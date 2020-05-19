@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+message StmMessage {
+  oneof payload {
+    uint32 buttonsStatusMask = 1;
+    uint32 batteryMv = 2;
+  }
+}
+
+message EspMessage {
+  oneof payload {
+    SetMotorPower motorPower = 1;
+    uint32 ledsStatusMask = 2;
+  }
+}
+
+message SetMotorPower {
+  uint32 motorId = 1;
+  uint32 power = 2;
+}
