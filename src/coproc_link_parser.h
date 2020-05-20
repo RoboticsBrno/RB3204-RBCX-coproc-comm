@@ -4,11 +4,11 @@
 
 #include <pb.h>
 
-#include "coproc_msg.h"
+#include "coproc_codec.h"
 
 namespace rb {
 
-template <typename MessageType, const pb_msgdesc_t* FieldDesc>
+template <typename MessageType, const pb_msgdesc_t* FieldDesc, rb::CoprocCodec* Codec>
 class CoprocLinkParser {
 public:
     CoprocLinkParser()
@@ -32,7 +32,7 @@ public:
             m_buf[m_buf_index++] = byte;
             if (m_buf_index == m_frame_len) {
                 m_state = AwaitingStart;
-                return CoprocMsg::decode(m_buf.data(), m_buf_index, FieldDesc, &m_last_msg);
+                return Codec->decode(m_buf.data(), m_buf_index, FieldDesc, &m_last_msg);
             }
         }
         return false;
