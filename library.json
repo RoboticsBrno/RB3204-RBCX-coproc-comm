@@ -16,7 +16,7 @@
   ],
   "dependencies": [
     {
-      "name": "Nanopb",
+      "name": "431",
       "version": "0.4.1"
     }
   ],
