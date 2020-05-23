@@ -29,7 +29,7 @@ size_t CoprocCodec::encode(const pb_msgdesc_t* fields, const void* src_struct, u
         return 0;
     }
 
-    return true;
+    return cobs_res.out_len;
 }
 
 bool CoprocCodec::decode(const uint8_t* buf, size_t size, const pb_msgdesc_t* fields, void* dest_struct) {
