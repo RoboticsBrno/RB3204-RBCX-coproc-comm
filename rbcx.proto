@@ -1,20 +1,30 @@
 syntax = "proto3";
 
-message StmMessage {
+message CoprocRequest {
   oneof payload {
-    uint32 buttonsStatusMask = 1;
-    uint32 batteryMv = 2;
+    LedsRequest ledsRequest = 4;
+    ButtonsRequest buttonsRequest = 5;
+  }
+
+  message LedsRequest {
+    uint32 ledsOn = 1;
+    uint32 mask = 2;
+  }
+
+  message ButtonsRequest {
   }
 }
 
-message EspMessage {
+message CoprocStatus {
   oneof payload {
-    SetMotorPower motorPower = 1;
-    uint32 ledsStatusMask = 2;
+    LedsStatus ledsStatus = 4;
+    ButtonsStatus buttonsStatus = 5;
   }
-}
 
-message SetMotorPower {
-  uint32 motorId = 1;
-  uint32 power = 2;
+  message LedsStatus {
+  }
+
+  message ButtonsStatus {
+    uint32 buttonsPressed = 1;
+  }
 }

@@ -18,28 +18,28 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=b'\n\nrbcx.proto\"I\n\nStmMessage\x12\x1b\n\x11\x62uttonsStatusMask\x18\x01 \x01(\rH\x00\x12\x13\n\tbatteryMv\x18\x02 \x01(\rH\x00\x42\t\n\x07payload\"W\n\nEspMessage\x12$\n\nmotorPower\x18\x01 \x01(\x0b\x32\x0e.SetMotorPowerH\x00\x12\x18\n\x0eledsStatusMask\x18\x02 \x01(\rH\x00\x42\t\n\x07payload\"/\n\rSetMotorPower\x12\x0f\n\x07motorId\x18\x01 \x01(\r\x12\r\n\x05power\x18\x02 \x01(\rb\x06proto3'
+  serialized_pb=b'\n\nrbcx.proto\"\xc5\x01\n\rCoprocRequest\x12\x31\n\x0bledsRequest\x18\x04 \x01(\x0b\x32\x1a.CoprocRequest.LedsRequestH\x00\x12\x37\n\x0e\x62uttonsRequest\x18\x05 \x01(\x0b\x32\x1d.CoprocRequest.ButtonsRequestH\x00\x1a+\n\x0bLedsRequest\x12\x0e\n\x06ledsOn\x18\x01 \x01(\r\x12\x0c\n\x04mask\x18\x02 \x01(\r\x1a\x10\n\x0e\x42uttonsRequestB\t\n\x07payload\"\xb6\x01\n\x0c\x43oprocStatus\x12.\n\nledsStatus\x18\x04 \x01(\x0b\x32\x18.CoprocStatus.LedsStatusH\x00\x12\x34\n\rbuttonsStatus\x18\x05 \x01(\x0b\x32\x1b.CoprocStatus.ButtonsStatusH\x00\x1a\x0c\n\nLedsStatus\x1a\'\n\rButtonsStatus\x12\x16\n\x0e\x62uttonsPressed\x18\x01 \x01(\rB\t\n\x07payloadb\x06proto3'
 )
 
 
 
 
-_STMMESSAGE = _descriptor.Descriptor(
-  name='StmMessage',
-  full_name='StmMessage',
+_COPROCREQUEST_LEDSREQUEST = _descriptor.Descriptor(
+  name='LedsRequest',
+  full_name='CoprocRequest.LedsRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='buttonsStatusMask', full_name='StmMessage.buttonsStatusMask', index=0,
+      name='ledsOn', full_name='CoprocRequest.LedsRequest.ledsOn', index=0,
       number=1, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='batteryMv', full_name='StmMessage.batteryMv', index=1,
+      name='mask', full_name='CoprocRequest.LedsRequest.mask', index=1,
       number=2, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -56,40 +56,59 @@ _STMMESSAGE = _descriptor.Descriptor(
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
-    _descriptor.OneofDescriptor(
-      name='payload', full_name='StmMessage.payload',
-      index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=14,
-  serialized_end=87,
+  serialized_start=140,
+  serialized_end=183,
 )
 
+_COPROCREQUEST_BUTTONSREQUEST = _descriptor.Descriptor(
+  name='ButtonsRequest',
+  full_name='CoprocRequest.ButtonsRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=185,
+  serialized_end=201,
+)
 
-_ESPMESSAGE = _descriptor.Descriptor(
-  name='EspMessage',
-  full_name='EspMessage',
+_COPROCREQUEST = _descriptor.Descriptor(
+  name='CoprocRequest',
+  full_name='CoprocRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='motorPower', full_name='EspMessage.motorPower', index=0,
-      number=1, type=11, cpp_type=10, label=1,
+      name='ledsRequest', full_name='CoprocRequest.ledsRequest', index=0,
+      number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='ledsStatusMask', full_name='EspMessage.ledsStatusMask', index=1,
-      number=2, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
+      name='buttonsRequest', full_name='CoprocRequest.buttonsRequest', index=1,
+      number=5, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
-  nested_types=[],
+  nested_types=[_COPROCREQUEST_LEDSREQUEST, _COPROCREQUEST_BUTTONSREQUEST, ],
   enum_types=[
   ],
   serialized_options=None,
@@ -98,31 +117,47 @@ _ESPMESSAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
     _descriptor.OneofDescriptor(
-      name='payload', full_name='EspMessage.payload',
+      name='payload', full_name='CoprocRequest.payload',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=89,
-  serialized_end=176,
+  serialized_start=15,
+  serialized_end=212,
 )
 
 
-_SETMOTORPOWER = _descriptor.Descriptor(
-  name='SetMotorPower',
-  full_name='SetMotorPower',
+_COPROCSTATUS_LEDSSTATUS = _descriptor.Descriptor(
+  name='LedsStatus',
+  full_name='CoprocStatus.LedsStatus',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=333,
+  serialized_end=345,
+)
+
+_COPROCSTATUS_BUTTONSSTATUS = _descriptor.Descriptor(
+  name='ButtonsStatus',
+  full_name='CoprocStatus.ButtonsStatus',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='motorId', full_name='SetMotorPower.motorId', index=0,
+      name='buttonsPressed', full_name='CoprocStatus.ButtonsStatus.buttonsPressed', index=0,
       number=1, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='power', full_name='SetMotorPower.power', index=1,
-      number=2, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -139,48 +174,119 @@ _SETMOTORPOWER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=178,
-  serialized_end=225,
+  serialized_start=347,
+  serialized_end=386,
 )
 
-_STMMESSAGE.oneofs_by_name['payload'].fields.append(
-  _STMMESSAGE.fields_by_name['buttonsStatusMask'])
-_STMMESSAGE.fields_by_name['buttonsStatusMask'].containing_oneof = _STMMESSAGE.oneofs_by_name['payload']
-_STMMESSAGE.oneofs_by_name['payload'].fields.append(
-  _STMMESSAGE.fields_by_name['batteryMv'])
-_STMMESSAGE.fields_by_name['batteryMv'].containing_oneof = _STMMESSAGE.oneofs_by_name['payload']
-_ESPMESSAGE.fields_by_name['motorPower'].message_type = _SETMOTORPOWER
-_ESPMESSAGE.oneofs_by_name['payload'].fields.append(
-  _ESPMESSAGE.fields_by_name['motorPower'])
-_ESPMESSAGE.fields_by_name['motorPower'].containing_oneof = _ESPMESSAGE.oneofs_by_name['payload']
-_ESPMESSAGE.oneofs_by_name['payload'].fields.append(
-  _ESPMESSAGE.fields_by_name['ledsStatusMask'])
-_ESPMESSAGE.fields_by_name['ledsStatusMask'].containing_oneof = _ESPMESSAGE.oneofs_by_name['payload']
-DESCRIPTOR.message_types_by_name['StmMessage'] = _STMMESSAGE
-DESCRIPTOR.message_types_by_name['EspMessage'] = _ESPMESSAGE
-DESCRIPTOR.message_types_by_name['SetMotorPower'] = _SETMOTORPOWER
+_COPROCSTATUS = _descriptor.Descriptor(
+  name='CoprocStatus',
+  full_name='CoprocStatus',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ledsStatus', full_name='CoprocStatus.ledsStatus', index=0,
+      number=4, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='buttonsStatus', full_name='CoprocStatus.buttonsStatus', index=1,
+      number=5, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[_COPROCSTATUS_LEDSSTATUS, _COPROCSTATUS_BUTTONSSTATUS, ],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+    _descriptor.OneofDescriptor(
+      name='payload', full_name='CoprocStatus.payload',
+      index=0, containing_type=None, fields=[]),
+  ],
+  serialized_start=215,
+  serialized_end=397,
+)
+
+_COPROCREQUEST_LEDSREQUEST.containing_type = _COPROCREQUEST
+_COPROCREQUEST_BUTTONSREQUEST.containing_type = _COPROCREQUEST
+_COPROCREQUEST.fields_by_name['ledsRequest'].message_type = _COPROCREQUEST_LEDSREQUEST
+_COPROCREQUEST.fields_by_name['buttonsRequest'].message_type = _COPROCREQUEST_BUTTONSREQUEST
+_COPROCREQUEST.oneofs_by_name['payload'].fields.append(
+  _COPROCREQUEST.fields_by_name['ledsRequest'])
+_COPROCREQUEST.fields_by_name['ledsRequest'].containing_oneof = _COPROCREQUEST.oneofs_by_name['payload']
+_COPROCREQUEST.oneofs_by_name['payload'].fields.append(
+  _COPROCREQUEST.fields_by_name['buttonsRequest'])
+_COPROCREQUEST.fields_by_name['buttonsRequest'].containing_oneof = _COPROCREQUEST.oneofs_by_name['payload']
+_COPROCSTATUS_LEDSSTATUS.containing_type = _COPROCSTATUS
+_COPROCSTATUS_BUTTONSSTATUS.containing_type = _COPROCSTATUS
+_COPROCSTATUS.fields_by_name['ledsStatus'].message_type = _COPROCSTATUS_LEDSSTATUS
+_COPROCSTATUS.fields_by_name['buttonsStatus'].message_type = _COPROCSTATUS_BUTTONSSTATUS
+_COPROCSTATUS.oneofs_by_name['payload'].fields.append(
+  _COPROCSTATUS.fields_by_name['ledsStatus'])
+_COPROCSTATUS.fields_by_name['ledsStatus'].containing_oneof = _COPROCSTATUS.oneofs_by_name['payload']
+_COPROCSTATUS.oneofs_by_name['payload'].fields.append(
+  _COPROCSTATUS.fields_by_name['buttonsStatus'])
+_COPROCSTATUS.fields_by_name['buttonsStatus'].containing_oneof = _COPROCSTATUS.oneofs_by_name['payload']
+DESCRIPTOR.message_types_by_name['CoprocRequest'] = _COPROCREQUEST
+DESCRIPTOR.message_types_by_name['CoprocStatus'] = _COPROCSTATUS
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
-StmMessage = _reflection.GeneratedProtocolMessageType('StmMessage', (_message.Message,), {
-  'DESCRIPTOR' : _STMMESSAGE,
-  '__module__' : 'rbcx_pb2'
-  # @@protoc_insertion_point(class_scope:StmMessage)
-  })
-_sym_db.RegisterMessage(StmMessage)
+CoprocRequest = _reflection.GeneratedProtocolMessageType('CoprocRequest', (_message.Message,), {
 
-EspMessage = _reflection.GeneratedProtocolMessageType('EspMessage', (_message.Message,), {
-  'DESCRIPTOR' : _ESPMESSAGE,
-  '__module__' : 'rbcx_pb2'
-  # @@protoc_insertion_point(class_scope:EspMessage)
-  })
-_sym_db.RegisterMessage(EspMessage)
+  'LedsRequest' : _reflection.GeneratedProtocolMessageType('LedsRequest', (_message.Message,), {
+    'DESCRIPTOR' : _COPROCREQUEST_LEDSREQUEST,
+    '__module__' : 'rbcx_pb2'
+    # @@protoc_insertion_point(class_scope:CoprocRequest.LedsRequest)
+    })
+  ,
 
-SetMotorPower = _reflection.GeneratedProtocolMessageType('SetMotorPower', (_message.Message,), {
-  'DESCRIPTOR' : _SETMOTORPOWER,
+  'ButtonsRequest' : _reflection.GeneratedProtocolMessageType('ButtonsRequest', (_message.Message,), {
+    'DESCRIPTOR' : _COPROCREQUEST_BUTTONSREQUEST,
+    '__module__' : 'rbcx_pb2'
+    # @@protoc_insertion_point(class_scope:CoprocRequest.ButtonsRequest)
+    })
+  ,
+  'DESCRIPTOR' : _COPROCREQUEST,
   '__module__' : 'rbcx_pb2'
-  # @@protoc_insertion_point(class_scope:SetMotorPower)
+  # @@protoc_insertion_point(class_scope:CoprocRequest)
   })
-_sym_db.RegisterMessage(SetMotorPower)
+_sym_db.RegisterMessage(CoprocRequest)
+_sym_db.RegisterMessage(CoprocRequest.LedsRequest)
+_sym_db.RegisterMessage(CoprocRequest.ButtonsRequest)
+
+CoprocStatus = _reflection.GeneratedProtocolMessageType('CoprocStatus', (_message.Message,), {
+
+  'LedsStatus' : _reflection.GeneratedProtocolMessageType('LedsStatus', (_message.Message,), {
+    'DESCRIPTOR' : _COPROCSTATUS_LEDSSTATUS,
+    '__module__' : 'rbcx_pb2'
+    # @@protoc_insertion_point(class_scope:CoprocStatus.LedsStatus)
+    })
+  ,
+
+  'ButtonsStatus' : _reflection.GeneratedProtocolMessageType('ButtonsStatus', (_message.Message,), {
+    'DESCRIPTOR' : _COPROCSTATUS_BUTTONSSTATUS,
+    '__module__' : 'rbcx_pb2'
+    # @@protoc_insertion_point(class_scope:CoprocStatus.ButtonsStatus)
+    })
+  ,
+  'DESCRIPTOR' : _COPROCSTATUS,
+  '__module__' : 'rbcx_pb2'
+  # @@protoc_insertion_point(class_scope:CoprocStatus)
+  })
+_sym_db.RegisterMessage(CoprocStatus)
+_sym_db.RegisterMessage(CoprocStatus.LedsStatus)
+_sym_db.RegisterMessage(CoprocStatus.ButtonsStatus)
 
 
 # @@protoc_insertion_point(module_scope)

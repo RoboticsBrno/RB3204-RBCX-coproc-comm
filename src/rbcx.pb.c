@@ -6,13 +6,22 @@
 #error Regenerate this file with the current version of nanopb generator.
 #endif
 
-PB_BIND(StmMessage, StmMessage, AUTO)
+PB_BIND(CoprocRequest, CoprocRequest, AUTO)
 
 
-PB_BIND(EspMessage, EspMessage, AUTO)
+PB_BIND(CoprocRequest_LedsRequest, CoprocRequest_LedsRequest, AUTO)
 
 
-PB_BIND(SetMotorPower, SetMotorPower, AUTO)
+PB_BIND(CoprocRequest_ButtonsRequest, CoprocRequest_ButtonsRequest, AUTO)
+
+
+PB_BIND(CoprocStatus, CoprocStatus, AUTO)
+
+
+PB_BIND(CoprocStatus_LedsStatus, CoprocStatus_LedsStatus, AUTO)
+
+
+PB_BIND(CoprocStatus_ButtonsStatus, CoprocStatus_ButtonsStatus, AUTO)
 
 
 
