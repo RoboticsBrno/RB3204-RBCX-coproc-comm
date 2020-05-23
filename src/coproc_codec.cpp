@@ -6,6 +6,19 @@
 
 namespace rb {
 
+size_t CoprocCodec::encodeWithHeader(const pb_msgdesc_t* fields, const void* src_struct, uint8_t* buf, size_t size) {
+    if (size <= 2)
+        return 0;
+
+    const auto len = encode(fields, src_struct, buf + 2, size - 2);
+    if (len == 0)
+        return 0;
+
+    buf[0] = 0;
+    buf[1] = len;
+    return len + 2;
+}
+
 size_t CoprocCodec::encode(const pb_msgdesc_t* fields, const void* src_struct, uint8_t* buf, size_t size) {
     size_t encoded_size = 0;
     if (!pb_get_encoded_size(&encoded_size, fields, src_struct) || encoded_size > m_pb_enc_arena.size()) {
