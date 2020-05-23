@@ -2,5 +2,6 @@
 
 # Install protobuf-compiler and pip3 install nanopb
 
-nanopb_generator -D src rbcx.proto
+protoc -orbcx.pb rbcx.proto
+nanopb_generator -D src rbcx.pb
 protoc --python_out=tools/pb rbcx.proto
