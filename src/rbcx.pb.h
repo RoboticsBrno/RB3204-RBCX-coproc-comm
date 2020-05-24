@@ -14,18 +14,17 @@ extern "C" {
 #endif
 
 /* Struct definitions */
-typedef struct _CoprocRequest_ButtonsRequest {
+typedef struct _CoprocRequest_GetButtonsState {
     char dummy_field;
-} CoprocRequest_ButtonsRequest;
+} CoprocRequest_GetButtonsState;
 
 typedef struct _CoprocStatus_LedsStatus {
     char dummy_field;
 } CoprocStatus_LedsStatus;
 
-typedef struct _CoprocRequest_LedsRequest {
+typedef struct _CoprocRequest_SetLeds {
     uint32_t ledsOn;
-    uint32_t mask;
-} CoprocRequest_LedsRequest;
+} CoprocRequest_SetLeds;
 
 typedef struct _CoprocStatus_ButtonsStatus {
     uint32_t buttonsPressed;
@@ -34,8 +33,8 @@ typedef struct _CoprocStatus_ButtonsStatus {
 typedef struct _CoprocRequest {
     pb_size_t which_payload;
     union {
-        CoprocRequest_LedsRequest ledsRequest;
-        CoprocRequest_ButtonsRequest buttonsRequest;
+        CoprocRequest_SetLeds setLeds;
+        CoprocRequest_GetButtonsState getButtonsState;
     } payload;
 } CoprocRequest;
 
@@ -49,47 +48,45 @@ typedef struct _CoprocStatus {
 
 
 /* Initializer values for message structs */
-#define CoprocRequest_init_default               {0, {CoprocRequest_LedsRequest_init_default}}
-#define CoprocRequest_LedsRequest_init_default   {0, 0}
-#define CoprocRequest_ButtonsRequest_init_default {0}
+#define CoprocRequest_init_default               {0, {CoprocRequest_SetLeds_init_default}}
+#define CoprocRequest_SetLeds_init_default       {0}
+#define CoprocRequest_GetButtonsState_init_default {0}
 #define CoprocStatus_init_default                {0, {CoprocStatus_LedsStatus_init_default}}
 #define CoprocStatus_LedsStatus_init_default     {0}
 #define CoprocStatus_ButtonsStatus_init_default  {0}
-#define CoprocRequest_init_zero                  {0, {CoprocRequest_LedsRequest_init_zero}}
-#define CoprocRequest_LedsRequest_init_zero      {0, 0}
-#define CoprocRequest_ButtonsRequest_init_zero   {0}
+#define CoprocRequest_init_zero                  {0, {CoprocRequest_SetLeds_init_zero}}
+#define CoprocRequest_SetLeds_init_zero          {0}
+#define CoprocRequest_GetButtonsState_init_zero  {0}
 #define CoprocStatus_init_zero                   {0, {CoprocStatus_LedsStatus_init_zero}}
 #define CoprocStatus_LedsStatus_init_zero        {0}
 #define CoprocStatus_ButtonsStatus_init_zero     {0}
 
 /* Field tags (for use in manual encoding/decoding) */
-#define CoprocRequest_LedsRequest_ledsOn_tag     1
-#define CoprocRequest_LedsRequest_mask_tag       2
+#define CoprocRequest_SetLeds_ledsOn_tag         1
 #define CoprocStatus_ButtonsStatus_buttonsPressed_tag 1
-#define CoprocRequest_ledsRequest_tag            4
-#define CoprocRequest_buttonsRequest_tag         5
+#define CoprocRequest_setLeds_tag                4
+#define CoprocRequest_getButtonsState_tag        5
 #define CoprocStatus_ledsStatus_tag              4
 #define CoprocStatus_buttonsStatus_tag           5
 
 /* Struct field encoding specification for nanopb */
 #define CoprocRequest_FIELDLIST(X, a) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (payload,ledsRequest,payload.ledsRequest),   4) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (payload,buttonsRequest,payload.buttonsRequest),   5)
+X(a, STATIC,   ONEOF,    MESSAGE,  (payload,setLeds,payload.setLeds),   4) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (payload,getButtonsState,payload.getButtonsState),   5)
 #define CoprocRequest_CALLBACK NULL
 #define CoprocRequest_DEFAULT NULL
-#define CoprocRequest_payload_ledsRequest_MSGTYPE CoprocRequest_LedsRequest
-#define CoprocRequest_payload_buttonsRequest_MSGTYPE CoprocRequest_ButtonsRequest
+#define CoprocRequest_payload_setLeds_MSGTYPE CoprocRequest_SetLeds
+#define CoprocRequest_payload_getButtonsState_MSGTYPE CoprocRequest_GetButtonsState
 
-#define CoprocRequest_LedsRequest_FIELDLIST(X, a) \
-X(a, STATIC,   SINGULAR, UINT32,   ledsOn,            1) \
-X(a, STATIC,   SINGULAR, UINT32,   mask,              2)
-#define CoprocRequest_LedsRequest_CALLBACK NULL
-#define CoprocRequest_LedsRequest_DEFAULT NULL
+#define CoprocRequest_SetLeds_FIELDLIST(X, a) \
+X(a, STATIC,   SINGULAR, UINT32,   ledsOn,            1)
+#define CoprocRequest_SetLeds_CALLBACK NULL
+#define CoprocRequest_SetLeds_DEFAULT NULL
 
-#define CoprocRequest_ButtonsRequest_FIELDLIST(X, a) \
+#define CoprocRequest_GetButtonsState_FIELDLIST(X, a) \
 
-#define CoprocRequest_ButtonsRequest_CALLBACK NULL
-#define CoprocRequest_ButtonsRequest_DEFAULT NULL
+#define CoprocRequest_GetButtonsState_CALLBACK NULL
+#define CoprocRequest_GetButtonsState_DEFAULT NULL
 
 #define CoprocStatus_FIELDLIST(X, a) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,ledsStatus,payload.ledsStatus),   4) \
@@ -110,24 +107,24 @@ X(a, STATIC,   SINGULAR, UINT32,   buttonsPressed,    1)
 #define CoprocStatus_ButtonsStatus_DEFAULT NULL
 
 extern const pb_msgdesc_t CoprocRequest_msg;
-extern const pb_msgdesc_t CoprocRequest_LedsRequest_msg;
-extern const pb_msgdesc_t CoprocRequest_ButtonsRequest_msg;
+extern const pb_msgdesc_t CoprocRequest_SetLeds_msg;
+extern const pb_msgdesc_t CoprocRequest_GetButtonsState_msg;
 extern const pb_msgdesc_t CoprocStatus_msg;
 extern const pb_msgdesc_t CoprocStatus_LedsStatus_msg;
 extern const pb_msgdesc_t CoprocStatus_ButtonsStatus_msg;
 
 /* Defines for backwards compatibility with code written before nanopb-0.4.0 */
 #define CoprocRequest_fields &CoprocRequest_msg
-#define CoprocRequest_LedsRequest_fields &CoprocRequest_LedsRequest_msg
-#define CoprocRequest_ButtonsRequest_fields &CoprocRequest_ButtonsRequest_msg
+#define CoprocRequest_SetLeds_fields &CoprocRequest_SetLeds_msg
+#define CoprocRequest_GetButtonsState_fields &CoprocRequest_GetButtonsState_msg
 #define CoprocStatus_fields &CoprocStatus_msg
 #define CoprocStatus_LedsStatus_fields &CoprocStatus_LedsStatus_msg
 #define CoprocStatus_ButtonsStatus_fields &CoprocStatus_ButtonsStatus_msg
 
 /* Maximum encoded size of messages (where known) */
-#define CoprocRequest_size                       14
-#define CoprocRequest_LedsRequest_size           12
-#define CoprocRequest_ButtonsRequest_size        0
+#define CoprocRequest_size                       8
+#define CoprocRequest_SetLeds_size               6
+#define CoprocRequest_GetButtonsState_size       0
 #define CoprocStatus_size                        8
 #define CoprocStatus_LedsStatus_size             0
 #define CoprocStatus_ButtonsStatus_size          6

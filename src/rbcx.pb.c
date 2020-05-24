@@ -9,10 +9,10 @@
 PB_BIND(CoprocRequest, CoprocRequest, AUTO)
 
 
-PB_BIND(CoprocRequest_LedsRequest, CoprocRequest_LedsRequest, AUTO)
+PB_BIND(CoprocRequest_SetLeds, CoprocRequest_SetLeds, AUTO)
 
 
-PB_BIND(CoprocRequest_ButtonsRequest, CoprocRequest_ButtonsRequest, AUTO)
+PB_BIND(CoprocRequest_GetButtonsState, CoprocRequest_GetButtonsState, AUTO)
 
 
 PB_BIND(CoprocStatus, CoprocStatus, AUTO)

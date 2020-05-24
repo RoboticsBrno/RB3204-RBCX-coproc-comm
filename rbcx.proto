@@ -2,16 +2,15 @@ syntax = "proto3";
 
 message CoprocRequest {
   oneof payload {
-    LedsRequest ledsRequest = 4;
-    ButtonsRequest buttonsRequest = 5;
+    SetLeds setLeds = 4;
+    GetButtonsState getButtonsState = 5;
   }
 
-  message LedsRequest {
+  message SetLeds {
     uint32 ledsOn = 1;
-    uint32 mask = 2;
   }
 
-  message ButtonsRequest {
+  message GetButtonsState {
   }
 }
 

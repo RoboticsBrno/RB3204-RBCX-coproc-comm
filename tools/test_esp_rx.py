@@ -22,7 +22,7 @@ if __name__ == "__main__":
             frame_send(port, msg)
             time.sleep(1)
 
-            msg = pb.CoprocStatus(buttonsStatus=pb.CoprocStatus.ButtonsStatus(buttonsClosed=0x55))
+            msg = pb.CoprocStatus(buttonsStatus=pb.CoprocStatus.ButtonsStatus(buttonsPressed=0x55))
             frame_send(port, msg)
             time.sleep(1)
 
