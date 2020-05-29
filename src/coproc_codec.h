@@ -5,13 +5,18 @@
 #include <stddef.h>
 #include <stdint.h>
 
+
 namespace rb {
 
 class CoprocCodec {
-    std::array<uint8_t, 254> m_pb_enc_arena;
-    std::array<uint8_t, 254> m_pb_dec_arena;
+
+    static constexpr size_t MaxPayloadSize = 254;
+    std::array<uint8_t, MaxPayloadSize> m_pb_enc_arena;
+    std::array<uint8_t, MaxPayloadSize> m_pb_dec_arena;
 
 public:
+    static constexpr size_t MaxFrameSize = 257;
+
     size_t encode(const pb_msgdesc_t* fields, const void* src_struct, uint8_t* buf, size_t size);
     size_t encodeWithHeader(const pb_msgdesc_t* fields, const void* src_struct, uint8_t* buf, size_t size);
 
