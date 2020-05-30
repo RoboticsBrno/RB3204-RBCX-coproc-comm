@@ -52,7 +52,7 @@ bool CoprocCodec::decode(const uint8_t* buf, size_t size, const pb_msgdesc_t* fi
         return false;
     }
 
-    auto istream = pb_istream_from_buffer(m_pb_dec_arena.data(), m_pb_dec_arena.size());
+    auto istream = pb_istream_from_buffer(m_pb_dec_arena.data(), cobs_res.out_len);
     return pb_decode(&istream, fields, dest_struct);
 }
 
