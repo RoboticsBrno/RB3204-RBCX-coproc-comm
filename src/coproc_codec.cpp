@@ -20,19 +20,13 @@ size_t CoprocCodec::encodeWithHeader(const pb_msgdesc_t* fields, const void* src
 }
 
 size_t CoprocCodec::encode(const pb_msgdesc_t* fields, const void* src_struct, uint8_t* buf, size_t size) {
-    size_t encoded_size = 0;
-    if (!pb_get_encoded_size(&encoded_size, fields, src_struct) || encoded_size > m_pb_enc_arena.size()) {
-        // TODO: how to report errors?
-        return 0;
-    }
-
     auto ostream = pb_ostream_from_buffer(m_pb_enc_arena.data(), m_pb_enc_arena.size());
     if (!pb_encode(&ostream, fields, src_struct)) {
         // TODO: how to report errors?
         return 0;
     }
 
-    const auto cobs_res = cobs_encode(buf, size, m_pb_enc_arena.data(), encoded_size);
+    const auto cobs_res = cobs_encode(buf, size, m_pb_enc_arena.data(), ostream.bytes_written);
     if (cobs_res.status != COBS_ENCODE_OK) {
         // TODO: how to report errors?
         return 0;
