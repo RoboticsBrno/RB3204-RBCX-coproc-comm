@@ -6,22 +6,22 @@
 #error Regenerate this file with the current version of nanopb generator.
 #endif
 
-PB_BIND(CoprocRequest, CoprocRequest, AUTO)
+PB_BIND(CoprocReq, CoprocReq, AUTO)
 
 
-PB_BIND(CoprocRequest_SetLeds, CoprocRequest_SetLeds, AUTO)
+PB_BIND(CoprocReq_SetLeds, CoprocReq_SetLeds, AUTO)
 
 
-PB_BIND(CoprocRequest_GetButtonsState, CoprocRequest_GetButtonsState, AUTO)
+PB_BIND(CoprocReq_GetButtons, CoprocReq_GetButtons, AUTO)
 
 
-PB_BIND(CoprocStatus, CoprocStatus, AUTO)
+PB_BIND(CoprocStat, CoprocStat, AUTO)
 
 
-PB_BIND(CoprocStatus_LedsStatus, CoprocStatus_LedsStatus, AUTO)
+PB_BIND(CoprocStat_LedsStat, CoprocStat_LedsStat, AUTO)
 
 
-PB_BIND(CoprocStatus_ButtonsStatus, CoprocStatus_ButtonsStatus, AUTO)
+PB_BIND(CoprocStat_ButtonsStat, CoprocStat_ButtonsStat, AUTO)
 
 
 
