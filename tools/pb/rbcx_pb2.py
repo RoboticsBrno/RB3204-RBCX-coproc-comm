@@ -18,10 +18,86 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=b'\n\nrbcx.proto\"\x93\x01\n\tCoprocReq\x12%\n\x07setLeds\x18\x04 \x01(\x0b\x32\x12.CoprocReq.SetLedsH\x00\x12+\n\ngetButtons\x18\x05 \x01(\x0b\x32\x15.CoprocReq.GetButtonsH\x00\x1a\x19\n\x07SetLeds\x12\x0e\n\x06ledsOn\x18\x01 \x01(\r\x1a\x0c\n\nGetButtonsB\t\n\x07payload\"\xa4\x01\n\nCoprocStat\x12(\n\x08ledsStat\x18\x04 \x01(\x0b\x32\x14.CoprocStat.LedsStatH\x00\x12.\n\x0b\x62uttonsStat\x18\x05 \x01(\x0b\x32\x17.CoprocStat.ButtonsStatH\x00\x1a\n\n\x08LedsStat\x1a%\n\x0b\x42uttonsStat\x12\x16\n\x0e\x62uttonsPressed\x18\x01 \x01(\rB\t\n\x07payloadb\x06proto3'
+  serialized_pb=b'\n\nrbcx.proto\"\xde\x01\n\tCoprocReq\x12%\n\x07setLeds\x18\x04 \x01(\x0b\x32\x12.CoprocReq.SetLedsH\x00\x12+\n\ngetButtons\x18\x05 \x01(\x0b\x32\x15.CoprocReq.GetButtonsH\x00\x1a.\n\x07SetLeds\x12#\n\x06ledsOn\x18\x01 \x01(\x0e\x32\x13.CoprocReq.LedsEnum\x1a\x0c\n\nGetButtons\"4\n\x08LedsEnum\x12\x08\n\x04NONE\x10\x00\x12\x06\n\x02L1\x10\x01\x12\x06\n\x02L2\x10\x02\x12\x06\n\x02L3\x10\x04\x12\x06\n\x02L4\x10\x08\x42\t\n\x07payload\"\x89\x02\n\nCoprocStat\x12(\n\x08ledsStat\x18\x04 \x01(\x0b\x32\x14.CoprocStat.LedsStatH\x00\x12.\n\x0b\x62uttonsStat\x18\x05 \x01(\x0b\x32\x17.CoprocStat.ButtonsStatH\x00\x1a\n\n\x08LedsStat\x1a>\n\x0b\x42uttonsStat\x12/\n\x0e\x62uttonsPressed\x18\x01 \x01(\x0e\x32\x17.CoprocStat.ButtonsEnum\"J\n\x0b\x42uttonsEnum\x12\x08\n\x04NONE\x10\x00\x12\x08\n\x04\x42OFF\x10\x01\x12\x06\n\x02\x42\x31\x10\x02\x12\x06\n\x02\x42\x32\x10\x04\x12\x06\n\x02\x42\x33\x10\x08\x12\x06\n\x02\x42\x34\x10\x10\x12\x07\n\x03\x42ON\x10 B\t\n\x07payloadb\x06proto3'
 )
 
 
+
+_COPROCREQ_LEDSENUM = _descriptor.EnumDescriptor(
+  name='LedsEnum',
+  full_name='CoprocReq.LedsEnum',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='NONE', index=0, number=0,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='L1', index=1, number=1,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='L2', index=2, number=2,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='L3', index=3, number=4,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='L4', index=4, number=8,
+      serialized_options=None,
+      type=None),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=174,
+  serialized_end=226,
+)
+_sym_db.RegisterEnumDescriptor(_COPROCREQ_LEDSENUM)
+
+_COPROCSTAT_BUTTONSENUM = _descriptor.EnumDescriptor(
+  name='ButtonsEnum',
+  full_name='CoprocStat.ButtonsEnum',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='NONE', index=0, number=0,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='BOFF', index=1, number=1,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='B1', index=2, number=2,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='B2', index=3, number=4,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='B3', index=4, number=8,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='B4', index=5, number=16,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='BON', index=6, number=32,
+      serialized_options=None,
+      type=None),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=420,
+  serialized_end=494,
+)
+_sym_db.RegisterEnumDescriptor(_COPROCSTAT_BUTTONSENUM)
 
 
 _COPROCREQ_SETLEDS = _descriptor.Descriptor(
@@ -33,7 +109,7 @@ _COPROCREQ_SETLEDS = _descriptor.Descriptor(
   fields=[
     _descriptor.FieldDescriptor(
       name='ledsOn', full_name='CoprocReq.SetLeds.ledsOn', index=0,
-      number=1, type=13, cpp_type=3, label=1,
+      number=1, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -51,7 +127,7 @@ _COPROCREQ_SETLEDS = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=112,
-  serialized_end=137,
+  serialized_end=158,
 )
 
 _COPROCREQ_GETBUTTONS = _descriptor.Descriptor(
@@ -73,8 +149,8 @@ _COPROCREQ_GETBUTTONS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=139,
-  serialized_end=151,
+  serialized_start=160,
+  serialized_end=172,
 )
 
 _COPROCREQ = _descriptor.Descriptor(
@@ -103,6 +179,7 @@ _COPROCREQ = _descriptor.Descriptor(
   ],
   nested_types=[_COPROCREQ_SETLEDS, _COPROCREQ_GETBUTTONS, ],
   enum_types=[
+    _COPROCREQ_LEDSENUM,
   ],
   serialized_options=None,
   is_extendable=False,
@@ -114,7 +191,7 @@ _COPROCREQ = _descriptor.Descriptor(
       index=0, containing_type=None, fields=[]),
   ],
   serialized_start=15,
-  serialized_end=162,
+  serialized_end=237,
 )
 
 
@@ -137,8 +214,8 @@ _COPROCSTAT_LEDSSTAT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=269,
-  serialized_end=279,
+  serialized_start=344,
+  serialized_end=354,
 )
 
 _COPROCSTAT_BUTTONSSTAT = _descriptor.Descriptor(
@@ -150,7 +227,7 @@ _COPROCSTAT_BUTTONSSTAT = _descriptor.Descriptor(
   fields=[
     _descriptor.FieldDescriptor(
       name='buttonsPressed', full_name='CoprocStat.ButtonsStat.buttonsPressed', index=0,
-      number=1, type=13, cpp_type=3, label=1,
+      number=1, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -167,8 +244,8 @@ _COPROCSTAT_BUTTONSSTAT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=281,
-  serialized_end=318,
+  serialized_start=356,
+  serialized_end=418,
 )
 
 _COPROCSTAT = _descriptor.Descriptor(
@@ -197,6 +274,7 @@ _COPROCSTAT = _descriptor.Descriptor(
   ],
   nested_types=[_COPROCSTAT_LEDSSTAT, _COPROCSTAT_BUTTONSSTAT, ],
   enum_types=[
+    _COPROCSTAT_BUTTONSENUM,
   ],
   serialized_options=None,
   is_extendable=False,
@@ -207,14 +285,16 @@ _COPROCSTAT = _descriptor.Descriptor(
       name='payload', full_name='CoprocStat.payload',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=165,
-  serialized_end=329,
+  serialized_start=240,
+  serialized_end=505,
 )
 
+_COPROCREQ_SETLEDS.fields_by_name['ledsOn'].enum_type = _COPROCREQ_LEDSENUM
 _COPROCREQ_SETLEDS.containing_type = _COPROCREQ
 _COPROCREQ_GETBUTTONS.containing_type = _COPROCREQ
 _COPROCREQ.fields_by_name['setLeds'].message_type = _COPROCREQ_SETLEDS
 _COPROCREQ.fields_by_name['getButtons'].message_type = _COPROCREQ_GETBUTTONS
+_COPROCREQ_LEDSENUM.containing_type = _COPROCREQ
 _COPROCREQ.oneofs_by_name['payload'].fields.append(
   _COPROCREQ.fields_by_name['setLeds'])
 _COPROCREQ.fields_by_name['setLeds'].containing_oneof = _COPROCREQ.oneofs_by_name['payload']
@@ -222,9 +302,11 @@ _COPROCREQ.oneofs_by_name['payload'].fields.append(
   _COPROCREQ.fields_by_name['getButtons'])
 _COPROCREQ.fields_by_name['getButtons'].containing_oneof = _COPROCREQ.oneofs_by_name['payload']
 _COPROCSTAT_LEDSSTAT.containing_type = _COPROCSTAT
+_COPROCSTAT_BUTTONSSTAT.fields_by_name['buttonsPressed'].enum_type = _COPROCSTAT_BUTTONSENUM
 _COPROCSTAT_BUTTONSSTAT.containing_type = _COPROCSTAT
 _COPROCSTAT.fields_by_name['ledsStat'].message_type = _COPROCSTAT_LEDSSTAT
 _COPROCSTAT.fields_by_name['buttonsStat'].message_type = _COPROCSTAT_BUTTONSSTAT
+_COPROCSTAT_BUTTONSENUM.containing_type = _COPROCSTAT
 _COPROCSTAT.oneofs_by_name['payload'].fields.append(
   _COPROCSTAT.fields_by_name['ledsStat'])
 _COPROCSTAT.fields_by_name['ledsStat'].containing_oneof = _COPROCSTAT.oneofs_by_name['payload']

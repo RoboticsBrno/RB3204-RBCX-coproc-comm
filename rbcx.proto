@@ -7,7 +7,15 @@ message CoprocReq {
   }
 
   message SetLeds {
-    uint32 ledsOn = 1;
+    LedsEnum ledsOn = 1;
+  }
+
+  enum LedsEnum {
+    NONE = 0;
+    L1 = 1;
+    L2 = 2;
+    L3 = 4;
+    L4 = 8;
   }
 
   message GetButtons {
@@ -24,6 +32,16 @@ message CoprocStat {
   }
 
   message ButtonsStat {
-    uint32 buttonsPressed = 1;
+    ButtonsEnum buttonsPressed = 1;
+  }
+
+  enum ButtonsEnum {
+    NONE = 0;
+    BOFF = 1;
+    B1 = 2;
+    B2 = 4;
+    B3 = 8;
+    B4 = 16;
+    BON = 32;
   }
 }

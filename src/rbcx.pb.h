@@ -13,6 +13,25 @@
 extern "C" {
 #endif
 
+/* Enum definitions */
+typedef enum _CoprocReq_LedsEnum {
+    CoprocReq_LedsEnum_NONE = 0,
+    CoprocReq_LedsEnum_L1 = 1,
+    CoprocReq_LedsEnum_L2 = 2,
+    CoprocReq_LedsEnum_L3 = 4,
+    CoprocReq_LedsEnum_L4 = 8
+} CoprocReq_LedsEnum;
+
+typedef enum _CoprocStat_ButtonsEnum {
+    CoprocStat_ButtonsEnum_NONE = 0,
+    CoprocStat_ButtonsEnum_BOFF = 1,
+    CoprocStat_ButtonsEnum_B1 = 2,
+    CoprocStat_ButtonsEnum_B2 = 4,
+    CoprocStat_ButtonsEnum_B3 = 8,
+    CoprocStat_ButtonsEnum_B4 = 16,
+    CoprocStat_ButtonsEnum_BON = 32
+} CoprocStat_ButtonsEnum;
+
 /* Struct definitions */
 typedef struct _CoprocReq_GetButtons {
     char dummy_field;
@@ -23,11 +42,11 @@ typedef struct _CoprocStat_LedsStat {
 } CoprocStat_LedsStat;
 
 typedef struct _CoprocReq_SetLeds {
-    uint32_t ledsOn;
+    CoprocReq_LedsEnum ledsOn;
 } CoprocReq_SetLeds;
 
 typedef struct _CoprocStat_ButtonsStat {
-    uint32_t buttonsPressed;
+    CoprocStat_ButtonsEnum buttonsPressed;
 } CoprocStat_ButtonsStat;
 
 typedef struct _CoprocReq {
@@ -47,19 +66,29 @@ typedef struct _CoprocStat {
 } CoprocStat;
 
 
+/* Helper constants for enums */
+#define _CoprocReq_LedsEnum_MIN CoprocReq_LedsEnum_NONE
+#define _CoprocReq_LedsEnum_MAX CoprocReq_LedsEnum_L4
+#define _CoprocReq_LedsEnum_ARRAYSIZE ((CoprocReq_LedsEnum)(CoprocReq_LedsEnum_L4+1))
+
+#define _CoprocStat_ButtonsEnum_MIN CoprocStat_ButtonsEnum_NONE
+#define _CoprocStat_ButtonsEnum_MAX CoprocStat_ButtonsEnum_BON
+#define _CoprocStat_ButtonsEnum_ARRAYSIZE ((CoprocStat_ButtonsEnum)(CoprocStat_ButtonsEnum_BON+1))
+
+
 /* Initializer values for message structs */
 #define CoprocReq_init_default                   {0, {CoprocReq_SetLeds_init_default}}
-#define CoprocReq_SetLeds_init_default           {0}
+#define CoprocReq_SetLeds_init_default           {_CoprocReq_LedsEnum_MIN}
 #define CoprocReq_GetButtons_init_default        {0}
 #define CoprocStat_init_default                  {0, {CoprocStat_LedsStat_init_default}}
 #define CoprocStat_LedsStat_init_default         {0}
-#define CoprocStat_ButtonsStat_init_default      {0}
+#define CoprocStat_ButtonsStat_init_default      {_CoprocStat_ButtonsEnum_MIN}
 #define CoprocReq_init_zero                      {0, {CoprocReq_SetLeds_init_zero}}
-#define CoprocReq_SetLeds_init_zero              {0}
+#define CoprocReq_SetLeds_init_zero              {_CoprocReq_LedsEnum_MIN}
 #define CoprocReq_GetButtons_init_zero           {0}
 #define CoprocStat_init_zero                     {0, {CoprocStat_LedsStat_init_zero}}
 #define CoprocStat_LedsStat_init_zero            {0}
-#define CoprocStat_ButtonsStat_init_zero         {0}
+#define CoprocStat_ButtonsStat_init_zero         {_CoprocStat_ButtonsEnum_MIN}
 
 /* Field tags (for use in manual encoding/decoding) */
 #define CoprocReq_SetLeds_ledsOn_tag             1
@@ -79,7 +108,7 @@ X(a, STATIC,   ONEOF,    MESSAGE,  (payload,getButtons,payload.getButtons),   5)
 #define CoprocReq_payload_getButtons_MSGTYPE CoprocReq_GetButtons
 
 #define CoprocReq_SetLeds_FIELDLIST(X, a) \
-X(a, STATIC,   SINGULAR, UINT32,   ledsOn,            1)
+X(a, STATIC,   SINGULAR, UENUM,    ledsOn,            1)
 #define CoprocReq_SetLeds_CALLBACK NULL
 #define CoprocReq_SetLeds_DEFAULT NULL
 
@@ -102,7 +131,7 @@ X(a, STATIC,   ONEOF,    MESSAGE,  (payload,buttonsStat,payload.buttonsStat),   
 #define CoprocStat_LedsStat_DEFAULT NULL
 
 #define CoprocStat_ButtonsStat_FIELDLIST(X, a) \
-X(a, STATIC,   SINGULAR, UINT32,   buttonsPressed,    1)
+X(a, STATIC,   SINGULAR, UENUM,    buttonsPressed,    1)
 #define CoprocStat_ButtonsStat_CALLBACK NULL
 #define CoprocStat_ButtonsStat_DEFAULT NULL
 
@@ -122,12 +151,12 @@ extern const pb_msgdesc_t CoprocStat_ButtonsStat_msg;
 #define CoprocStat_ButtonsStat_fields &CoprocStat_ButtonsStat_msg
 
 /* Maximum encoded size of messages (where known) */
-#define CoprocReq_size                           8
-#define CoprocReq_SetLeds_size                   6
+#define CoprocReq_size                           4
+#define CoprocReq_SetLeds_size                   2
 #define CoprocReq_GetButtons_size                0
-#define CoprocStat_size                          8
+#define CoprocStat_size                          4
 #define CoprocStat_LedsStat_size                 0
-#define CoprocStat_ButtonsStat_size              6
+#define CoprocStat_ButtonsStat_size              2
 
 #ifdef __cplusplus
 } /* extern "C" */
