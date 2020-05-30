@@ -18,11 +18,11 @@ if __name__ == "__main__":
     with serial.Serial(sys.argv[1], baudrate=115200) as port:
         threading.Thread(target=read_serial, args=(port, ), daemon=True).start()
         while True:
-            msg = pb.StmMessage(batteryMv=random.randint(4000, 8000))
+            msg = pb.CoprocStat(ledsStat=pb.CoprocStat.LedsStat())
             frame_send(port, msg)
             time.sleep(1)
 
-            msg = pb.StmMessage(buttonsStatusMask=random.randint(0, 1 << 7))
+            msg = pb.CoprocStat(buttonsStat=pb.CoprocStat.ButtonsStat(buttonsPressed=0x55))
             frame_send(port, msg)
             time.sleep(1)
 

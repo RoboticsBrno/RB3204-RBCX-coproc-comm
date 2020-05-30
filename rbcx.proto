@@ -1,20 +1,47 @@
 syntax = "proto3";
 
-message StmMessage {
+message CoprocReq {
   oneof payload {
-    uint32 buttonsStatusMask = 1;
-    uint32 batteryMv = 2;
+    SetLeds setLeds = 4;
+    GetButtons getButtons = 5;
+  }
+
+  message SetLeds {
+    LedsEnum ledsOn = 1;
+  }
+
+  enum LedsEnum {
+    NONE = 0;
+    L1 = 1;
+    L2 = 2;
+    L3 = 4;
+    L4 = 8;
+  }
+
+  message GetButtons {
   }
 }
 
-message EspMessage {
+message CoprocStat {
   oneof payload {
-    SetMotorPower motorPower = 1;
-    uint32 ledsStatusMask = 2;
+    LedsStat ledsStat = 4;
+    ButtonsStat buttonsStat = 5;
   }
-}
 
-message SetMotorPower {
-  uint32 motorId = 1;
-  uint32 power = 2;
+  message LedsStat {
+  }
+
+  message ButtonsStat {
+    ButtonsEnum buttonsPressed = 1;
+  }
+
+  enum ButtonsEnum {
+    NONE = 0;
+    BOFF = 1;
+    B1 = 2;
+    B2 = 4;
+    B3 = 8;
+    B4 = 16;
+    BON = 32;
+  }
 }

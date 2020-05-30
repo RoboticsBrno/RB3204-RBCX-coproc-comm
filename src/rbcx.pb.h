@@ -13,78 +13,150 @@
 extern "C" {
 #endif
 
+/* Enum definitions */
+typedef enum _CoprocReq_LedsEnum {
+    CoprocReq_LedsEnum_NONE = 0,
+    CoprocReq_LedsEnum_L1 = 1,
+    CoprocReq_LedsEnum_L2 = 2,
+    CoprocReq_LedsEnum_L3 = 4,
+    CoprocReq_LedsEnum_L4 = 8
+} CoprocReq_LedsEnum;
+
+typedef enum _CoprocStat_ButtonsEnum {
+    CoprocStat_ButtonsEnum_NONE = 0,
+    CoprocStat_ButtonsEnum_BOFF = 1,
+    CoprocStat_ButtonsEnum_B1 = 2,
+    CoprocStat_ButtonsEnum_B2 = 4,
+    CoprocStat_ButtonsEnum_B3 = 8,
+    CoprocStat_ButtonsEnum_B4 = 16,
+    CoprocStat_ButtonsEnum_BON = 32
+} CoprocStat_ButtonsEnum;
+
 /* Struct definitions */
-typedef struct _SetMotorPower {
-    uint32_t motorId;
-    uint32_t power;
-} SetMotorPower;
+typedef struct _CoprocReq_GetButtons {
+    char dummy_field;
+} CoprocReq_GetButtons;
 
-typedef struct _StmMessage {
+typedef struct _CoprocStat_LedsStat {
+    char dummy_field;
+} CoprocStat_LedsStat;
+
+typedef struct _CoprocReq_SetLeds {
+    CoprocReq_LedsEnum ledsOn;
+} CoprocReq_SetLeds;
+
+typedef struct _CoprocStat_ButtonsStat {
+    CoprocStat_ButtonsEnum buttonsPressed;
+} CoprocStat_ButtonsStat;
+
+typedef struct _CoprocReq {
     pb_size_t which_payload;
     union {
-        uint32_t buttonsStatusMask;
-        uint32_t batteryMv;
+        CoprocReq_SetLeds setLeds;
+        CoprocReq_GetButtons getButtons;
     } payload;
-} StmMessage;
+} CoprocReq;
 
-typedef struct _EspMessage {
+typedef struct _CoprocStat {
     pb_size_t which_payload;
     union {
-        SetMotorPower motorPower;
-        uint32_t ledsStatusMask;
+        CoprocStat_LedsStat ledsStat;
+        CoprocStat_ButtonsStat buttonsStat;
     } payload;
-} EspMessage;
+} CoprocStat;
+
+
+/* Helper constants for enums */
+#define _CoprocReq_LedsEnum_MIN CoprocReq_LedsEnum_NONE
+#define _CoprocReq_LedsEnum_MAX CoprocReq_LedsEnum_L4
+#define _CoprocReq_LedsEnum_ARRAYSIZE ((CoprocReq_LedsEnum)(CoprocReq_LedsEnum_L4+1))
+
+#define _CoprocStat_ButtonsEnum_MIN CoprocStat_ButtonsEnum_NONE
+#define _CoprocStat_ButtonsEnum_MAX CoprocStat_ButtonsEnum_BON
+#define _CoprocStat_ButtonsEnum_ARRAYSIZE ((CoprocStat_ButtonsEnum)(CoprocStat_ButtonsEnum_BON+1))
 
 
 /* Initializer values for message structs */
-#define StmMessage_init_default                  {0, {0}}
-#define EspMessage_init_default                  {0, {SetMotorPower_init_default}}
-#define SetMotorPower_init_default               {0, 0}
-#define StmMessage_init_zero                     {0, {0}}
-#define EspMessage_init_zero                     {0, {SetMotorPower_init_zero}}
-#define SetMotorPower_init_zero                  {0, 0}
+#define CoprocReq_init_default                   {0, {CoprocReq_SetLeds_init_default}}
+#define CoprocReq_SetLeds_init_default           {_CoprocReq_LedsEnum_MIN}
+#define CoprocReq_GetButtons_init_default        {0}
+#define CoprocStat_init_default                  {0, {CoprocStat_LedsStat_init_default}}
+#define CoprocStat_LedsStat_init_default         {0}
+#define CoprocStat_ButtonsStat_init_default      {_CoprocStat_ButtonsEnum_MIN}
+#define CoprocReq_init_zero                      {0, {CoprocReq_SetLeds_init_zero}}
+#define CoprocReq_SetLeds_init_zero              {_CoprocReq_LedsEnum_MIN}
+#define CoprocReq_GetButtons_init_zero           {0}
+#define CoprocStat_init_zero                     {0, {CoprocStat_LedsStat_init_zero}}
+#define CoprocStat_LedsStat_init_zero            {0}
+#define CoprocStat_ButtonsStat_init_zero         {_CoprocStat_ButtonsEnum_MIN}
 
 /* Field tags (for use in manual encoding/decoding) */
-#define SetMotorPower_motorId_tag                1
-#define SetMotorPower_power_tag                  2
-#define StmMessage_buttonsStatusMask_tag         1
-#define StmMessage_batteryMv_tag                 2
-#define EspMessage_motorPower_tag                1
-#define EspMessage_ledsStatusMask_tag            2
+#define CoprocReq_SetLeds_ledsOn_tag             1
+#define CoprocStat_ButtonsStat_buttonsPressed_tag 1
+#define CoprocReq_setLeds_tag                    4
+#define CoprocReq_getButtons_tag                 5
+#define CoprocStat_ledsStat_tag                  4
+#define CoprocStat_buttonsStat_tag               5
 
 /* Struct field encoding specification for nanopb */
-#define StmMessage_FIELDLIST(X, a) \
-X(a, STATIC,   ONEOF,    UINT32,   (payload,buttonsStatusMask,payload.buttonsStatusMask),   1) \
-X(a, STATIC,   ONEOF,    UINT32,   (payload,batteryMv,payload.batteryMv),   2)
-#define StmMessage_CALLBACK NULL
-#define StmMessage_DEFAULT NULL
+#define CoprocReq_FIELDLIST(X, a) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (payload,setLeds,payload.setLeds),   4) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (payload,getButtons,payload.getButtons),   5)
+#define CoprocReq_CALLBACK NULL
+#define CoprocReq_DEFAULT NULL
+#define CoprocReq_payload_setLeds_MSGTYPE CoprocReq_SetLeds
+#define CoprocReq_payload_getButtons_MSGTYPE CoprocReq_GetButtons
 
-#define EspMessage_FIELDLIST(X, a) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (payload,motorPower,payload.motorPower),   1) \
-X(a, STATIC,   ONEOF,    UINT32,   (payload,ledsStatusMask,payload.ledsStatusMask),   2)
-#define EspMessage_CALLBACK NULL
-#define EspMessage_DEFAULT NULL
-#define EspMessage_payload_motorPower_MSGTYPE SetMotorPower
+#define CoprocReq_SetLeds_FIELDLIST(X, a) \
+X(a, STATIC,   SINGULAR, UENUM,    ledsOn,            1)
+#define CoprocReq_SetLeds_CALLBACK NULL
+#define CoprocReq_SetLeds_DEFAULT NULL
 
-#define SetMotorPower_FIELDLIST(X, a) \
-X(a, STATIC,   SINGULAR, UINT32,   motorId,           1) \
-X(a, STATIC,   SINGULAR, UINT32,   power,             2)
-#define SetMotorPower_CALLBACK NULL
-#define SetMotorPower_DEFAULT NULL
+#define CoprocReq_GetButtons_FIELDLIST(X, a) \
 
-extern const pb_msgdesc_t StmMessage_msg;
-extern const pb_msgdesc_t EspMessage_msg;
-extern const pb_msgdesc_t SetMotorPower_msg;
+#define CoprocReq_GetButtons_CALLBACK NULL
+#define CoprocReq_GetButtons_DEFAULT NULL
+
+#define CoprocStat_FIELDLIST(X, a) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (payload,ledsStat,payload.ledsStat),   4) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (payload,buttonsStat,payload.buttonsStat),   5)
+#define CoprocStat_CALLBACK NULL
+#define CoprocStat_DEFAULT NULL
+#define CoprocStat_payload_ledsStat_MSGTYPE CoprocStat_LedsStat
+#define CoprocStat_payload_buttonsStat_MSGTYPE CoprocStat_ButtonsStat
+
+#define CoprocStat_LedsStat_FIELDLIST(X, a) \
+
+#define CoprocStat_LedsStat_CALLBACK NULL
+#define CoprocStat_LedsStat_DEFAULT NULL
+
+#define CoprocStat_ButtonsStat_FIELDLIST(X, a) \
+X(a, STATIC,   SINGULAR, UENUM,    buttonsPressed,    1)
+#define CoprocStat_ButtonsStat_CALLBACK NULL
+#define CoprocStat_ButtonsStat_DEFAULT NULL
+
+extern const pb_msgdesc_t CoprocReq_msg;
+extern const pb_msgdesc_t CoprocReq_SetLeds_msg;
+extern const pb_msgdesc_t CoprocReq_GetButtons_msg;
+extern const pb_msgdesc_t CoprocStat_msg;
+extern const pb_msgdesc_t CoprocStat_LedsStat_msg;
+extern const pb_msgdesc_t CoprocStat_ButtonsStat_msg;
 
 /* Defines for backwards compatibility with code written before nanopb-0.4.0 */
-#define StmMessage_fields &StmMessage_msg
-#define EspMessage_fields &EspMessage_msg
-#define SetMotorPower_fields &SetMotorPower_msg
+#define CoprocReq_fields &CoprocReq_msg
+#define CoprocReq_SetLeds_fields &CoprocReq_SetLeds_msg
+#define CoprocReq_GetButtons_fields &CoprocReq_GetButtons_msg
+#define CoprocStat_fields &CoprocStat_msg
+#define CoprocStat_LedsStat_fields &CoprocStat_LedsStat_msg
+#define CoprocStat_ButtonsStat_fields &CoprocStat_ButtonsStat_msg
 
 /* Maximum encoded size of messages (where known) */
-#define StmMessage_size                          6
-#define EspMessage_size                          14
-#define SetMotorPower_size                       12
+#define CoprocReq_size                           4
+#define CoprocReq_SetLeds_size                   2
+#define CoprocReq_GetButtons_size                0
+#define CoprocStat_size                          4
+#define CoprocStat_LedsStat_size                 0
+#define CoprocStat_ButtonsStat_size              2
 
 #ifdef __cplusplus
 } /* extern "C" */
