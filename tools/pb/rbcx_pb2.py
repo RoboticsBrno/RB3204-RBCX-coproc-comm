@@ -18,7 +18,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=b'\n\nrbcx.proto\"\xde\x01\n\tCoprocReq\x12%\n\x07setLeds\x18\x04 \x01(\x0b\x32\x12.CoprocReq.SetLedsH\x00\x12+\n\ngetButtons\x18\x05 \x01(\x0b\x32\x15.CoprocReq.GetButtonsH\x00\x1a.\n\x07SetLeds\x12#\n\x06ledsOn\x18\x01 \x01(\x0e\x32\x13.CoprocReq.LedsEnum\x1a\x0c\n\nGetButtons\"4\n\x08LedsEnum\x12\x08\n\x04NONE\x10\x00\x12\x06\n\x02L1\x10\x01\x12\x06\n\x02L2\x10\x02\x12\x06\n\x02L3\x10\x04\x12\x06\n\x02L4\x10\x08\x42\t\n\x07payload\"\x89\x02\n\nCoprocStat\x12(\n\x08ledsStat\x18\x04 \x01(\x0b\x32\x14.CoprocStat.LedsStatH\x00\x12.\n\x0b\x62uttonsStat\x18\x05 \x01(\x0b\x32\x17.CoprocStat.ButtonsStatH\x00\x1a\n\n\x08LedsStat\x1a>\n\x0b\x42uttonsStat\x12/\n\x0e\x62uttonsPressed\x18\x01 \x01(\x0e\x32\x17.CoprocStat.ButtonsEnum\"J\n\x0b\x42uttonsEnum\x12\x08\n\x04NONE\x10\x00\x12\x08\n\x04\x42OFF\x10\x01\x12\x06\n\x02\x42\x31\x10\x02\x12\x06\n\x02\x42\x32\x10\x04\x12\x06\n\x02\x42\x33\x10\x08\x12\x06\n\x02\x42\x34\x10\x10\x12\x07\n\x03\x42ON\x10 B\t\n\x07payloadb\x06proto3'
+  serialized_pb=b'\n\nrbcx.proto\"\x06\n\x04None\"\xf6\x02\n\tCoprocReq\x12%\n\x07setLeds\x18\x04 \x01(\x0b\x32\x12.CoprocReq.SetLedsH\x00\x12+\n\ngetButtons\x18\x05 \x01(\x0b\x32\x15.CoprocReq.GetButtonsH\x00\x12\x33\n\x0esetStupidServo\x18\x06 \x01(\x0b\x32\x19.CoprocReq.SetStupidServoH\x00\x1a.\n\x07SetLeds\x12#\n\x06ledsOn\x18\x01 \x01(\x0e\x32\x13.CoprocReq.LedsEnum\x1a\x0c\n\nGetButtons\x1a\x61\n\x0eSetStupidServo\x12\x12\n\nservoIndex\x18\x01 \x01(\r\x12\x18\n\x07\x64isable\x18\x04 \x01(\x0b\x32\x05.NoneH\x00\x12\x15\n\x0bsetPosition\x18\x05 \x01(\x02H\x00\x42\n\n\x08servoCmd\"4\n\x08LedsEnum\x12\x08\n\x04NONE\x10\x00\x12\x06\n\x02L1\x10\x01\x12\x06\n\x02L2\x10\x02\x12\x06\n\x02L3\x10\x04\x12\x06\n\x02L4\x10\x08\x42\t\n\x07payload\"\x90\x02\n\nCoprocStat\x12\x19\n\x08ledsStat\x18\x04 \x01(\x0b\x32\x05.NoneH\x00\x12.\n\x0b\x62uttonsStat\x18\x05 \x01(\x0b\x32\x17.CoprocStat.ButtonsStatH\x00\x12 \n\x0fstupidServoStat\x18\x06 \x01(\x0b\x32\x05.NoneH\x00\x1a>\n\x0b\x42uttonsStat\x12/\n\x0e\x62uttonsPressed\x18\x01 \x01(\x0e\x32\x17.CoprocStat.ButtonsEnum\"J\n\x0b\x42uttonsEnum\x12\x08\n\x04NONE\x10\x00\x12\x08\n\x04\x42OFF\x10\x01\x12\x06\n\x02\x42\x31\x10\x02\x12\x06\n\x02\x42\x32\x10\x04\x12\x06\n\x02\x42\x33\x10\x08\x12\x06\n\x02\x42\x34\x10\x10\x12\x07\n\x03\x42ON\x10 B\t\n\x07payloadb\x06proto3'
 )
 
 
@@ -52,8 +52,8 @@ _COPROCREQ_LEDSENUM = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=174,
-  serialized_end=226,
+  serialized_start=334,
+  serialized_end=386,
 )
 _sym_db.RegisterEnumDescriptor(_COPROCREQ_LEDSENUM)
 
@@ -94,10 +94,34 @@ _COPROCSTAT_BUTTONSENUM = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=420,
-  serialized_end=494,
+  serialized_start=587,
+  serialized_end=661,
 )
 _sym_db.RegisterEnumDescriptor(_COPROCSTAT_BUTTONSENUM)
+
+
+_NONE = _descriptor.Descriptor(
+  name='None',
+  full_name='None',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=14,
+  serialized_end=20,
+)
 
 
 _COPROCREQ_SETLEDS = _descriptor.Descriptor(
@@ -126,8 +150,8 @@ _COPROCREQ_SETLEDS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=112,
-  serialized_end=158,
+  serialized_start=173,
+  serialized_end=219,
 )
 
 _COPROCREQ_GETBUTTONS = _descriptor.Descriptor(
@@ -149,8 +173,55 @@ _COPROCREQ_GETBUTTONS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=160,
-  serialized_end=172,
+  serialized_start=221,
+  serialized_end=233,
+)
+
+_COPROCREQ_SETSTUPIDSERVO = _descriptor.Descriptor(
+  name='SetStupidServo',
+  full_name='CoprocReq.SetStupidServo',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='servoIndex', full_name='CoprocReq.SetStupidServo.servoIndex', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='disable', full_name='CoprocReq.SetStupidServo.disable', index=1,
+      number=4, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='setPosition', full_name='CoprocReq.SetStupidServo.setPosition', index=2,
+      number=5, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+    _descriptor.OneofDescriptor(
+      name='servoCmd', full_name='CoprocReq.SetStupidServo.servoCmd',
+      index=0, containing_type=None, fields=[]),
+  ],
+  serialized_start=235,
+  serialized_end=332,
 )
 
 _COPROCREQ = _descriptor.Descriptor(
@@ -174,10 +245,17 @@ _COPROCREQ = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='setStupidServo', full_name='CoprocReq.setStupidServo', index=2,
+      number=6, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
-  nested_types=[_COPROCREQ_SETLEDS, _COPROCREQ_GETBUTTONS, ],
+  nested_types=[_COPROCREQ_SETLEDS, _COPROCREQ_GETBUTTONS, _COPROCREQ_SETSTUPIDSERVO, ],
   enum_types=[
     _COPROCREQ_LEDSENUM,
   ],
@@ -190,33 +268,10 @@ _COPROCREQ = _descriptor.Descriptor(
       name='payload', full_name='CoprocReq.payload',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=15,
-  serialized_end=237,
+  serialized_start=23,
+  serialized_end=397,
 )
 
-
-_COPROCSTAT_LEDSSTAT = _descriptor.Descriptor(
-  name='LedsStat',
-  full_name='CoprocStat.LedsStat',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=344,
-  serialized_end=354,
-)
 
 _COPROCSTAT_BUTTONSSTAT = _descriptor.Descriptor(
   name='ButtonsStat',
@@ -244,8 +299,8 @@ _COPROCSTAT_BUTTONSSTAT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=356,
-  serialized_end=418,
+  serialized_start=523,
+  serialized_end=585,
 )
 
 _COPROCSTAT = _descriptor.Descriptor(
@@ -269,10 +324,17 @@ _COPROCSTAT = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='stupidServoStat', full_name='CoprocStat.stupidServoStat', index=2,
+      number=6, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
-  nested_types=[_COPROCSTAT_LEDSSTAT, _COPROCSTAT_BUTTONSSTAT, ],
+  nested_types=[_COPROCSTAT_BUTTONSSTAT, ],
   enum_types=[
     _COPROCSTAT_BUTTONSENUM,
   ],
@@ -285,15 +347,24 @@ _COPROCSTAT = _descriptor.Descriptor(
       name='payload', full_name='CoprocStat.payload',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=240,
-  serialized_end=505,
+  serialized_start=400,
+  serialized_end=672,
 )
 
 _COPROCREQ_SETLEDS.fields_by_name['ledsOn'].enum_type = _COPROCREQ_LEDSENUM
 _COPROCREQ_SETLEDS.containing_type = _COPROCREQ
 _COPROCREQ_GETBUTTONS.containing_type = _COPROCREQ
+_COPROCREQ_SETSTUPIDSERVO.fields_by_name['disable'].message_type = _NONE
+_COPROCREQ_SETSTUPIDSERVO.containing_type = _COPROCREQ
+_COPROCREQ_SETSTUPIDSERVO.oneofs_by_name['servoCmd'].fields.append(
+  _COPROCREQ_SETSTUPIDSERVO.fields_by_name['disable'])
+_COPROCREQ_SETSTUPIDSERVO.fields_by_name['disable'].containing_oneof = _COPROCREQ_SETSTUPIDSERVO.oneofs_by_name['servoCmd']
+_COPROCREQ_SETSTUPIDSERVO.oneofs_by_name['servoCmd'].fields.append(
+  _COPROCREQ_SETSTUPIDSERVO.fields_by_name['setPosition'])
+_COPROCREQ_SETSTUPIDSERVO.fields_by_name['setPosition'].containing_oneof = _COPROCREQ_SETSTUPIDSERVO.oneofs_by_name['servoCmd']
 _COPROCREQ.fields_by_name['setLeds'].message_type = _COPROCREQ_SETLEDS
 _COPROCREQ.fields_by_name['getButtons'].message_type = _COPROCREQ_GETBUTTONS
+_COPROCREQ.fields_by_name['setStupidServo'].message_type = _COPROCREQ_SETSTUPIDSERVO
 _COPROCREQ_LEDSENUM.containing_type = _COPROCREQ
 _COPROCREQ.oneofs_by_name['payload'].fields.append(
   _COPROCREQ.fields_by_name['setLeds'])
@@ -301,11 +372,14 @@ _COPROCREQ.fields_by_name['setLeds'].containing_oneof = _COPROCREQ.oneofs_by_nam
 _COPROCREQ.oneofs_by_name['payload'].fields.append(
   _COPROCREQ.fields_by_name['getButtons'])
 _COPROCREQ.fields_by_name['getButtons'].containing_oneof = _COPROCREQ.oneofs_by_name['payload']
-_COPROCSTAT_LEDSSTAT.containing_type = _COPROCSTAT
+_COPROCREQ.oneofs_by_name['payload'].fields.append(
+  _COPROCREQ.fields_by_name['setStupidServo'])
+_COPROCREQ.fields_by_name['setStupidServo'].containing_oneof = _COPROCREQ.oneofs_by_name['payload']
 _COPROCSTAT_BUTTONSSTAT.fields_by_name['buttonsPressed'].enum_type = _COPROCSTAT_BUTTONSENUM
 _COPROCSTAT_BUTTONSSTAT.containing_type = _COPROCSTAT
-_COPROCSTAT.fields_by_name['ledsStat'].message_type = _COPROCSTAT_LEDSSTAT
+_COPROCSTAT.fields_by_name['ledsStat'].message_type = _NONE
 _COPROCSTAT.fields_by_name['buttonsStat'].message_type = _COPROCSTAT_BUTTONSSTAT
+_COPROCSTAT.fields_by_name['stupidServoStat'].message_type = _NONE
 _COPROCSTAT_BUTTONSENUM.containing_type = _COPROCSTAT
 _COPROCSTAT.oneofs_by_name['payload'].fields.append(
   _COPROCSTAT.fields_by_name['ledsStat'])
@@ -313,9 +387,20 @@ _COPROCSTAT.fields_by_name['ledsStat'].containing_oneof = _COPROCSTAT.oneofs_by_
 _COPROCSTAT.oneofs_by_name['payload'].fields.append(
   _COPROCSTAT.fields_by_name['buttonsStat'])
 _COPROCSTAT.fields_by_name['buttonsStat'].containing_oneof = _COPROCSTAT.oneofs_by_name['payload']
+_COPROCSTAT.oneofs_by_name['payload'].fields.append(
+  _COPROCSTAT.fields_by_name['stupidServoStat'])
+_COPROCSTAT.fields_by_name['stupidServoStat'].containing_oneof = _COPROCSTAT.oneofs_by_name['payload']
+DESCRIPTOR.message_types_by_name['None'] = _NONE
 DESCRIPTOR.message_types_by_name['CoprocReq'] = _COPROCREQ
 DESCRIPTOR.message_types_by_name['CoprocStat'] = _COPROCSTAT
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
+
+globals()['None'] = _reflection.GeneratedProtocolMessageType('None', (_message.Message,), {
+  'DESCRIPTOR' : _NONE,
+  '__module__' : 'rbcx_pb2'
+  # @@protoc_insertion_point(class_scope:None)
+  })
+_sym_db.RegisterMessage(globals()['None'])
 
 CoprocReq = _reflection.GeneratedProtocolMessageType('CoprocReq', (_message.Message,), {
 
@@ -332,6 +417,13 @@ CoprocReq = _reflection.GeneratedProtocolMessageType('CoprocReq', (_message.Mess
     # @@protoc_insertion_point(class_scope:CoprocReq.GetButtons)
     })
   ,
+
+  'SetStupidServo' : _reflection.GeneratedProtocolMessageType('SetStupidServo', (_message.Message,), {
+    'DESCRIPTOR' : _COPROCREQ_SETSTUPIDSERVO,
+    '__module__' : 'rbcx_pb2'
+    # @@protoc_insertion_point(class_scope:CoprocReq.SetStupidServo)
+    })
+  ,
   'DESCRIPTOR' : _COPROCREQ,
   '__module__' : 'rbcx_pb2'
   # @@protoc_insertion_point(class_scope:CoprocReq)
@@ -339,15 +431,9 @@ CoprocReq = _reflection.GeneratedProtocolMessageType('CoprocReq', (_message.Mess
 _sym_db.RegisterMessage(CoprocReq)
 _sym_db.RegisterMessage(CoprocReq.SetLeds)
 _sym_db.RegisterMessage(CoprocReq.GetButtons)
+_sym_db.RegisterMessage(CoprocReq.SetStupidServo)
 
 CoprocStat = _reflection.GeneratedProtocolMessageType('CoprocStat', (_message.Message,), {
-
-  'LedsStat' : _reflection.GeneratedProtocolMessageType('LedsStat', (_message.Message,), {
-    'DESCRIPTOR' : _COPROCSTAT_LEDSSTAT,
-    '__module__' : 'rbcx_pb2'
-    # @@protoc_insertion_point(class_scope:CoprocStat.LedsStat)
-    })
-  ,
 
   'ButtonsStat' : _reflection.GeneratedProtocolMessageType('ButtonsStat', (_message.Message,), {
     'DESCRIPTOR' : _COPROCSTAT_BUTTONSSTAT,
@@ -360,7 +446,6 @@ CoprocStat = _reflection.GeneratedProtocolMessageType('CoprocStat', (_message.Me
   # @@protoc_insertion_point(class_scope:CoprocStat)
   })
 _sym_db.RegisterMessage(CoprocStat)
-_sym_db.RegisterMessage(CoprocStat.LedsStat)
 _sym_db.RegisterMessage(CoprocStat.ButtonsStat)
 
 

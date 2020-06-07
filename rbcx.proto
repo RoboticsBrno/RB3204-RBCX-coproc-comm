@@ -1,9 +1,13 @@
 syntax = "proto3";
 
+message None {
+}
+
 message CoprocReq {
   oneof payload {
     SetLeds setLeds = 4;
     GetButtons getButtons = 5;
+    SetStupidServo setStupidServo = 6;
   }
 
   message SetLeds {
@@ -20,15 +24,21 @@ message CoprocReq {
 
   message GetButtons {
   }
+
+  message SetStupidServo {
+    uint32 servoIndex = 1;
+    oneof servoCmd {
+      None disable = 4;
+      float setPosition = 5;
+    }
+  }
 }
 
 message CoprocStat {
   oneof payload {
-    LedsStat ledsStat = 4;
+    None ledsStat = 4;
     ButtonsStat buttonsStat = 5;
-  }
-
-  message LedsStat {
+    None stupidServoStat = 6;
   }
 
   message ButtonsStat {
