@@ -21,10 +21,16 @@ PB_BIND(CoprocReq_GetButtons, CoprocReq_GetButtons, AUTO)
 PB_BIND(CoprocReq_SetStupidServo, CoprocReq_SetStupidServo, AUTO)
 
 
+PB_BIND(CoprocReq_UltrasoundReq, CoprocReq_UltrasoundReq, AUTO)
+
+
 PB_BIND(CoprocStat, CoprocStat, AUTO)
 
 
 PB_BIND(CoprocStat_ButtonsStat, CoprocStat_ButtonsStat, AUTO)
+
+
+PB_BIND(CoprocStat_UltrasoundStat, CoprocStat_UltrasoundStat, AUTO)
 
 
 

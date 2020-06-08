@@ -8,6 +8,7 @@ message CoprocReq {
     SetLeds setLeds = 4;
     GetButtons getButtons = 5;
     SetStupidServo setStupidServo = 6;
+    UltrasoundReq ultrasoundReq = 7;
   }
 
   message SetLeds {
@@ -32,6 +33,13 @@ message CoprocReq {
       float setPosition = 5;
     }
   }
+
+  message UltrasoundReq {
+    uint32 utsIndex = 1;
+    oneof utsCmd {
+      None singlePing = 4;
+    }
+  }
 }
 
 message CoprocStat {
@@ -39,6 +47,7 @@ message CoprocStat {
     None ledsStat = 4;
     ButtonsStat buttonsStat = 5;
     None stupidServoStat = 6;
+    UltrasoundStat ultrasoundStat = 7;
   }
 
   message ButtonsStat {
@@ -53,5 +62,9 @@ message CoprocStat {
     B3 = 8;
     B4 = 16;
     BON = 32;
+  }
+
+  message UltrasoundStat {
+    uint32 roundtripMicrosecs = 1;
   }
 }
