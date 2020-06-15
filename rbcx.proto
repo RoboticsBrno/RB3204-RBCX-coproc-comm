@@ -65,6 +65,7 @@ message CoprocStat {
   }
 
   message UltrasoundStat {
-    uint32 roundtripMicrosecs = 1;
+    uint32 utsIndex = 1;
+    uint32 roundtripMicrosecs = 2;
   }
 }

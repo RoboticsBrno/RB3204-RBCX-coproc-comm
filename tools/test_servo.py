@@ -18,7 +18,12 @@ if __name__ == "__main__":
     with serial.Serial(sys.argv[1], baudrate=115200) as port:
         threading.Thread(target=read_serial, args=(port, ), daemon=True).start()
         while True:
-            position = float(input())
-            msg = pb.CoprocReq(setStupidServo=pb.CoprocReq.SetStupidServo(setPosition=position))
+            position = input()
+            if (position == ''):
+                msg = pb.CoprocReq(setStupidServo=pb.CoprocReq.SetStupidServo())
+                msg.SetStupidServo.disable.SetInParent()
+            else:
+                msg = pb.CoprocReq(setStupidServo=pb.CoprocReq.SetStupidServo(
+                    setPosition=float(position)))
             frame_send(port, msg)
 

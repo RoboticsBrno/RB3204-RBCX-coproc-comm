@@ -67,6 +67,7 @@ typedef struct _CoprocStat_ButtonsStat {
 } CoprocStat_ButtonsStat;
 
 typedef struct _CoprocStat_UltrasoundStat {
+    uint32_t utsIndex;
     uint32_t roundtripMicrosecs;
 } CoprocStat_UltrasoundStat;
 
@@ -110,7 +111,7 @@ typedef struct _CoprocStat {
 #define CoprocReq_UltrasoundReq_init_default     {0, 0, {None_init_default}}
 #define CoprocStat_init_default                  {0, {None_init_default}}
 #define CoprocStat_ButtonsStat_init_default      {_CoprocStat_ButtonsEnum_MIN}
-#define CoprocStat_UltrasoundStat_init_default   {0}
+#define CoprocStat_UltrasoundStat_init_default   {0, 0}
 #define None_init_zero                           {0}
 #define CoprocReq_init_zero                      {0, {CoprocReq_SetLeds_init_zero}}
 #define CoprocReq_SetLeds_init_zero              {_CoprocReq_LedsEnum_MIN}
@@ -119,7 +120,7 @@ typedef struct _CoprocStat {
 #define CoprocReq_UltrasoundReq_init_zero        {0, 0, {None_init_zero}}
 #define CoprocStat_init_zero                     {0, {None_init_zero}}
 #define CoprocStat_ButtonsStat_init_zero         {_CoprocStat_ButtonsEnum_MIN}
-#define CoprocStat_UltrasoundStat_init_zero      {0}
+#define CoprocStat_UltrasoundStat_init_zero      {0, 0}
 
 /* Field tags (for use in manual encoding/decoding) */
 #define CoprocReq_SetLeds_ledsOn_tag             1
@@ -129,7 +130,8 @@ typedef struct _CoprocStat {
 #define CoprocReq_UltrasoundReq_singlePing_tag   4
 #define CoprocReq_UltrasoundReq_utsIndex_tag     1
 #define CoprocStat_ButtonsStat_buttonsPressed_tag 1
-#define CoprocStat_UltrasoundStat_roundtripMicrosecs_tag 1
+#define CoprocStat_UltrasoundStat_utsIndex_tag   1
+#define CoprocStat_UltrasoundStat_roundtripMicrosecs_tag 2
 #define CoprocReq_setLeds_tag                    4
 #define CoprocReq_getButtons_tag                 5
 #define CoprocReq_setStupidServo_tag             6
@@ -200,7 +202,8 @@ X(a, STATIC,   SINGULAR, UENUM,    buttonsPressed,    1)
 #define CoprocStat_ButtonsStat_DEFAULT NULL
 
 #define CoprocStat_UltrasoundStat_FIELDLIST(X, a) \
-X(a, STATIC,   SINGULAR, UINT32,   roundtripMicrosecs,   1)
+X(a, STATIC,   SINGULAR, UINT32,   utsIndex,          1) \
+X(a, STATIC,   SINGULAR, UINT32,   roundtripMicrosecs,   2)
 #define CoprocStat_UltrasoundStat_CALLBACK NULL
 #define CoprocStat_UltrasoundStat_DEFAULT NULL
 
@@ -232,9 +235,9 @@ extern const pb_msgdesc_t CoprocStat_UltrasoundStat_msg;
 #define CoprocReq_GetButtons_size                0
 #define CoprocReq_SetStupidServo_size            11
 #define CoprocReq_UltrasoundReq_size             8
-#define CoprocStat_size                          8
+#define CoprocStat_size                          14
 #define CoprocStat_ButtonsStat_size              2
-#define CoprocStat_UltrasoundStat_size           6
+#define CoprocStat_UltrasoundStat_size           12
 
 #ifdef __cplusplus
 } /* extern "C" */
