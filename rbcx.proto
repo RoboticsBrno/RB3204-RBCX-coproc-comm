@@ -5,6 +5,7 @@ message None {
 
 message CoprocReq {
   oneof payload {
+    None keepalive = 1;
     SetLeds setLeds = 4;
     GetButtons getButtons = 5;
     SetStupidServo setStupidServo = 6;
