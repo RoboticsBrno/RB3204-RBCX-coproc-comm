@@ -74,6 +74,7 @@ typedef struct _CoprocStat_UltrasoundStat {
 typedef struct _CoprocReq {
     pb_size_t which_payload;
     union {
+        None keepalive;
         CoprocReq_SetLeds setLeds;
         CoprocReq_GetButtons getButtons;
         CoprocReq_SetStupidServo setStupidServo;
@@ -104,7 +105,7 @@ typedef struct _CoprocStat {
 
 /* Initializer values for message structs */
 #define None_init_default                        {0}
-#define CoprocReq_init_default                   {0, {CoprocReq_SetLeds_init_default}}
+#define CoprocReq_init_default                   {0, {None_init_default}}
 #define CoprocReq_SetLeds_init_default           {_CoprocReq_LedsEnum_MIN}
 #define CoprocReq_GetButtons_init_default        {0}
 #define CoprocReq_SetStupidServo_init_default    {0, 0, {None_init_default}}
@@ -113,7 +114,7 @@ typedef struct _CoprocStat {
 #define CoprocStat_ButtonsStat_init_default      {_CoprocStat_ButtonsEnum_MIN}
 #define CoprocStat_UltrasoundStat_init_default   {0, 0}
 #define None_init_zero                           {0}
-#define CoprocReq_init_zero                      {0, {CoprocReq_SetLeds_init_zero}}
+#define CoprocReq_init_zero                      {0, {None_init_zero}}
 #define CoprocReq_SetLeds_init_zero              {_CoprocReq_LedsEnum_MIN}
 #define CoprocReq_GetButtons_init_zero           {0}
 #define CoprocReq_SetStupidServo_init_zero       {0, 0, {None_init_zero}}
@@ -132,6 +133,7 @@ typedef struct _CoprocStat {
 #define CoprocStat_ButtonsStat_buttonsPressed_tag 1
 #define CoprocStat_UltrasoundStat_utsIndex_tag   1
 #define CoprocStat_UltrasoundStat_roundtripMicrosecs_tag 2
+#define CoprocReq_keepalive_tag                  1
 #define CoprocReq_setLeds_tag                    4
 #define CoprocReq_getButtons_tag                 5
 #define CoprocReq_setStupidServo_tag             6
@@ -148,12 +150,14 @@ typedef struct _CoprocStat {
 #define None_DEFAULT NULL
 
 #define CoprocReq_FIELDLIST(X, a) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (payload,keepalive,payload.keepalive),   1) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,setLeds,payload.setLeds),   4) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,getButtons,payload.getButtons),   5) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,setStupidServo,payload.setStupidServo),   6) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,ultrasoundReq,payload.ultrasoundReq),   7)
 #define CoprocReq_CALLBACK NULL
 #define CoprocReq_DEFAULT NULL
+#define CoprocReq_payload_keepalive_MSGTYPE None
 #define CoprocReq_payload_setLeds_MSGTYPE CoprocReq_SetLeds
 #define CoprocReq_payload_getButtons_MSGTYPE CoprocReq_GetButtons
 #define CoprocReq_payload_setStupidServo_MSGTYPE CoprocReq_SetStupidServo
