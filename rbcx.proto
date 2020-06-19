@@ -10,6 +10,7 @@ message CoprocReq {
     GetButtons getButtons = 5;
     SetStupidServo setStupidServo = 6;
     UltrasoundReq ultrasoundReq = 7;
+    MotorReq motorReq = 8;
   }
 
   message SetLeds {
@@ -39,6 +40,14 @@ message CoprocReq {
     uint32 utsIndex = 1;
     oneof utsCmd {
       None singlePing = 4;
+    }
+  }
+
+  message MotorReq {
+    uint32 motorIndex = 1;
+    oneof motorCmd {
+      None disable = 4;
+      float setPwm = 5;
     }
   }
 }

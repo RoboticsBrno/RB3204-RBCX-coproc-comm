@@ -18,7 +18,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=b'\n\nrbcx.proto\"\x06\n\x04None\"\x8f\x04\n\tCoprocReq\x12\x1a\n\tkeepalive\x18\x01 \x01(\x0b\x32\x05.NoneH\x00\x12%\n\x07setLeds\x18\x04 \x01(\x0b\x32\x12.CoprocReq.SetLedsH\x00\x12+\n\ngetButtons\x18\x05 \x01(\x0b\x32\x15.CoprocReq.GetButtonsH\x00\x12\x33\n\x0esetStupidServo\x18\x06 \x01(\x0b\x32\x19.CoprocReq.SetStupidServoH\x00\x12\x31\n\rultrasoundReq\x18\x07 \x01(\x0b\x32\x18.CoprocReq.UltrasoundReqH\x00\x1a.\n\x07SetLeds\x12#\n\x06ledsOn\x18\x01 \x01(\x0e\x32\x13.CoprocReq.LedsEnum\x1a\x0c\n\nGetButtons\x1a\x61\n\x0eSetStupidServo\x12\x12\n\nservoIndex\x18\x01 \x01(\r\x12\x18\n\x07\x64isable\x18\x04 \x01(\x0b\x32\x05.NoneH\x00\x12\x15\n\x0bsetPosition\x18\x05 \x01(\x02H\x00\x42\n\n\x08servoCmd\x1aH\n\rUltrasoundReq\x12\x10\n\x08utsIndex\x18\x01 \x01(\r\x12\x1b\n\nsinglePing\x18\x04 \x01(\x0b\x32\x05.NoneH\x00\x42\x08\n\x06utsCmd\"4\n\x08LedsEnum\x12\x08\n\x04NONE\x10\x00\x12\x06\n\x02L1\x10\x01\x12\x06\n\x02L2\x10\x02\x12\x06\n\x02L3\x10\x04\x12\x06\n\x02L4\x10\x08\x42\t\n\x07payload\"\x86\x03\n\nCoprocStat\x12\x19\n\x08ledsStat\x18\x04 \x01(\x0b\x32\x05.NoneH\x00\x12.\n\x0b\x62uttonsStat\x18\x05 \x01(\x0b\x32\x17.CoprocStat.ButtonsStatH\x00\x12 \n\x0fstupidServoStat\x18\x06 \x01(\x0b\x32\x05.NoneH\x00\x12\x34\n\x0eultrasoundStat\x18\x07 \x01(\x0b\x32\x1a.CoprocStat.UltrasoundStatH\x00\x1a>\n\x0b\x42uttonsStat\x12/\n\x0e\x62uttonsPressed\x18\x01 \x01(\x0e\x32\x17.CoprocStat.ButtonsEnum\x1a>\n\x0eUltrasoundStat\x12\x10\n\x08utsIndex\x18\x01 \x01(\r\x12\x1a\n\x12roundtripMicrosecs\x18\x02 \x01(\r\"J\n\x0b\x42uttonsEnum\x12\x08\n\x04NONE\x10\x00\x12\x08\n\x04\x42OFF\x10\x01\x12\x06\n\x02\x42\x31\x10\x02\x12\x06\n\x02\x42\x32\x10\x04\x12\x06\n\x02\x42\x33\x10\x08\x12\x06\n\x02\x42\x34\x10\x10\x12\x07\n\x03\x42ON\x10 B\t\n\x07payloadb\x06proto3'
+  serialized_pb=b'\n\nrbcx.proto\"\x06\n\x04None\"\x90\x05\n\tCoprocReq\x12\x1a\n\tkeepalive\x18\x01 \x01(\x0b\x32\x05.NoneH\x00\x12%\n\x07setLeds\x18\x04 \x01(\x0b\x32\x12.CoprocReq.SetLedsH\x00\x12+\n\ngetButtons\x18\x05 \x01(\x0b\x32\x15.CoprocReq.GetButtonsH\x00\x12\x33\n\x0esetStupidServo\x18\x06 \x01(\x0b\x32\x19.CoprocReq.SetStupidServoH\x00\x12\x31\n\rultrasoundReq\x18\x07 \x01(\x0b\x32\x18.CoprocReq.UltrasoundReqH\x00\x12\'\n\x08motorReq\x18\x08 \x01(\x0b\x32\x13.CoprocReq.MotorReqH\x00\x1a.\n\x07SetLeds\x12#\n\x06ledsOn\x18\x01 \x01(\x0e\x32\x13.CoprocReq.LedsEnum\x1a\x0c\n\nGetButtons\x1a\x61\n\x0eSetStupidServo\x12\x12\n\nservoIndex\x18\x01 \x01(\r\x12\x18\n\x07\x64isable\x18\x04 \x01(\x0b\x32\x05.NoneH\x00\x12\x15\n\x0bsetPosition\x18\x05 \x01(\x02H\x00\x42\n\n\x08servoCmd\x1aH\n\rUltrasoundReq\x12\x10\n\x08utsIndex\x18\x01 \x01(\r\x12\x1b\n\nsinglePing\x18\x04 \x01(\x0b\x32\x05.NoneH\x00\x42\x08\n\x06utsCmd\x1aV\n\x08MotorReq\x12\x12\n\nmotorIndex\x18\x01 \x01(\r\x12\x18\n\x07\x64isable\x18\x04 \x01(\x0b\x32\x05.NoneH\x00\x12\x10\n\x06setPwm\x18\x05 \x01(\x02H\x00\x42\n\n\x08motorCmd\"4\n\x08LedsEnum\x12\x08\n\x04NONE\x10\x00\x12\x06\n\x02L1\x10\x01\x12\x06\n\x02L2\x10\x02\x12\x06\n\x02L3\x10\x04\x12\x06\n\x02L4\x10\x08\x42\t\n\x07payload\"\x86\x03\n\nCoprocStat\x12\x19\n\x08ledsStat\x18\x04 \x01(\x0b\x32\x05.NoneH\x00\x12.\n\x0b\x62uttonsStat\x18\x05 \x01(\x0b\x32\x17.CoprocStat.ButtonsStatH\x00\x12 \n\x0fstupidServoStat\x18\x06 \x01(\x0b\x32\x05.NoneH\x00\x12\x34\n\x0eultrasoundStat\x18\x07 \x01(\x0b\x32\x1a.CoprocStat.UltrasoundStatH\x00\x1a>\n\x0b\x42uttonsStat\x12/\n\x0e\x62uttonsPressed\x18\x01 \x01(\x0e\x32\x17.CoprocStat.ButtonsEnum\x1a>\n\x0eUltrasoundStat\x12\x10\n\x08utsIndex\x18\x01 \x01(\r\x12\x1a\n\x12roundtripMicrosecs\x18\x02 \x01(\r\"J\n\x0b\x42uttonsEnum\x12\x08\n\x04NONE\x10\x00\x12\x08\n\x04\x42OFF\x10\x01\x12\x06\n\x02\x42\x31\x10\x02\x12\x06\n\x02\x42\x32\x10\x04\x12\x06\n\x02\x42\x33\x10\x08\x12\x06\n\x02\x42\x34\x10\x10\x12\x07\n\x03\x42ON\x10 B\t\n\x07payloadb\x06proto3'
 )
 
 
@@ -52,8 +52,8 @@ _COPROCREQ_LEDSENUM = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=487,
-  serialized_end=539,
+  serialized_start=616,
+  serialized_end=668,
 )
 _sym_db.RegisterEnumDescriptor(_COPROCREQ_LEDSENUM)
 
@@ -94,8 +94,8 @@ _COPROCSTAT_BUTTONSENUM = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=858,
-  serialized_end=932,
+  serialized_start=987,
+  serialized_end=1061,
 )
 _sym_db.RegisterEnumDescriptor(_COPROCSTAT_BUTTONSENUM)
 
@@ -150,8 +150,8 @@ _COPROCREQ_SETLEDS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=252,
-  serialized_end=298,
+  serialized_start=293,
+  serialized_end=339,
 )
 
 _COPROCREQ_GETBUTTONS = _descriptor.Descriptor(
@@ -173,8 +173,8 @@ _COPROCREQ_GETBUTTONS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=300,
-  serialized_end=312,
+  serialized_start=341,
+  serialized_end=353,
 )
 
 _COPROCREQ_SETSTUPIDSERVO = _descriptor.Descriptor(
@@ -220,8 +220,8 @@ _COPROCREQ_SETSTUPIDSERVO = _descriptor.Descriptor(
       name='servoCmd', full_name='CoprocReq.SetStupidServo.servoCmd',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=314,
-  serialized_end=411,
+  serialized_start=355,
+  serialized_end=452,
 )
 
 _COPROCREQ_ULTRASOUNDREQ = _descriptor.Descriptor(
@@ -260,8 +260,55 @@ _COPROCREQ_ULTRASOUNDREQ = _descriptor.Descriptor(
       name='utsCmd', full_name='CoprocReq.UltrasoundReq.utsCmd',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=413,
-  serialized_end=485,
+  serialized_start=454,
+  serialized_end=526,
+)
+
+_COPROCREQ_MOTORREQ = _descriptor.Descriptor(
+  name='MotorReq',
+  full_name='CoprocReq.MotorReq',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='motorIndex', full_name='CoprocReq.MotorReq.motorIndex', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='disable', full_name='CoprocReq.MotorReq.disable', index=1,
+      number=4, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='setPwm', full_name='CoprocReq.MotorReq.setPwm', index=2,
+      number=5, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+    _descriptor.OneofDescriptor(
+      name='motorCmd', full_name='CoprocReq.MotorReq.motorCmd',
+      index=0, containing_type=None, fields=[]),
+  ],
+  serialized_start=528,
+  serialized_end=614,
 )
 
 _COPROCREQ = _descriptor.Descriptor(
@@ -306,10 +353,17 @@ _COPROCREQ = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='motorReq', full_name='CoprocReq.motorReq', index=5,
+      number=8, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
-  nested_types=[_COPROCREQ_SETLEDS, _COPROCREQ_GETBUTTONS, _COPROCREQ_SETSTUPIDSERVO, _COPROCREQ_ULTRASOUNDREQ, ],
+  nested_types=[_COPROCREQ_SETLEDS, _COPROCREQ_GETBUTTONS, _COPROCREQ_SETSTUPIDSERVO, _COPROCREQ_ULTRASOUNDREQ, _COPROCREQ_MOTORREQ, ],
   enum_types=[
     _COPROCREQ_LEDSENUM,
   ],
@@ -323,7 +377,7 @@ _COPROCREQ = _descriptor.Descriptor(
       index=0, containing_type=None, fields=[]),
   ],
   serialized_start=23,
-  serialized_end=550,
+  serialized_end=679,
 )
 
 
@@ -353,8 +407,8 @@ _COPROCSTAT_BUTTONSSTAT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=730,
-  serialized_end=792,
+  serialized_start=859,
+  serialized_end=921,
 )
 
 _COPROCSTAT_ULTRASOUNDSTAT = _descriptor.Descriptor(
@@ -390,8 +444,8 @@ _COPROCSTAT_ULTRASOUNDSTAT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=794,
-  serialized_end=856,
+  serialized_start=923,
+  serialized_end=985,
 )
 
 _COPROCSTAT = _descriptor.Descriptor(
@@ -445,8 +499,8 @@ _COPROCSTAT = _descriptor.Descriptor(
       name='payload', full_name='CoprocStat.payload',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=553,
-  serialized_end=943,
+  serialized_start=682,
+  serialized_end=1072,
 )
 
 _COPROCREQ_SETLEDS.fields_by_name['ledsOn'].enum_type = _COPROCREQ_LEDSENUM
@@ -465,11 +519,20 @@ _COPROCREQ_ULTRASOUNDREQ.containing_type = _COPROCREQ
 _COPROCREQ_ULTRASOUNDREQ.oneofs_by_name['utsCmd'].fields.append(
   _COPROCREQ_ULTRASOUNDREQ.fields_by_name['singlePing'])
 _COPROCREQ_ULTRASOUNDREQ.fields_by_name['singlePing'].containing_oneof = _COPROCREQ_ULTRASOUNDREQ.oneofs_by_name['utsCmd']
+_COPROCREQ_MOTORREQ.fields_by_name['disable'].message_type = _NONE
+_COPROCREQ_MOTORREQ.containing_type = _COPROCREQ
+_COPROCREQ_MOTORREQ.oneofs_by_name['motorCmd'].fields.append(
+  _COPROCREQ_MOTORREQ.fields_by_name['disable'])
+_COPROCREQ_MOTORREQ.fields_by_name['disable'].containing_oneof = _COPROCREQ_MOTORREQ.oneofs_by_name['motorCmd']
+_COPROCREQ_MOTORREQ.oneofs_by_name['motorCmd'].fields.append(
+  _COPROCREQ_MOTORREQ.fields_by_name['setPwm'])
+_COPROCREQ_MOTORREQ.fields_by_name['setPwm'].containing_oneof = _COPROCREQ_MOTORREQ.oneofs_by_name['motorCmd']
 _COPROCREQ.fields_by_name['keepalive'].message_type = _NONE
 _COPROCREQ.fields_by_name['setLeds'].message_type = _COPROCREQ_SETLEDS
 _COPROCREQ.fields_by_name['getButtons'].message_type = _COPROCREQ_GETBUTTONS
 _COPROCREQ.fields_by_name['setStupidServo'].message_type = _COPROCREQ_SETSTUPIDSERVO
 _COPROCREQ.fields_by_name['ultrasoundReq'].message_type = _COPROCREQ_ULTRASOUNDREQ
+_COPROCREQ.fields_by_name['motorReq'].message_type = _COPROCREQ_MOTORREQ
 _COPROCREQ_LEDSENUM.containing_type = _COPROCREQ
 _COPROCREQ.oneofs_by_name['payload'].fields.append(
   _COPROCREQ.fields_by_name['keepalive'])
@@ -486,6 +549,9 @@ _COPROCREQ.fields_by_name['setStupidServo'].containing_oneof = _COPROCREQ.oneofs
 _COPROCREQ.oneofs_by_name['payload'].fields.append(
   _COPROCREQ.fields_by_name['ultrasoundReq'])
 _COPROCREQ.fields_by_name['ultrasoundReq'].containing_oneof = _COPROCREQ.oneofs_by_name['payload']
+_COPROCREQ.oneofs_by_name['payload'].fields.append(
+  _COPROCREQ.fields_by_name['motorReq'])
+_COPROCREQ.fields_by_name['motorReq'].containing_oneof = _COPROCREQ.oneofs_by_name['payload']
 _COPROCSTAT_BUTTONSSTAT.fields_by_name['buttonsPressed'].enum_type = _COPROCSTAT_BUTTONSENUM
 _COPROCSTAT_BUTTONSSTAT.containing_type = _COPROCSTAT
 _COPROCSTAT_ULTRASOUNDSTAT.containing_type = _COPROCSTAT
@@ -547,6 +613,13 @@ CoprocReq = _reflection.GeneratedProtocolMessageType('CoprocReq', (_message.Mess
     # @@protoc_insertion_point(class_scope:CoprocReq.UltrasoundReq)
     })
   ,
+
+  'MotorReq' : _reflection.GeneratedProtocolMessageType('MotorReq', (_message.Message,), {
+    'DESCRIPTOR' : _COPROCREQ_MOTORREQ,
+    '__module__' : 'rbcx_pb2'
+    # @@protoc_insertion_point(class_scope:CoprocReq.MotorReq)
+    })
+  ,
   'DESCRIPTOR' : _COPROCREQ,
   '__module__' : 'rbcx_pb2'
   # @@protoc_insertion_point(class_scope:CoprocReq)
@@ -556,6 +629,7 @@ _sym_db.RegisterMessage(CoprocReq.SetLeds)
 _sym_db.RegisterMessage(CoprocReq.GetButtons)
 _sym_db.RegisterMessage(CoprocReq.SetStupidServo)
 _sym_db.RegisterMessage(CoprocReq.UltrasoundReq)
+_sym_db.RegisterMessage(CoprocReq.MotorReq)
 
 CoprocStat = _reflection.GeneratedProtocolMessageType('CoprocStat', (_message.Message,), {
 

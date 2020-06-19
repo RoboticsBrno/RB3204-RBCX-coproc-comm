@@ -16,11 +16,11 @@ def read_serial(port):
 
 
 if __name__ == "__main__":
-    with serial.Serial(sys.argv[1], baudrate=115200) as port:
+    with serial.Serial(sys.argv[1], baudrate=921600) as port:
         threading.Thread(target=read_serial, args=(port, ), daemon=True).start()
         while True:
             ultrasoundReq = pb.CoprocReq.UltrasoundReq(utsIndex=3)
             ultrasoundReq.singlePing.SetInParent()
             msg = pb.CoprocReq(ultrasoundReq=ultrasoundReq)
             frame_send(port, msg)
-            time.sleep(0.3)
+            time.sleep(0.5)

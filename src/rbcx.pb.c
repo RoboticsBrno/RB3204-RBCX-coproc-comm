@@ -24,6 +24,9 @@ PB_BIND(CoprocReq_SetStupidServo, CoprocReq_SetStupidServo, AUTO)
 PB_BIND(CoprocReq_UltrasoundReq, CoprocReq_UltrasoundReq, AUTO)
 
 
+PB_BIND(CoprocReq_MotorReq, CoprocReq_MotorReq, AUTO)
+
+
 PB_BIND(CoprocStat, CoprocStat, AUTO)
 
 
