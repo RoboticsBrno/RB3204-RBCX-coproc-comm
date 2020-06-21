@@ -46,8 +46,8 @@ message CoprocReq {
   message MotorReq {
     uint32 motorIndex = 1;
     oneof motorCmd {
-      None disable = 4;
-      float setPwm = 5;
+      float setPower = 5;
+      float setBrake = 6;
     }
   }
 }

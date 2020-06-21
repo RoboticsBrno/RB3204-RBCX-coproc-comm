@@ -45,8 +45,8 @@ typedef struct _CoprocReq_MotorReq {
     uint32_t motorIndex;
     pb_size_t which_motorCmd;
     union {
-        None disable;
-        float setPwm;
+        float setPower;
+        float setBrake;
     } motorCmd;
 } CoprocReq_MotorReq;
 
@@ -120,7 +120,7 @@ typedef struct _CoprocStat {
 #define CoprocReq_GetButtons_init_default        {0}
 #define CoprocReq_SetStupidServo_init_default    {0, 0, {None_init_default}}
 #define CoprocReq_UltrasoundReq_init_default     {0, 0, {None_init_default}}
-#define CoprocReq_MotorReq_init_default          {0, 0, {None_init_default}}
+#define CoprocReq_MotorReq_init_default          {0, 0, {0}}
 #define CoprocStat_init_default                  {0, {None_init_default}}
 #define CoprocStat_ButtonsStat_init_default      {_CoprocStat_ButtonsEnum_MIN}
 #define CoprocStat_UltrasoundStat_init_default   {0, 0}
@@ -130,14 +130,14 @@ typedef struct _CoprocStat {
 #define CoprocReq_GetButtons_init_zero           {0}
 #define CoprocReq_SetStupidServo_init_zero       {0, 0, {None_init_zero}}
 #define CoprocReq_UltrasoundReq_init_zero        {0, 0, {None_init_zero}}
-#define CoprocReq_MotorReq_init_zero             {0, 0, {None_init_zero}}
+#define CoprocReq_MotorReq_init_zero             {0, 0, {0}}
 #define CoprocStat_init_zero                     {0, {None_init_zero}}
 #define CoprocStat_ButtonsStat_init_zero         {_CoprocStat_ButtonsEnum_MIN}
 #define CoprocStat_UltrasoundStat_init_zero      {0, 0}
 
 /* Field tags (for use in manual encoding/decoding) */
-#define CoprocReq_MotorReq_disable_tag           4
-#define CoprocReq_MotorReq_setPwm_tag            5
+#define CoprocReq_MotorReq_setPower_tag          5
+#define CoprocReq_MotorReq_setBrake_tag          6
 #define CoprocReq_MotorReq_motorIndex_tag        1
 #define CoprocReq_SetLeds_ledsOn_tag             1
 #define CoprocReq_SetStupidServo_disable_tag     4
@@ -208,11 +208,10 @@ X(a, STATIC,   ONEOF,    MESSAGE,  (utsCmd,singlePing,utsCmd.singlePing),   4)
 
 #define CoprocReq_MotorReq_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, UINT32,   motorIndex,        1) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (motorCmd,disable,motorCmd.disable),   4) \
-X(a, STATIC,   ONEOF,    FLOAT,    (motorCmd,setPwm,motorCmd.setPwm),   5)
+X(a, STATIC,   ONEOF,    FLOAT,    (motorCmd,setPower,motorCmd.setPower),   5) \
+X(a, STATIC,   ONEOF,    FLOAT,    (motorCmd,setBrake,motorCmd.setBrake),   6)
 #define CoprocReq_MotorReq_CALLBACK NULL
 #define CoprocReq_MotorReq_DEFAULT NULL
-#define CoprocReq_MotorReq_motorCmd_disable_MSGTYPE None
 
 #define CoprocStat_FIELDLIST(X, a) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,ledsStat,payload.ledsStat),   4) \
