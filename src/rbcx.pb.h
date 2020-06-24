@@ -49,8 +49,9 @@ typedef struct _CoprocReq_MotorReq {
     uint32_t motorIndex;
     pb_size_t which_motorCmd;
     union {
-        float setPower;
-        float setBrake;
+        int32_t setPower;
+        int32_t setBrake;
+        int32_t setVelocity;
     } motorCmd;
 } CoprocReq_MotorReq;
 
@@ -146,6 +147,7 @@ typedef struct _CoprocStat {
 #define CoprocReq_BuzzerReq_on_tag               1
 #define CoprocReq_MotorReq_setPower_tag          5
 #define CoprocReq_MotorReq_setBrake_tag          6
+#define CoprocReq_MotorReq_setVelocity_tag       7
 #define CoprocReq_MotorReq_motorIndex_tag        1
 #define CoprocReq_SetLeds_ledsOn_tag             1
 #define CoprocReq_SetStupidServo_disable_tag     4
@@ -219,8 +221,9 @@ X(a, STATIC,   ONEOF,    MESSAGE,  (utsCmd,singlePing,utsCmd.singlePing),   4)
 
 #define CoprocReq_MotorReq_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, UINT32,   motorIndex,        1) \
-X(a, STATIC,   ONEOF,    FLOAT,    (motorCmd,setPower,motorCmd.setPower),   5) \
-X(a, STATIC,   ONEOF,    FLOAT,    (motorCmd,setBrake,motorCmd.setBrake),   6)
+X(a, STATIC,   ONEOF,    SINT32,   (motorCmd,setPower,motorCmd.setPower),   5) \
+X(a, STATIC,   ONEOF,    SINT32,   (motorCmd,setBrake,motorCmd.setBrake),   6) \
+X(a, STATIC,   ONEOF,    SINT32,   (motorCmd,setVelocity,motorCmd.setVelocity),   7)
 #define CoprocReq_MotorReq_CALLBACK NULL
 #define CoprocReq_MotorReq_DEFAULT NULL
 
@@ -279,12 +282,12 @@ extern const pb_msgdesc_t CoprocStat_UltrasoundStat_msg;
 
 /* Maximum encoded size of messages (where known) */
 #define None_size                                0
-#define CoprocReq_size                           13
+#define CoprocReq_size                           14
 #define CoprocReq_SetLeds_size                   2
 #define CoprocReq_GetButtons_size                0
 #define CoprocReq_SetStupidServo_size            11
 #define CoprocReq_UltrasoundReq_size             8
-#define CoprocReq_MotorReq_size                  11
+#define CoprocReq_MotorReq_size                  12
 #define CoprocReq_BuzzerReq_size                 2
 #define CoprocStat_size                          14
 #define CoprocStat_ButtonsStat_size              2
