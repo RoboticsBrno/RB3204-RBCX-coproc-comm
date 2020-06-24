@@ -11,6 +11,7 @@ message CoprocReq {
     SetStupidServo setStupidServo = 6;
     UltrasoundReq ultrasoundReq = 7;
     MotorReq motorReq = 8;
+    BuzzerReq buzzerReq = 9;
   }
 
   message SetLeds {
@@ -49,6 +50,10 @@ message CoprocReq {
       float setPower = 5;
       float setBrake = 6;
     }
+  }
+
+  message BuzzerReq {
+    bool on = 1;
   }
 }
 
