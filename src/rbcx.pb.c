@@ -9,6 +9,9 @@
 PB_BIND(None, None, AUTO)
 
 
+PB_BIND(RegCoefs, RegCoefs, AUTO)
+
+
 PB_BIND(CoprocReq, CoprocReq, AUTO)
 
 

@@ -19,9 +19,6 @@ if __name__ == "__main__":
     with serial.Serial(sys.argv[1], baudrate=921600) as port:
         threading.Thread(target=read_serial, args=(port, ), daemon=True).start()
         while True:
-            power = input()
-            if (power == ''):
-                msg = pb.CoprocReq(motorReq=pb.CoprocReq.MotorReq(motorIndex=1, setBrake=0.5))
-            else:
-                msg = pb.CoprocReq(motorReq=pb.CoprocReq.MotorReq(motorIndex=1, setPower=float(power)))
+            velocity = int(input())
+            msg = pb.CoprocReq(motorReq=pb.CoprocReq.MotorReq(motorIndex=1, setVelocity=velocity))
             frame_send(port, msg)

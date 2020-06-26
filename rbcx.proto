@@ -3,6 +3,12 @@ syntax = "proto3";
 message None {
 }
 
+message RegCoefs {
+  uint32 p = 1;
+  uint32 i = 2;
+  uint32 d = 3;
+}
+
 message CoprocReq {
   oneof payload {
     None keepalive = 1;
@@ -50,6 +56,7 @@ message CoprocReq {
       sint32 setPower = 5;
       sint32 setBrake = 6;
       sint32 setVelocity = 7;
+      RegCoefs setVelocityRegCoefs = 16;
     }
   }
 
