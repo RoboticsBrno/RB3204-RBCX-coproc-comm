@@ -18,6 +18,11 @@ def read_serial(port):
 if __name__ == "__main__":
     with serial.Serial(sys.argv[1], baudrate=921600) as port:
         threading.Thread(target=read_serial, args=(port, ), daemon=True).start()
+        p = int(input("P:"))
+        i = int(input("I:"))
+        d = int(input("D:"))
+        msg = pb.CoprocReq(motorReq=pb.CoprocReq.MotorReq(motorIndex=1, setVelocityRegCoefs=pb.RegCoefs(p=p, i=i, d=d)))
+        frame_send(port, msg)
         while True:
             velocity = int(input())
             msg = pb.CoprocReq(motorReq=pb.CoprocReq.MotorReq(motorIndex=1, setVelocity=velocity))
