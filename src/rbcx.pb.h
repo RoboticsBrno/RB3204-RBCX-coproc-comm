@@ -45,6 +45,13 @@ typedef struct _CoprocReq_BuzzerReq {
     bool on;
 } CoprocReq_BuzzerReq;
 
+typedef struct _CoprocReq_CalibratePower {
+    uint32_t vccMv;
+    uint32_t battMidMv;
+    uint32_t vRef33Mv;
+    uint32_t temperatureC;
+} CoprocReq_CalibratePower;
+
 typedef struct _CoprocReq_SetLeds {
     CoprocReq_LedsEnum ledsOn;
 } CoprocReq_SetLeds;
@@ -112,6 +119,7 @@ typedef struct _CoprocReq {
         CoprocReq_UltrasoundReq ultrasoundReq;
         CoprocReq_MotorReq motorReq;
         CoprocReq_BuzzerReq buzzerReq;
+        CoprocReq_CalibratePower calibratePower;
     } payload;
 } CoprocReq;
 
@@ -136,6 +144,7 @@ typedef struct _CoprocReq {
 #define CoprocReq_UltrasoundReq_init_default     {0, 0, {None_init_default}}
 #define CoprocReq_MotorReq_init_default          {0, 0, {0}}
 #define CoprocReq_BuzzerReq_init_default         {0}
+#define CoprocReq_CalibratePower_init_default    {0, 0, 0, 0}
 #define CoprocStat_init_default                  {0, {None_init_default}}
 #define CoprocStat_ButtonsStat_init_default      {_CoprocStat_ButtonsEnum_MIN}
 #define CoprocStat_UltrasoundStat_init_default   {0, 0}
@@ -148,12 +157,17 @@ typedef struct _CoprocReq {
 #define CoprocReq_UltrasoundReq_init_zero        {0, 0, {None_init_zero}}
 #define CoprocReq_MotorReq_init_zero             {0, 0, {0}}
 #define CoprocReq_BuzzerReq_init_zero            {0}
+#define CoprocReq_CalibratePower_init_zero       {0, 0, 0, 0}
 #define CoprocStat_init_zero                     {0, {None_init_zero}}
 #define CoprocStat_ButtonsStat_init_zero         {_CoprocStat_ButtonsEnum_MIN}
 #define CoprocStat_UltrasoundStat_init_zero      {0, 0}
 
 /* Field tags (for use in manual encoding/decoding) */
 #define CoprocReq_BuzzerReq_on_tag               1
+#define CoprocReq_CalibratePower_vccMv_tag       1
+#define CoprocReq_CalibratePower_battMidMv_tag   2
+#define CoprocReq_CalibratePower_vRef33Mv_tag    3
+#define CoprocReq_CalibratePower_temperatureC_tag 4
 #define CoprocReq_SetLeds_ledsOn_tag             1
 #define CoprocReq_SetStupidServo_disable_tag     4
 #define CoprocReq_SetStupidServo_setPosition_tag 5
@@ -182,6 +196,7 @@ typedef struct _CoprocReq {
 #define CoprocReq_ultrasoundReq_tag              7
 #define CoprocReq_motorReq_tag                   8
 #define CoprocReq_buzzerReq_tag                  9
+#define CoprocReq_calibratePower_tag             10
 
 /* Struct field encoding specification for nanopb */
 #define None_FIELDLIST(X, a) \
@@ -203,7 +218,8 @@ X(a, STATIC,   ONEOF,    MESSAGE,  (payload,getButtons,payload.getButtons),   5)
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,setStupidServo,payload.setStupidServo),   6) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,ultrasoundReq,payload.ultrasoundReq),   7) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,motorReq,payload.motorReq),   8) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (payload,buzzerReq,payload.buzzerReq),   9)
+X(a, STATIC,   ONEOF,    MESSAGE,  (payload,buzzerReq,payload.buzzerReq),   9) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (payload,calibratePower,payload.calibratePower),  10)
 #define CoprocReq_CALLBACK NULL
 #define CoprocReq_DEFAULT NULL
 #define CoprocReq_payload_keepalive_MSGTYPE None
@@ -213,6 +229,7 @@ X(a, STATIC,   ONEOF,    MESSAGE,  (payload,buzzerReq,payload.buzzerReq),   9)
 #define CoprocReq_payload_ultrasoundReq_MSGTYPE CoprocReq_UltrasoundReq
 #define CoprocReq_payload_motorReq_MSGTYPE CoprocReq_MotorReq
 #define CoprocReq_payload_buzzerReq_MSGTYPE CoprocReq_BuzzerReq
+#define CoprocReq_payload_calibratePower_MSGTYPE CoprocReq_CalibratePower
 
 #define CoprocReq_SetLeds_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, UENUM,    ledsOn,            1)
@@ -254,6 +271,14 @@ X(a, STATIC,   SINGULAR, BOOL,     on,                1)
 #define CoprocReq_BuzzerReq_CALLBACK NULL
 #define CoprocReq_BuzzerReq_DEFAULT NULL
 
+#define CoprocReq_CalibratePower_FIELDLIST(X, a) \
+X(a, STATIC,   SINGULAR, UINT32,   vccMv,             1) \
+X(a, STATIC,   SINGULAR, UINT32,   battMidMv,         2) \
+X(a, STATIC,   SINGULAR, UINT32,   vRef33Mv,          3) \
+X(a, STATIC,   SINGULAR, UINT32,   temperatureC,      4)
+#define CoprocReq_CalibratePower_CALLBACK NULL
+#define CoprocReq_CalibratePower_DEFAULT NULL
+
 #define CoprocStat_FIELDLIST(X, a) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,ledsStat,payload.ledsStat),   4) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,buttonsStat,payload.buttonsStat),   5) \
@@ -286,6 +311,7 @@ extern const pb_msgdesc_t CoprocReq_SetStupidServo_msg;
 extern const pb_msgdesc_t CoprocReq_UltrasoundReq_msg;
 extern const pb_msgdesc_t CoprocReq_MotorReq_msg;
 extern const pb_msgdesc_t CoprocReq_BuzzerReq_msg;
+extern const pb_msgdesc_t CoprocReq_CalibratePower_msg;
 extern const pb_msgdesc_t CoprocStat_msg;
 extern const pb_msgdesc_t CoprocStat_ButtonsStat_msg;
 extern const pb_msgdesc_t CoprocStat_UltrasoundStat_msg;
@@ -300,6 +326,7 @@ extern const pb_msgdesc_t CoprocStat_UltrasoundStat_msg;
 #define CoprocReq_UltrasoundReq_fields &CoprocReq_UltrasoundReq_msg
 #define CoprocReq_MotorReq_fields &CoprocReq_MotorReq_msg
 #define CoprocReq_BuzzerReq_fields &CoprocReq_BuzzerReq_msg
+#define CoprocReq_CalibratePower_fields &CoprocReq_CalibratePower_msg
 #define CoprocStat_fields &CoprocStat_msg
 #define CoprocStat_ButtonsStat_fields &CoprocStat_ButtonsStat_msg
 #define CoprocStat_UltrasoundStat_fields &CoprocStat_UltrasoundStat_msg
@@ -314,6 +341,7 @@ extern const pb_msgdesc_t CoprocStat_UltrasoundStat_msg;
 #define CoprocReq_UltrasoundReq_size             8
 #define CoprocReq_MotorReq_size                  27
 #define CoprocReq_BuzzerReq_size                 2
+#define CoprocReq_CalibratePower_size            24
 #define CoprocStat_size                          14
 #define CoprocStat_ButtonsStat_size              2
 #define CoprocStat_UltrasoundStat_size           12

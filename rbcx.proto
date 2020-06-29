@@ -18,6 +18,7 @@ message CoprocReq {
     UltrasoundReq ultrasoundReq = 7;
     MotorReq motorReq = 8;
     BuzzerReq buzzerReq = 9;
+    CalibratePower calibratePower = 10;
   }
 
   message SetLeds {
@@ -62,6 +63,13 @@ message CoprocReq {
 
   message BuzzerReq {
     bool on = 1;
+  }
+
+  message CalibratePower {
+    uint32 vccMv = 1;
+    uint32 battMidMv = 2;
+    uint32 vRef33Mv = 3;
+    uint32 temperatureC = 4;
   }
 }
 

@@ -33,6 +33,9 @@ PB_BIND(CoprocReq_MotorReq, CoprocReq_MotorReq, AUTO)
 PB_BIND(CoprocReq_BuzzerReq, CoprocReq_BuzzerReq, AUTO)
 
 
+PB_BIND(CoprocReq_CalibratePower, CoprocReq_CalibratePower, AUTO)
+
+
 PB_BIND(CoprocStat, CoprocStat, AUTO)
 
 
