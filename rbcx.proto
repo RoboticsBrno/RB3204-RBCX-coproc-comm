@@ -79,6 +79,7 @@ message CoprocStat {
     ButtonsStat buttonsStat = 5;
     None stupidServoStat = 6;
     UltrasoundStat ultrasoundStat = 7;
+    PowerAdcStat powerAdcStat = 8;
   }
 
   message ButtonsStat {
@@ -98,5 +99,11 @@ message CoprocStat {
   message UltrasoundStat {
     uint32 utsIndex = 1;
     uint32 roundtripMicrosecs = 2;
+  }
+
+  message PowerAdcStat {
+    uint32 vccMv = 1;
+    uint32 battMidMv = 2;
+    int32 temperatureC = 3;
   }
 }

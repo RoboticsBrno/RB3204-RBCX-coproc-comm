@@ -18,7 +18,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=b'\n\nrbcx.proto\"\x06\n\x04None\"+\n\x08RegCoefs\x12\t\n\x01p\x18\x01 \x01(\r\x12\t\n\x01i\x18\x02 \x01(\r\x12\t\n\x01\x64\x18\x03 \x01(\r\"\xa3\x07\n\tCoprocReq\x12\x1a\n\tkeepalive\x18\x01 \x01(\x0b\x32\x05.NoneH\x00\x12%\n\x07setLeds\x18\x04 \x01(\x0b\x32\x12.CoprocReq.SetLedsH\x00\x12+\n\ngetButtons\x18\x05 \x01(\x0b\x32\x15.CoprocReq.GetButtonsH\x00\x12\x33\n\x0esetStupidServo\x18\x06 \x01(\x0b\x32\x19.CoprocReq.SetStupidServoH\x00\x12\x31\n\rultrasoundReq\x18\x07 \x01(\x0b\x32\x18.CoprocReq.UltrasoundReqH\x00\x12\'\n\x08motorReq\x18\x08 \x01(\x0b\x32\x13.CoprocReq.MotorReqH\x00\x12)\n\tbuzzerReq\x18\t \x01(\x0b\x32\x14.CoprocReq.BuzzerReqH\x00\x12\x33\n\x0e\x63\x61libratePower\x18\n \x01(\x0b\x32\x19.CoprocReq.CalibratePowerH\x00\x1a.\n\x07SetLeds\x12#\n\x06ledsOn\x18\x01 \x01(\x0e\x32\x13.CoprocReq.LedsEnum\x1a\x0c\n\nGetButtons\x1a\x61\n\x0eSetStupidServo\x12\x12\n\nservoIndex\x18\x01 \x01(\r\x12\x18\n\x07\x64isable\x18\x04 \x01(\x0b\x32\x05.NoneH\x00\x12\x15\n\x0bsetPosition\x18\x05 \x01(\x02H\x00\x42\n\n\x08servoCmd\x1aH\n\rUltrasoundReq\x12\x10\n\x08utsIndex\x18\x01 \x01(\r\x12\x1b\n\nsinglePing\x18\x04 \x01(\x0b\x32\x05.NoneH\x00\x42\x08\n\x06utsCmd\x1a\x93\x01\n\x08MotorReq\x12\x12\n\nmotorIndex\x18\x01 \x01(\r\x12\x12\n\x08setPower\x18\x05 \x01(\x11H\x00\x12\x12\n\x08setBrake\x18\x06 \x01(\x11H\x00\x12\x15\n\x0bsetVelocity\x18\x07 \x01(\x11H\x00\x12(\n\x13setVelocityRegCoefs\x18\x10 \x01(\x0b\x32\t.RegCoefsH\x00\x42\n\n\x08motorCmd\x1a\x17\n\tBuzzerReq\x12\n\n\x02on\x18\x01 \x01(\x08\x1aZ\n\x0e\x43\x61libratePower\x12\r\n\x05vccMv\x18\x01 \x01(\r\x12\x11\n\tbattMidMv\x18\x02 \x01(\r\x12\x10\n\x08vRef33Mv\x18\x03 \x01(\r\x12\x14\n\x0ctemperatureC\x18\x04 \x01(\r\"4\n\x08LedsEnum\x12\x08\n\x04NONE\x10\x00\x12\x06\n\x02L1\x10\x01\x12\x06\n\x02L2\x10\x02\x12\x06\n\x02L3\x10\x04\x12\x06\n\x02L4\x10\x08\x42\t\n\x07payload\"\x86\x03\n\nCoprocStat\x12\x19\n\x08ledsStat\x18\x04 \x01(\x0b\x32\x05.NoneH\x00\x12.\n\x0b\x62uttonsStat\x18\x05 \x01(\x0b\x32\x17.CoprocStat.ButtonsStatH\x00\x12 \n\x0fstupidServoStat\x18\x06 \x01(\x0b\x32\x05.NoneH\x00\x12\x34\n\x0eultrasoundStat\x18\x07 \x01(\x0b\x32\x1a.CoprocStat.UltrasoundStatH\x00\x1a>\n\x0b\x42uttonsStat\x12/\n\x0e\x62uttonsPressed\x18\x01 \x01(\x0e\x32\x17.CoprocStat.ButtonsEnum\x1a>\n\x0eUltrasoundStat\x12\x10\n\x08utsIndex\x18\x01 \x01(\r\x12\x1a\n\x12roundtripMicrosecs\x18\x02 \x01(\r\"J\n\x0b\x42uttonsEnum\x12\x08\n\x04NONE\x10\x00\x12\x08\n\x04\x42OFF\x10\x01\x12\x06\n\x02\x42\x31\x10\x02\x12\x06\n\x02\x42\x32\x10\x04\x12\x06\n\x02\x42\x33\x10\x08\x12\x06\n\x02\x42\x34\x10\x10\x12\x07\n\x03\x42ON\x10 B\t\n\x07payloadb\x06proto3'
+  serialized_pb=b'\n\nrbcx.proto\"\x06\n\x04None\"+\n\x08RegCoefs\x12\t\n\x01p\x18\x01 \x01(\r\x12\t\n\x01i\x18\x02 \x01(\r\x12\t\n\x01\x64\x18\x03 \x01(\r\"\xa3\x07\n\tCoprocReq\x12\x1a\n\tkeepalive\x18\x01 \x01(\x0b\x32\x05.NoneH\x00\x12%\n\x07setLeds\x18\x04 \x01(\x0b\x32\x12.CoprocReq.SetLedsH\x00\x12+\n\ngetButtons\x18\x05 \x01(\x0b\x32\x15.CoprocReq.GetButtonsH\x00\x12\x33\n\x0esetStupidServo\x18\x06 \x01(\x0b\x32\x19.CoprocReq.SetStupidServoH\x00\x12\x31\n\rultrasoundReq\x18\x07 \x01(\x0b\x32\x18.CoprocReq.UltrasoundReqH\x00\x12\'\n\x08motorReq\x18\x08 \x01(\x0b\x32\x13.CoprocReq.MotorReqH\x00\x12)\n\tbuzzerReq\x18\t \x01(\x0b\x32\x14.CoprocReq.BuzzerReqH\x00\x12\x33\n\x0e\x63\x61libratePower\x18\n \x01(\x0b\x32\x19.CoprocReq.CalibratePowerH\x00\x1a.\n\x07SetLeds\x12#\n\x06ledsOn\x18\x01 \x01(\x0e\x32\x13.CoprocReq.LedsEnum\x1a\x0c\n\nGetButtons\x1a\x61\n\x0eSetStupidServo\x12\x12\n\nservoIndex\x18\x01 \x01(\r\x12\x18\n\x07\x64isable\x18\x04 \x01(\x0b\x32\x05.NoneH\x00\x12\x15\n\x0bsetPosition\x18\x05 \x01(\x02H\x00\x42\n\n\x08servoCmd\x1aH\n\rUltrasoundReq\x12\x10\n\x08utsIndex\x18\x01 \x01(\r\x12\x1b\n\nsinglePing\x18\x04 \x01(\x0b\x32\x05.NoneH\x00\x42\x08\n\x06utsCmd\x1a\x93\x01\n\x08MotorReq\x12\x12\n\nmotorIndex\x18\x01 \x01(\r\x12\x12\n\x08setPower\x18\x05 \x01(\x11H\x00\x12\x12\n\x08setBrake\x18\x06 \x01(\x11H\x00\x12\x15\n\x0bsetVelocity\x18\x07 \x01(\x11H\x00\x12(\n\x13setVelocityRegCoefs\x18\x10 \x01(\x0b\x32\t.RegCoefsH\x00\x42\n\n\x08motorCmd\x1a\x17\n\tBuzzerReq\x12\n\n\x02on\x18\x01 \x01(\x08\x1aZ\n\x0e\x43\x61libratePower\x12\r\n\x05vccMv\x18\x01 \x01(\r\x12\x11\n\tbattMidMv\x18\x02 \x01(\r\x12\x10\n\x08vRef33Mv\x18\x03 \x01(\r\x12\x14\n\x0ctemperatureC\x18\x04 \x01(\r\"4\n\x08LedsEnum\x12\x08\n\x04NONE\x10\x00\x12\x06\n\x02L1\x10\x01\x12\x06\n\x02L2\x10\x02\x12\x06\n\x02L3\x10\x04\x12\x06\n\x02L4\x10\x08\x42\t\n\x07payload\"\x80\x04\n\nCoprocStat\x12\x19\n\x08ledsStat\x18\x04 \x01(\x0b\x32\x05.NoneH\x00\x12.\n\x0b\x62uttonsStat\x18\x05 \x01(\x0b\x32\x17.CoprocStat.ButtonsStatH\x00\x12 \n\x0fstupidServoStat\x18\x06 \x01(\x0b\x32\x05.NoneH\x00\x12\x34\n\x0eultrasoundStat\x18\x07 \x01(\x0b\x32\x1a.CoprocStat.UltrasoundStatH\x00\x12\x30\n\x0cpowerAdcStat\x18\x08 \x01(\x0b\x32\x18.CoprocStat.PowerAdcStatH\x00\x1a>\n\x0b\x42uttonsStat\x12/\n\x0e\x62uttonsPressed\x18\x01 \x01(\x0e\x32\x17.CoprocStat.ButtonsEnum\x1a>\n\x0eUltrasoundStat\x12\x10\n\x08utsIndex\x18\x01 \x01(\r\x12\x1a\n\x12roundtripMicrosecs\x18\x02 \x01(\r\x1a\x46\n\x0cPowerAdcStat\x12\r\n\x05vccMv\x18\x01 \x01(\r\x12\x11\n\tbattMidMv\x18\x02 \x01(\r\x12\x14\n\x0ctemperatureC\x18\x03 \x01(\x05\"J\n\x0b\x42uttonsEnum\x12\x08\n\x04NONE\x10\x00\x12\x08\n\x04\x42OFF\x10\x01\x12\x06\n\x02\x42\x31\x10\x02\x12\x06\n\x02\x42\x32\x10\x04\x12\x06\n\x02\x42\x33\x10\x08\x12\x06\n\x02\x42\x34\x10\x10\x12\x07\n\x03\x42ON\x10 B\t\n\x07payloadb\x06proto3'
 )
 
 
@@ -94,8 +94,8 @@ _COPROCSTAT_BUTTONSENUM = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1307,
-  serialized_end=1381,
+  serialized_start=1429,
+  serialized_end=1503,
 )
 _sym_db.RegisterEnumDescriptor(_COPROCSTAT_BUTTONSENUM)
 
@@ -561,8 +561,8 @@ _COPROCSTAT_BUTTONSSTAT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1179,
-  serialized_end=1241,
+  serialized_start=1229,
+  serialized_end=1291,
 )
 
 _COPROCSTAT_ULTRASOUNDSTAT = _descriptor.Descriptor(
@@ -598,8 +598,52 @@ _COPROCSTAT_ULTRASOUNDSTAT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1243,
-  serialized_end=1305,
+  serialized_start=1293,
+  serialized_end=1355,
+)
+
+_COPROCSTAT_POWERADCSTAT = _descriptor.Descriptor(
+  name='PowerAdcStat',
+  full_name='CoprocStat.PowerAdcStat',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='vccMv', full_name='CoprocStat.PowerAdcStat.vccMv', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='battMidMv', full_name='CoprocStat.PowerAdcStat.battMidMv', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='temperatureC', full_name='CoprocStat.PowerAdcStat.temperatureC', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1357,
+  serialized_end=1427,
 )
 
 _COPROCSTAT = _descriptor.Descriptor(
@@ -637,10 +681,17 @@ _COPROCSTAT = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='powerAdcStat', full_name='CoprocStat.powerAdcStat', index=4,
+      number=8, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
-  nested_types=[_COPROCSTAT_BUTTONSSTAT, _COPROCSTAT_ULTRASOUNDSTAT, ],
+  nested_types=[_COPROCSTAT_BUTTONSSTAT, _COPROCSTAT_ULTRASOUNDSTAT, _COPROCSTAT_POWERADCSTAT, ],
   enum_types=[
     _COPROCSTAT_BUTTONSENUM,
   ],
@@ -654,7 +705,7 @@ _COPROCSTAT = _descriptor.Descriptor(
       index=0, containing_type=None, fields=[]),
   ],
   serialized_start=1002,
-  serialized_end=1392,
+  serialized_end=1514,
 )
 
 _COPROCREQ_SETLEDS.fields_by_name['ledsOn'].enum_type = _COPROCREQ_LEDSENUM
@@ -725,10 +776,12 @@ _COPROCREQ.fields_by_name['calibratePower'].containing_oneof = _COPROCREQ.oneofs
 _COPROCSTAT_BUTTONSSTAT.fields_by_name['buttonsPressed'].enum_type = _COPROCSTAT_BUTTONSENUM
 _COPROCSTAT_BUTTONSSTAT.containing_type = _COPROCSTAT
 _COPROCSTAT_ULTRASOUNDSTAT.containing_type = _COPROCSTAT
+_COPROCSTAT_POWERADCSTAT.containing_type = _COPROCSTAT
 _COPROCSTAT.fields_by_name['ledsStat'].message_type = _NONE
 _COPROCSTAT.fields_by_name['buttonsStat'].message_type = _COPROCSTAT_BUTTONSSTAT
 _COPROCSTAT.fields_by_name['stupidServoStat'].message_type = _NONE
 _COPROCSTAT.fields_by_name['ultrasoundStat'].message_type = _COPROCSTAT_ULTRASOUNDSTAT
+_COPROCSTAT.fields_by_name['powerAdcStat'].message_type = _COPROCSTAT_POWERADCSTAT
 _COPROCSTAT_BUTTONSENUM.containing_type = _COPROCSTAT
 _COPROCSTAT.oneofs_by_name['payload'].fields.append(
   _COPROCSTAT.fields_by_name['ledsStat'])
@@ -742,6 +795,9 @@ _COPROCSTAT.fields_by_name['stupidServoStat'].containing_oneof = _COPROCSTAT.one
 _COPROCSTAT.oneofs_by_name['payload'].fields.append(
   _COPROCSTAT.fields_by_name['ultrasoundStat'])
 _COPROCSTAT.fields_by_name['ultrasoundStat'].containing_oneof = _COPROCSTAT.oneofs_by_name['payload']
+_COPROCSTAT.oneofs_by_name['payload'].fields.append(
+  _COPROCSTAT.fields_by_name['powerAdcStat'])
+_COPROCSTAT.fields_by_name['powerAdcStat'].containing_oneof = _COPROCSTAT.oneofs_by_name['payload']
 DESCRIPTOR.message_types_by_name['None'] = _NONE
 DESCRIPTOR.message_types_by_name['RegCoefs'] = _REGCOEFS
 DESCRIPTOR.message_types_by_name['CoprocReq'] = _COPROCREQ
@@ -840,6 +896,13 @@ CoprocStat = _reflection.GeneratedProtocolMessageType('CoprocStat', (_message.Me
     # @@protoc_insertion_point(class_scope:CoprocStat.UltrasoundStat)
     })
   ,
+
+  'PowerAdcStat' : _reflection.GeneratedProtocolMessageType('PowerAdcStat', (_message.Message,), {
+    'DESCRIPTOR' : _COPROCSTAT_POWERADCSTAT,
+    '__module__' : 'rbcx_pb2'
+    # @@protoc_insertion_point(class_scope:CoprocStat.PowerAdcStat)
+    })
+  ,
   'DESCRIPTOR' : _COPROCSTAT,
   '__module__' : 'rbcx_pb2'
   # @@protoc_insertion_point(class_scope:CoprocStat)
@@ -847,6 +910,7 @@ CoprocStat = _reflection.GeneratedProtocolMessageType('CoprocStat', (_message.Me
 _sym_db.RegisterMessage(CoprocStat)
 _sym_db.RegisterMessage(CoprocStat.ButtonsStat)
 _sym_db.RegisterMessage(CoprocStat.UltrasoundStat)
+_sym_db.RegisterMessage(CoprocStat.PowerAdcStat)
 
 
 # @@protoc_insertion_point(module_scope)

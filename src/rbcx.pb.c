@@ -45,6 +45,9 @@ PB_BIND(CoprocStat_ButtonsStat, CoprocStat_ButtonsStat, AUTO)
 PB_BIND(CoprocStat_UltrasoundStat, CoprocStat_UltrasoundStat, AUTO)
 
 
+PB_BIND(CoprocStat_PowerAdcStat, CoprocStat_PowerAdcStat, AUTO)
+
+
 
 
 

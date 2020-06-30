@@ -77,6 +77,12 @@ typedef struct _CoprocStat_ButtonsStat {
     CoprocStat_ButtonsEnum buttonsPressed;
 } CoprocStat_ButtonsStat;
 
+typedef struct _CoprocStat_PowerAdcStat {
+    uint32_t vccMv;
+    uint32_t battMidMv;
+    int32_t temperatureC;
+} CoprocStat_PowerAdcStat;
+
 typedef struct _CoprocStat_UltrasoundStat {
     uint32_t utsIndex;
     uint32_t roundtripMicrosecs;
@@ -106,6 +112,7 @@ typedef struct _CoprocStat {
         CoprocStat_ButtonsStat buttonsStat;
         None stupidServoStat;
         CoprocStat_UltrasoundStat ultrasoundStat;
+        CoprocStat_PowerAdcStat powerAdcStat;
     } payload;
 } CoprocStat;
 
@@ -148,6 +155,7 @@ typedef struct _CoprocReq {
 #define CoprocStat_init_default                  {0, {None_init_default}}
 #define CoprocStat_ButtonsStat_init_default      {_CoprocStat_ButtonsEnum_MIN}
 #define CoprocStat_UltrasoundStat_init_default   {0, 0}
+#define CoprocStat_PowerAdcStat_init_default     {0, 0, 0}
 #define None_init_zero                           {0}
 #define RegCoefs_init_zero                       {0, 0, 0}
 #define CoprocReq_init_zero                      {0, {None_init_zero}}
@@ -161,6 +169,7 @@ typedef struct _CoprocReq {
 #define CoprocStat_init_zero                     {0, {None_init_zero}}
 #define CoprocStat_ButtonsStat_init_zero         {_CoprocStat_ButtonsEnum_MIN}
 #define CoprocStat_UltrasoundStat_init_zero      {0, 0}
+#define CoprocStat_PowerAdcStat_init_zero        {0, 0, 0}
 
 /* Field tags (for use in manual encoding/decoding) */
 #define CoprocReq_BuzzerReq_on_tag               1
@@ -175,6 +184,9 @@ typedef struct _CoprocReq {
 #define CoprocReq_UltrasoundReq_singlePing_tag   4
 #define CoprocReq_UltrasoundReq_utsIndex_tag     1
 #define CoprocStat_ButtonsStat_buttonsPressed_tag 1
+#define CoprocStat_PowerAdcStat_vccMv_tag        1
+#define CoprocStat_PowerAdcStat_battMidMv_tag    2
+#define CoprocStat_PowerAdcStat_temperatureC_tag 3
 #define CoprocStat_UltrasoundStat_utsIndex_tag   1
 #define CoprocStat_UltrasoundStat_roundtripMicrosecs_tag 2
 #define RegCoefs_p_tag                           1
@@ -189,6 +201,7 @@ typedef struct _CoprocReq {
 #define CoprocStat_buttonsStat_tag               5
 #define CoprocStat_stupidServoStat_tag           6
 #define CoprocStat_ultrasoundStat_tag            7
+#define CoprocStat_powerAdcStat_tag              8
 #define CoprocReq_keepalive_tag                  1
 #define CoprocReq_setLeds_tag                    4
 #define CoprocReq_getButtons_tag                 5
@@ -283,13 +296,15 @@ X(a, STATIC,   SINGULAR, UINT32,   temperatureC,      4)
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,ledsStat,payload.ledsStat),   4) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,buttonsStat,payload.buttonsStat),   5) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,stupidServoStat,payload.stupidServoStat),   6) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (payload,ultrasoundStat,payload.ultrasoundStat),   7)
+X(a, STATIC,   ONEOF,    MESSAGE,  (payload,ultrasoundStat,payload.ultrasoundStat),   7) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (payload,powerAdcStat,payload.powerAdcStat),   8)
 #define CoprocStat_CALLBACK NULL
 #define CoprocStat_DEFAULT NULL
 #define CoprocStat_payload_ledsStat_MSGTYPE None
 #define CoprocStat_payload_buttonsStat_MSGTYPE CoprocStat_ButtonsStat
 #define CoprocStat_payload_stupidServoStat_MSGTYPE None
 #define CoprocStat_payload_ultrasoundStat_MSGTYPE CoprocStat_UltrasoundStat
+#define CoprocStat_payload_powerAdcStat_MSGTYPE CoprocStat_PowerAdcStat
 
 #define CoprocStat_ButtonsStat_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, UENUM,    buttonsPressed,    1)
@@ -301,6 +316,13 @@ X(a, STATIC,   SINGULAR, UINT32,   utsIndex,          1) \
 X(a, STATIC,   SINGULAR, UINT32,   roundtripMicrosecs,   2)
 #define CoprocStat_UltrasoundStat_CALLBACK NULL
 #define CoprocStat_UltrasoundStat_DEFAULT NULL
+
+#define CoprocStat_PowerAdcStat_FIELDLIST(X, a) \
+X(a, STATIC,   SINGULAR, UINT32,   vccMv,             1) \
+X(a, STATIC,   SINGULAR, UINT32,   battMidMv,         2) \
+X(a, STATIC,   SINGULAR, INT32,    temperatureC,      3)
+#define CoprocStat_PowerAdcStat_CALLBACK NULL
+#define CoprocStat_PowerAdcStat_DEFAULT NULL
 
 extern const pb_msgdesc_t None_msg;
 extern const pb_msgdesc_t RegCoefs_msg;
@@ -315,6 +337,7 @@ extern const pb_msgdesc_t CoprocReq_CalibratePower_msg;
 extern const pb_msgdesc_t CoprocStat_msg;
 extern const pb_msgdesc_t CoprocStat_ButtonsStat_msg;
 extern const pb_msgdesc_t CoprocStat_UltrasoundStat_msg;
+extern const pb_msgdesc_t CoprocStat_PowerAdcStat_msg;
 
 /* Defines for backwards compatibility with code written before nanopb-0.4.0 */
 #define None_fields &None_msg
@@ -330,6 +353,7 @@ extern const pb_msgdesc_t CoprocStat_UltrasoundStat_msg;
 #define CoprocStat_fields &CoprocStat_msg
 #define CoprocStat_ButtonsStat_fields &CoprocStat_ButtonsStat_msg
 #define CoprocStat_UltrasoundStat_fields &CoprocStat_UltrasoundStat_msg
+#define CoprocStat_PowerAdcStat_fields &CoprocStat_PowerAdcStat_msg
 
 /* Maximum encoded size of messages (where known) */
 #define None_size                                0
@@ -342,9 +366,10 @@ extern const pb_msgdesc_t CoprocStat_UltrasoundStat_msg;
 #define CoprocReq_MotorReq_size                  27
 #define CoprocReq_BuzzerReq_size                 2
 #define CoprocReq_CalibratePower_size            24
-#define CoprocStat_size                          14
+#define CoprocStat_size                          25
 #define CoprocStat_ButtonsStat_size              2
 #define CoprocStat_UltrasoundStat_size           12
+#define CoprocStat_PowerAdcStat_size             23
 
 #ifdef __cplusplus
 } /* extern "C" */
