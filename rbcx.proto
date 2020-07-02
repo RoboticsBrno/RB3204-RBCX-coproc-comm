@@ -19,6 +19,7 @@ message CoprocReq {
     MotorReq motorReq = 8;
     BuzzerReq buzzerReq = 9;
     CalibratePower calibratePower = 10;
+    None shutdownPower = 11;
   }
 
   message SetLeds {

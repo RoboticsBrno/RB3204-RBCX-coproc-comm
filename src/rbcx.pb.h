@@ -127,6 +127,7 @@ typedef struct _CoprocReq {
         CoprocReq_MotorReq motorReq;
         CoprocReq_BuzzerReq buzzerReq;
         CoprocReq_CalibratePower calibratePower;
+        None shutdownPower;
     } payload;
 } CoprocReq;
 
@@ -210,6 +211,7 @@ typedef struct _CoprocReq {
 #define CoprocReq_motorReq_tag                   8
 #define CoprocReq_buzzerReq_tag                  9
 #define CoprocReq_calibratePower_tag             10
+#define CoprocReq_shutdownPower_tag              11
 
 /* Struct field encoding specification for nanopb */
 #define None_FIELDLIST(X, a) \
@@ -232,7 +234,8 @@ X(a, STATIC,   ONEOF,    MESSAGE,  (payload,setStupidServo,payload.setStupidServ
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,ultrasoundReq,payload.ultrasoundReq),   7) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,motorReq,payload.motorReq),   8) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,buzzerReq,payload.buzzerReq),   9) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (payload,calibratePower,payload.calibratePower),  10)
+X(a, STATIC,   ONEOF,    MESSAGE,  (payload,calibratePower,payload.calibratePower),  10) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (payload,shutdownPower,payload.shutdownPower),  11)
 #define CoprocReq_CALLBACK NULL
 #define CoprocReq_DEFAULT NULL
 #define CoprocReq_payload_keepalive_MSGTYPE None
@@ -243,6 +246,7 @@ X(a, STATIC,   ONEOF,    MESSAGE,  (payload,calibratePower,payload.calibratePowe
 #define CoprocReq_payload_motorReq_MSGTYPE CoprocReq_MotorReq
 #define CoprocReq_payload_buzzerReq_MSGTYPE CoprocReq_BuzzerReq
 #define CoprocReq_payload_calibratePower_MSGTYPE CoprocReq_CalibratePower
+#define CoprocReq_payload_shutdownPower_MSGTYPE None
 
 #define CoprocReq_SetLeds_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, UENUM,    ledsOn,            1)
