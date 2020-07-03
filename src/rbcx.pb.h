@@ -119,6 +119,7 @@ typedef struct _CoprocStat {
         None stupidServoStat;
         CoprocStat_UltrasoundStat ultrasoundStat;
         CoprocStat_PowerAdcStat powerAdcStat;
+        CoprocStat_VersionStat versionStat;
     } payload;
 } CoprocStat;
 
@@ -215,6 +216,7 @@ typedef struct _CoprocReq {
 #define CoprocStat_stupidServoStat_tag           6
 #define CoprocStat_ultrasoundStat_tag            7
 #define CoprocStat_powerAdcStat_tag              8
+#define CoprocStat_versionStat_tag               9
 #define CoprocReq_keepalive_tag                  1
 #define CoprocReq_setLeds_tag                    4
 #define CoprocReq_getButtons_tag                 5
@@ -316,7 +318,8 @@ X(a, STATIC,   ONEOF,    MESSAGE,  (payload,ledsStat,payload.ledsStat),   4) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,buttonsStat,payload.buttonsStat),   5) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,stupidServoStat,payload.stupidServoStat),   6) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,ultrasoundStat,payload.ultrasoundStat),   7) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (payload,powerAdcStat,payload.powerAdcStat),   8)
+X(a, STATIC,   ONEOF,    MESSAGE,  (payload,powerAdcStat,payload.powerAdcStat),   8) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (payload,versionStat,payload.versionStat),   9)
 #define CoprocStat_CALLBACK NULL
 #define CoprocStat_DEFAULT NULL
 #define CoprocStat_payload_ledsStat_MSGTYPE None
@@ -324,6 +327,7 @@ X(a, STATIC,   ONEOF,    MESSAGE,  (payload,powerAdcStat,payload.powerAdcStat), 
 #define CoprocStat_payload_stupidServoStat_MSGTYPE None
 #define CoprocStat_payload_ultrasoundStat_MSGTYPE CoprocStat_UltrasoundStat
 #define CoprocStat_payload_powerAdcStat_MSGTYPE CoprocStat_PowerAdcStat
+#define CoprocStat_payload_versionStat_MSGTYPE CoprocStat_VersionStat
 
 #define CoprocStat_ButtonsStat_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, UENUM,    buttonsPressed,    1)
