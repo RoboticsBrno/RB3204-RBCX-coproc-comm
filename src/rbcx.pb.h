@@ -89,7 +89,7 @@ typedef struct _CoprocStat_UltrasoundStat {
 } CoprocStat_UltrasoundStat;
 
 typedef struct _CoprocStat_VersionStat {
-    char revision[8];
+    pb_byte_t revision[8];
     uint32_t number;
     bool dirty;
 } CoprocStat_VersionStat;
@@ -165,7 +165,7 @@ typedef struct _CoprocReq {
 #define CoprocStat_ButtonsStat_init_default      {_CoprocStat_ButtonsEnum_MIN}
 #define CoprocStat_UltrasoundStat_init_default   {0, 0}
 #define CoprocStat_PowerAdcStat_init_default     {0, 0, 0}
-#define CoprocStat_VersionStat_init_default      {"", 0, 0}
+#define CoprocStat_VersionStat_init_default      {{0}, 0, 0}
 #define None_init_zero                           {0}
 #define RegCoefs_init_zero                       {0, 0, 0}
 #define CoprocReq_init_zero                      {0, {None_init_zero}}
@@ -180,7 +180,7 @@ typedef struct _CoprocReq {
 #define CoprocStat_ButtonsStat_init_zero         {_CoprocStat_ButtonsEnum_MIN}
 #define CoprocStat_UltrasoundStat_init_zero      {0, 0}
 #define CoprocStat_PowerAdcStat_init_zero        {0, 0, 0}
-#define CoprocStat_VersionStat_init_zero         {"", 0, 0}
+#define CoprocStat_VersionStat_init_zero         {{0}, 0, 0}
 
 /* Field tags (for use in manual encoding/decoding) */
 #define CoprocReq_BuzzerReq_on_tag               1
@@ -348,7 +348,7 @@ X(a, STATIC,   SINGULAR, INT32,    temperatureC,      3)
 #define CoprocStat_PowerAdcStat_DEFAULT NULL
 
 #define CoprocStat_VersionStat_FIELDLIST(X, a) \
-X(a, STATIC,   SINGULAR, STRING,   revision,          1) \
+X(a, STATIC,   SINGULAR, FIXED_LENGTH_BYTES, revision,          1) \
 X(a, STATIC,   SINGULAR, UINT32,   number,            2) \
 X(a, STATIC,   SINGULAR, BOOL,     dirty,             3)
 #define CoprocStat_VersionStat_CALLBACK NULL
@@ -402,7 +402,7 @@ extern const pb_msgdesc_t CoprocStat_VersionStat_msg;
 #define CoprocStat_ButtonsStat_size              2
 #define CoprocStat_UltrasoundStat_size           12
 #define CoprocStat_PowerAdcStat_size             23
-#define CoprocStat_VersionStat_size              17
+#define CoprocStat_VersionStat_size              18
 
 #ifdef __cplusplus
 } /* extern "C" */

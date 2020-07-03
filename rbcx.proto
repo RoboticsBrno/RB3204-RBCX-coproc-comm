@@ -113,7 +113,7 @@ message CoprocStat {
   }
 
   message VersionStat {
-    string revision = 1 [(nanopb).max_size = 8, (nanopb).fixed_length = true];
+    bytes revision = 1 [(nanopb).max_size = 8, (nanopb).fixed_length = true];
     uint32 number = 2;
     bool dirty = 3;
   }
