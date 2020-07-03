@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+import "nanopb.proto";
+
 message None {
 }
 
@@ -20,6 +22,7 @@ message CoprocReq {
     BuzzerReq buzzerReq = 9;
     CalibratePower calibratePower = 10;
     None shutdownPower = 11;
+    None versionReq = 12;
   }
 
   message SetLeds {
@@ -106,5 +109,11 @@ message CoprocStat {
     uint32 vccMv = 1;
     uint32 battMidMv = 2;
     int32 temperatureC = 3;
+  }
+
+  message VersionStat {
+    string revision = 1 [(nanopb).max_size = 8, (nanopb).fixed_length = true];
+    uint32 number = 2;
+    bool dirty = 3;
   }
 }

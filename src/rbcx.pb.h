@@ -88,6 +88,12 @@ typedef struct _CoprocStat_UltrasoundStat {
     uint32_t roundtripMicrosecs;
 } CoprocStat_UltrasoundStat;
 
+typedef struct _CoprocStat_VersionStat {
+    char revision[8];
+    uint32_t number;
+    bool dirty;
+} CoprocStat_VersionStat;
+
 typedef struct _RegCoefs {
     uint32_t p;
     uint32_t i;
@@ -128,6 +134,7 @@ typedef struct _CoprocReq {
         CoprocReq_BuzzerReq buzzerReq;
         CoprocReq_CalibratePower calibratePower;
         None shutdownPower;
+        None versionReq;
     } payload;
 } CoprocReq;
 
@@ -157,6 +164,7 @@ typedef struct _CoprocReq {
 #define CoprocStat_ButtonsStat_init_default      {_CoprocStat_ButtonsEnum_MIN}
 #define CoprocStat_UltrasoundStat_init_default   {0, 0}
 #define CoprocStat_PowerAdcStat_init_default     {0, 0, 0}
+#define CoprocStat_VersionStat_init_default      {"", 0, 0}
 #define None_init_zero                           {0}
 #define RegCoefs_init_zero                       {0, 0, 0}
 #define CoprocReq_init_zero                      {0, {None_init_zero}}
@@ -171,6 +179,7 @@ typedef struct _CoprocReq {
 #define CoprocStat_ButtonsStat_init_zero         {_CoprocStat_ButtonsEnum_MIN}
 #define CoprocStat_UltrasoundStat_init_zero      {0, 0}
 #define CoprocStat_PowerAdcStat_init_zero        {0, 0, 0}
+#define CoprocStat_VersionStat_init_zero         {"", 0, 0}
 
 /* Field tags (for use in manual encoding/decoding) */
 #define CoprocReq_BuzzerReq_on_tag               1
@@ -190,6 +199,9 @@ typedef struct _CoprocReq {
 #define CoprocStat_PowerAdcStat_temperatureC_tag 3
 #define CoprocStat_UltrasoundStat_utsIndex_tag   1
 #define CoprocStat_UltrasoundStat_roundtripMicrosecs_tag 2
+#define CoprocStat_VersionStat_revision_tag      1
+#define CoprocStat_VersionStat_number_tag        2
+#define CoprocStat_VersionStat_dirty_tag         3
 #define RegCoefs_p_tag                           1
 #define RegCoefs_i_tag                           2
 #define RegCoefs_d_tag                           3
@@ -212,6 +224,7 @@ typedef struct _CoprocReq {
 #define CoprocReq_buzzerReq_tag                  9
 #define CoprocReq_calibratePower_tag             10
 #define CoprocReq_shutdownPower_tag              11
+#define CoprocReq_versionReq_tag                 12
 
 /* Struct field encoding specification for nanopb */
 #define None_FIELDLIST(X, a) \
@@ -235,7 +248,8 @@ X(a, STATIC,   ONEOF,    MESSAGE,  (payload,ultrasoundReq,payload.ultrasoundReq)
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,motorReq,payload.motorReq),   8) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,buzzerReq,payload.buzzerReq),   9) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,calibratePower,payload.calibratePower),  10) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (payload,shutdownPower,payload.shutdownPower),  11)
+X(a, STATIC,   ONEOF,    MESSAGE,  (payload,shutdownPower,payload.shutdownPower),  11) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (payload,versionReq,payload.versionReq),  12)
 #define CoprocReq_CALLBACK NULL
 #define CoprocReq_DEFAULT NULL
 #define CoprocReq_payload_keepalive_MSGTYPE None
@@ -247,6 +261,7 @@ X(a, STATIC,   ONEOF,    MESSAGE,  (payload,shutdownPower,payload.shutdownPower)
 #define CoprocReq_payload_buzzerReq_MSGTYPE CoprocReq_BuzzerReq
 #define CoprocReq_payload_calibratePower_MSGTYPE CoprocReq_CalibratePower
 #define CoprocReq_payload_shutdownPower_MSGTYPE None
+#define CoprocReq_payload_versionReq_MSGTYPE None
 
 #define CoprocReq_SetLeds_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, UENUM,    ledsOn,            1)
@@ -328,6 +343,13 @@ X(a, STATIC,   SINGULAR, INT32,    temperatureC,      3)
 #define CoprocStat_PowerAdcStat_CALLBACK NULL
 #define CoprocStat_PowerAdcStat_DEFAULT NULL
 
+#define CoprocStat_VersionStat_FIELDLIST(X, a) \
+X(a, STATIC,   SINGULAR, STRING,   revision,          1) \
+X(a, STATIC,   SINGULAR, UINT32,   number,            2) \
+X(a, STATIC,   SINGULAR, BOOL,     dirty,             3)
+#define CoprocStat_VersionStat_CALLBACK NULL
+#define CoprocStat_VersionStat_DEFAULT NULL
+
 extern const pb_msgdesc_t None_msg;
 extern const pb_msgdesc_t RegCoefs_msg;
 extern const pb_msgdesc_t CoprocReq_msg;
@@ -342,6 +364,7 @@ extern const pb_msgdesc_t CoprocStat_msg;
 extern const pb_msgdesc_t CoprocStat_ButtonsStat_msg;
 extern const pb_msgdesc_t CoprocStat_UltrasoundStat_msg;
 extern const pb_msgdesc_t CoprocStat_PowerAdcStat_msg;
+extern const pb_msgdesc_t CoprocStat_VersionStat_msg;
 
 /* Defines for backwards compatibility with code written before nanopb-0.4.0 */
 #define None_fields &None_msg
@@ -358,6 +381,7 @@ extern const pb_msgdesc_t CoprocStat_PowerAdcStat_msg;
 #define CoprocStat_ButtonsStat_fields &CoprocStat_ButtonsStat_msg
 #define CoprocStat_UltrasoundStat_fields &CoprocStat_UltrasoundStat_msg
 #define CoprocStat_PowerAdcStat_fields &CoprocStat_PowerAdcStat_msg
+#define CoprocStat_VersionStat_fields &CoprocStat_VersionStat_msg
 
 /* Maximum encoded size of messages (where known) */
 #define None_size                                0
@@ -374,6 +398,7 @@ extern const pb_msgdesc_t CoprocStat_PowerAdcStat_msg;
 #define CoprocStat_ButtonsStat_size              2
 #define CoprocStat_UltrasoundStat_size           12
 #define CoprocStat_PowerAdcStat_size             23
+#define CoprocStat_VersionStat_size              17
 
 #ifdef __cplusplus
 } /* extern "C" */
