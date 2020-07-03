@@ -84,6 +84,7 @@ message CoprocStat {
     None stupidServoStat = 6;
     UltrasoundStat ultrasoundStat = 7;
     PowerAdcStat powerAdcStat = 8;
+    VersionStat versionStat = 9;
   }
 
   message ButtonsStat {
