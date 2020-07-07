@@ -7,7 +7,7 @@ import time
 import threading
 
 from lib import frame_send
-from pb import rbcx_pb2 as pb
+import rbcx_pb2 as pb
 
 def read_serial(port):
     while True:

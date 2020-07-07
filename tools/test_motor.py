@@ -8,7 +8,7 @@ import threading
 from google.protobuf import text_format
 
 from lib import frame_send, frame_receive
-from pb import rbcx_pb2 as pb
+import rbcx_pb2 as pb
 
 def read_serial(port):
     while True:

@@ -4,4 +4,4 @@
 
 protoc -orbcx.pb rbcx.proto
 nanopb_generator -D src rbcx.pb
-protoc --python_out=tools/pb rbcx.proto
+protoc --python_out=tools rbcx.proto nanopb.proto
