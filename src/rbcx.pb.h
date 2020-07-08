@@ -14,6 +14,13 @@ extern "C" {
 #endif
 
 /* Enum definitions */
+typedef enum _MotorMode {
+    MotorMode_POWER = 0,
+    MotorMode_BRAKE = 1,
+    MotorMode_VELOCITY = 2,
+    MotorMode_POSITION = 3
+} MotorMode;
+
 typedef enum _CoprocReq_LedsEnum {
     CoprocReq_LedsEnum_NONE = 0,
     CoprocReq_LedsEnum_L1 = 1,
@@ -77,6 +84,14 @@ typedef struct _CoprocStat_ButtonsStat {
     CoprocStat_ButtonsEnum buttonsPressed;
 } CoprocStat_ButtonsStat;
 
+typedef struct _CoprocStat_MotorStat {
+    uint32_t motorIndex;
+    MotorMode mode;
+    int32_t power;
+    int32_t velocity;
+    int32_t position;
+} CoprocStat_MotorStat;
+
 typedef struct _CoprocStat_PowerAdcStat {
     uint32_t vccMv;
     uint32_t battMidMv;
@@ -104,10 +119,15 @@ typedef struct _CoprocReq_MotorReq {
     uint32_t motorIndex;
     pb_size_t which_motorCmd;
     union {
+        None getState;
         int32_t setPower;
         int32_t setBrake;
         int32_t setVelocity;
+        int32_t homePosition;
+        int32_t setPosition;
+        int32_t addPosition;
         RegCoefs setVelocityRegCoefs;
+        RegCoefs setPositionRegCoefs;
     } motorCmd;
 } CoprocReq_MotorReq;
 
@@ -141,6 +161,10 @@ typedef struct _CoprocReq {
 
 
 /* Helper constants for enums */
+#define _MotorMode_MIN MotorMode_POWER
+#define _MotorMode_MAX MotorMode_POSITION
+#define _MotorMode_ARRAYSIZE ((MotorMode)(MotorMode_POSITION+1))
+
 #define _CoprocReq_LedsEnum_MIN CoprocReq_LedsEnum_NONE
 #define _CoprocReq_LedsEnum_MAX CoprocReq_LedsEnum_L4
 #define _CoprocReq_LedsEnum_ARRAYSIZE ((CoprocReq_LedsEnum)(CoprocReq_LedsEnum_L4+1))
@@ -158,12 +182,13 @@ typedef struct _CoprocReq {
 #define CoprocReq_GetButtons_init_default        {0}
 #define CoprocReq_SetStupidServo_init_default    {0, 0, {None_init_default}}
 #define CoprocReq_UltrasoundReq_init_default     {0, 0, {None_init_default}}
-#define CoprocReq_MotorReq_init_default          {0, 0, {0}}
+#define CoprocReq_MotorReq_init_default          {0, 0, {None_init_default}}
 #define CoprocReq_BuzzerReq_init_default         {0}
 #define CoprocReq_CalibratePower_init_default    {0, 0, 0, 0}
 #define CoprocStat_init_default                  {0, {None_init_default}}
 #define CoprocStat_ButtonsStat_init_default      {_CoprocStat_ButtonsEnum_MIN}
 #define CoprocStat_UltrasoundStat_init_default   {0, 0}
+#define CoprocStat_MotorStat_init_default        {0, _MotorMode_MIN, 0, 0, 0}
 #define CoprocStat_PowerAdcStat_init_default     {0, 0, 0}
 #define CoprocStat_VersionStat_init_default      {{0}, 0, 0}
 #define None_init_zero                           {0}
@@ -173,12 +198,13 @@ typedef struct _CoprocReq {
 #define CoprocReq_GetButtons_init_zero           {0}
 #define CoprocReq_SetStupidServo_init_zero       {0, 0, {None_init_zero}}
 #define CoprocReq_UltrasoundReq_init_zero        {0, 0, {None_init_zero}}
-#define CoprocReq_MotorReq_init_zero             {0, 0, {0}}
+#define CoprocReq_MotorReq_init_zero             {0, 0, {None_init_zero}}
 #define CoprocReq_BuzzerReq_init_zero            {0}
 #define CoprocReq_CalibratePower_init_zero       {0, 0, 0, 0}
 #define CoprocStat_init_zero                     {0, {None_init_zero}}
 #define CoprocStat_ButtonsStat_init_zero         {_CoprocStat_ButtonsEnum_MIN}
 #define CoprocStat_UltrasoundStat_init_zero      {0, 0}
+#define CoprocStat_MotorStat_init_zero           {0, _MotorMode_MIN, 0, 0, 0}
 #define CoprocStat_PowerAdcStat_init_zero        {0, 0, 0}
 #define CoprocStat_VersionStat_init_zero         {{0}, 0, 0}
 
@@ -195,6 +221,11 @@ typedef struct _CoprocReq {
 #define CoprocReq_UltrasoundReq_singlePing_tag   4
 #define CoprocReq_UltrasoundReq_utsIndex_tag     1
 #define CoprocStat_ButtonsStat_buttonsPressed_tag 1
+#define CoprocStat_MotorStat_motorIndex_tag      1
+#define CoprocStat_MotorStat_mode_tag            2
+#define CoprocStat_MotorStat_power_tag           3
+#define CoprocStat_MotorStat_velocity_tag        4
+#define CoprocStat_MotorStat_position_tag        5
 #define CoprocStat_PowerAdcStat_vccMv_tag        1
 #define CoprocStat_PowerAdcStat_battMidMv_tag    2
 #define CoprocStat_PowerAdcStat_temperatureC_tag 3
@@ -206,10 +237,15 @@ typedef struct _CoprocReq {
 #define RegCoefs_p_tag                           1
 #define RegCoefs_i_tag                           2
 #define RegCoefs_d_tag                           3
+#define CoprocReq_MotorReq_getState_tag          4
 #define CoprocReq_MotorReq_setPower_tag          5
 #define CoprocReq_MotorReq_setBrake_tag          6
 #define CoprocReq_MotorReq_setVelocity_tag       7
+#define CoprocReq_MotorReq_homePosition_tag      8
+#define CoprocReq_MotorReq_setPosition_tag       10
+#define CoprocReq_MotorReq_addPosition_tag       11
 #define CoprocReq_MotorReq_setVelocityRegCoefs_tag 16
+#define CoprocReq_MotorReq_setPositionRegCoefs_tag 17
 #define CoprocReq_MotorReq_motorIndex_tag        1
 #define CoprocStat_ledsStat_tag                  4
 #define CoprocStat_buttonsStat_tag               5
@@ -292,13 +328,20 @@ X(a, STATIC,   ONEOF,    MESSAGE,  (utsCmd,singlePing,utsCmd.singlePing),   4)
 
 #define CoprocReq_MotorReq_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, UINT32,   motorIndex,        1) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (motorCmd,getState,motorCmd.getState),   4) \
 X(a, STATIC,   ONEOF,    SINT32,   (motorCmd,setPower,motorCmd.setPower),   5) \
 X(a, STATIC,   ONEOF,    SINT32,   (motorCmd,setBrake,motorCmd.setBrake),   6) \
 X(a, STATIC,   ONEOF,    SINT32,   (motorCmd,setVelocity,motorCmd.setVelocity),   7) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (motorCmd,setVelocityRegCoefs,motorCmd.setVelocityRegCoefs),  16)
+X(a, STATIC,   ONEOF,    SINT32,   (motorCmd,homePosition,motorCmd.homePosition),   8) \
+X(a, STATIC,   ONEOF,    SINT32,   (motorCmd,setPosition,motorCmd.setPosition),  10) \
+X(a, STATIC,   ONEOF,    SINT32,   (motorCmd,addPosition,motorCmd.addPosition),  11) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (motorCmd,setVelocityRegCoefs,motorCmd.setVelocityRegCoefs),  16) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (motorCmd,setPositionRegCoefs,motorCmd.setPositionRegCoefs),  17)
 #define CoprocReq_MotorReq_CALLBACK NULL
 #define CoprocReq_MotorReq_DEFAULT NULL
+#define CoprocReq_MotorReq_motorCmd_getState_MSGTYPE None
 #define CoprocReq_MotorReq_motorCmd_setVelocityRegCoefs_MSGTYPE RegCoefs
+#define CoprocReq_MotorReq_motorCmd_setPositionRegCoefs_MSGTYPE RegCoefs
 
 #define CoprocReq_BuzzerReq_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, BOOL,     on,                1)
@@ -340,6 +383,15 @@ X(a, STATIC,   SINGULAR, UINT32,   roundtripMicrosecs,   2)
 #define CoprocStat_UltrasoundStat_CALLBACK NULL
 #define CoprocStat_UltrasoundStat_DEFAULT NULL
 
+#define CoprocStat_MotorStat_FIELDLIST(X, a) \
+X(a, STATIC,   SINGULAR, UINT32,   motorIndex,        1) \
+X(a, STATIC,   SINGULAR, UENUM,    mode,              2) \
+X(a, STATIC,   SINGULAR, SINT32,   power,             3) \
+X(a, STATIC,   SINGULAR, SINT32,   velocity,          4) \
+X(a, STATIC,   SINGULAR, SINT32,   position,          5)
+#define CoprocStat_MotorStat_CALLBACK NULL
+#define CoprocStat_MotorStat_DEFAULT NULL
+
 #define CoprocStat_PowerAdcStat_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, UINT32,   vccMv,             1) \
 X(a, STATIC,   SINGULAR, UINT32,   battMidMv,         2) \
@@ -367,6 +419,7 @@ extern const pb_msgdesc_t CoprocReq_CalibratePower_msg;
 extern const pb_msgdesc_t CoprocStat_msg;
 extern const pb_msgdesc_t CoprocStat_ButtonsStat_msg;
 extern const pb_msgdesc_t CoprocStat_UltrasoundStat_msg;
+extern const pb_msgdesc_t CoprocStat_MotorStat_msg;
 extern const pb_msgdesc_t CoprocStat_PowerAdcStat_msg;
 extern const pb_msgdesc_t CoprocStat_VersionStat_msg;
 
@@ -384,6 +437,7 @@ extern const pb_msgdesc_t CoprocStat_VersionStat_msg;
 #define CoprocStat_fields &CoprocStat_msg
 #define CoprocStat_ButtonsStat_fields &CoprocStat_ButtonsStat_msg
 #define CoprocStat_UltrasoundStat_fields &CoprocStat_UltrasoundStat_msg
+#define CoprocStat_MotorStat_fields &CoprocStat_MotorStat_msg
 #define CoprocStat_PowerAdcStat_fields &CoprocStat_PowerAdcStat_msg
 #define CoprocStat_VersionStat_fields &CoprocStat_VersionStat_msg
 
@@ -401,6 +455,7 @@ extern const pb_msgdesc_t CoprocStat_VersionStat_msg;
 #define CoprocStat_size                          25
 #define CoprocStat_ButtonsStat_size              2
 #define CoprocStat_UltrasoundStat_size           12
+#define CoprocStat_MotorStat_size                26
 #define CoprocStat_PowerAdcStat_size             23
 #define CoprocStat_VersionStat_size              18
 

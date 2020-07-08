@@ -5,6 +5,13 @@ import "nanopb.proto";
 message None {
 }
 
+enum MotorMode {
+  POWER = 0;
+  BRAKE = 1;
+  VELOCITY = 2;
+  POSITION = 3;
+}
+
 message RegCoefs {
   uint32 p = 1;
   uint32 i = 2;
@@ -58,10 +65,15 @@ message CoprocReq {
   message MotorReq {
     uint32 motorIndex = 1;
     oneof motorCmd {
+      None getState = 4;
       sint32 setPower = 5;
       sint32 setBrake = 6;
       sint32 setVelocity = 7;
+      sint32 homePosition = 8;
+      sint32 setPosition = 10;
+      sint32 addPosition = 11;
       RegCoefs setVelocityRegCoefs = 16;
+      RegCoefs setPositionRegCoefs = 17;
     }
   }
 
@@ -104,6 +116,14 @@ message CoprocStat {
   message UltrasoundStat {
     uint32 utsIndex = 1;
     uint32 roundtripMicrosecs = 2;
+  }
+
+  message MotorStat {
+    uint32 motorIndex = 1;
+    MotorMode mode = 2;
+    sint32 power = 3;
+    sint32 velocity = 4;
+    sint32 position = 5;
   }
 
   message PowerAdcStat {
