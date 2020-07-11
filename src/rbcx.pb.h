@@ -18,7 +18,8 @@ typedef enum _MotorMode {
     MotorMode_POWER = 0,
     MotorMode_BRAKE = 1,
     MotorMode_VELOCITY = 2,
-    MotorMode_POSITION = 3
+    MotorMode_POSITION = 3,
+    MotorMode_POSITION_IDLE = 4
 } MotorMode;
 
 typedef enum _CoprocReq_LedsEnum {
@@ -109,6 +110,12 @@ typedef struct _CoprocStat_VersionStat {
     bool dirty;
 } CoprocStat_VersionStat;
 
+typedef struct _MotorConfig {
+    uint32_t velEpsilon;
+    uint32_t posEpsilon;
+    uint32_t maxAccel;
+} MotorConfig;
+
 typedef struct _RegCoefs {
     uint32_t p;
     uint32_t i;
@@ -128,6 +135,7 @@ typedef struct _CoprocReq_MotorReq {
         int32_t addPosition;
         RegCoefs setVelocityRegCoefs;
         RegCoefs setPositionRegCoefs;
+        MotorConfig setConfig;
     } motorCmd;
 } CoprocReq_MotorReq;
 
@@ -140,6 +148,7 @@ typedef struct _CoprocStat {
         CoprocStat_UltrasoundStat ultrasoundStat;
         CoprocStat_PowerAdcStat powerAdcStat;
         CoprocStat_VersionStat versionStat;
+        CoprocStat_MotorStat motorStat;
     } payload;
 } CoprocStat;
 
@@ -162,8 +171,8 @@ typedef struct _CoprocReq {
 
 /* Helper constants for enums */
 #define _MotorMode_MIN MotorMode_POWER
-#define _MotorMode_MAX MotorMode_POSITION
-#define _MotorMode_ARRAYSIZE ((MotorMode)(MotorMode_POSITION+1))
+#define _MotorMode_MAX MotorMode_POSITION_IDLE
+#define _MotorMode_ARRAYSIZE ((MotorMode)(MotorMode_POSITION_IDLE+1))
 
 #define _CoprocReq_LedsEnum_MIN CoprocReq_LedsEnum_NONE
 #define _CoprocReq_LedsEnum_MAX CoprocReq_LedsEnum_L4
@@ -177,6 +186,7 @@ typedef struct _CoprocReq {
 /* Initializer values for message structs */
 #define None_init_default                        {0}
 #define RegCoefs_init_default                    {0, 0, 0}
+#define MotorConfig_init_default                 {0, 0, 0}
 #define CoprocReq_init_default                   {0, {None_init_default}}
 #define CoprocReq_SetLeds_init_default           {_CoprocReq_LedsEnum_MIN}
 #define CoprocReq_GetButtons_init_default        {0}
@@ -193,6 +203,7 @@ typedef struct _CoprocReq {
 #define CoprocStat_VersionStat_init_default      {{0}, 0, 0}
 #define None_init_zero                           {0}
 #define RegCoefs_init_zero                       {0, 0, 0}
+#define MotorConfig_init_zero                    {0, 0, 0}
 #define CoprocReq_init_zero                      {0, {None_init_zero}}
 #define CoprocReq_SetLeds_init_zero              {_CoprocReq_LedsEnum_MIN}
 #define CoprocReq_GetButtons_init_zero           {0}
@@ -234,6 +245,9 @@ typedef struct _CoprocReq {
 #define CoprocStat_VersionStat_revision_tag      1
 #define CoprocStat_VersionStat_number_tag        2
 #define CoprocStat_VersionStat_dirty_tag         3
+#define MotorConfig_velEpsilon_tag               1
+#define MotorConfig_posEpsilon_tag               2
+#define MotorConfig_maxAccel_tag                 3
 #define RegCoefs_p_tag                           1
 #define RegCoefs_i_tag                           2
 #define RegCoefs_d_tag                           3
@@ -246,6 +260,7 @@ typedef struct _CoprocReq {
 #define CoprocReq_MotorReq_addPosition_tag       11
 #define CoprocReq_MotorReq_setVelocityRegCoefs_tag 16
 #define CoprocReq_MotorReq_setPositionRegCoefs_tag 17
+#define CoprocReq_MotorReq_setConfig_tag         18
 #define CoprocReq_MotorReq_motorIndex_tag        1
 #define CoprocStat_ledsStat_tag                  4
 #define CoprocStat_buttonsStat_tag               5
@@ -253,6 +268,7 @@ typedef struct _CoprocReq {
 #define CoprocStat_ultrasoundStat_tag            7
 #define CoprocStat_powerAdcStat_tag              8
 #define CoprocStat_versionStat_tag               9
+#define CoprocStat_motorStat_tag                 10
 #define CoprocReq_keepalive_tag                  1
 #define CoprocReq_setLeds_tag                    4
 #define CoprocReq_getButtons_tag                 5
@@ -276,6 +292,13 @@ X(a, STATIC,   SINGULAR, UINT32,   i,                 2) \
 X(a, STATIC,   SINGULAR, UINT32,   d,                 3)
 #define RegCoefs_CALLBACK NULL
 #define RegCoefs_DEFAULT NULL
+
+#define MotorConfig_FIELDLIST(X, a) \
+X(a, STATIC,   SINGULAR, UINT32,   velEpsilon,        1) \
+X(a, STATIC,   SINGULAR, UINT32,   posEpsilon,        2) \
+X(a, STATIC,   SINGULAR, UINT32,   maxAccel,          3)
+#define MotorConfig_CALLBACK NULL
+#define MotorConfig_DEFAULT NULL
 
 #define CoprocReq_FIELDLIST(X, a) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,keepalive,payload.keepalive),   1) \
@@ -336,12 +359,14 @@ X(a, STATIC,   ONEOF,    SINT32,   (motorCmd,homePosition,motorCmd.homePosition)
 X(a, STATIC,   ONEOF,    SINT32,   (motorCmd,setPosition,motorCmd.setPosition),  10) \
 X(a, STATIC,   ONEOF,    SINT32,   (motorCmd,addPosition,motorCmd.addPosition),  11) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (motorCmd,setVelocityRegCoefs,motorCmd.setVelocityRegCoefs),  16) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (motorCmd,setPositionRegCoefs,motorCmd.setPositionRegCoefs),  17)
+X(a, STATIC,   ONEOF,    MESSAGE,  (motorCmd,setPositionRegCoefs,motorCmd.setPositionRegCoefs),  17) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (motorCmd,setConfig,motorCmd.setConfig),  18)
 #define CoprocReq_MotorReq_CALLBACK NULL
 #define CoprocReq_MotorReq_DEFAULT NULL
 #define CoprocReq_MotorReq_motorCmd_getState_MSGTYPE None
 #define CoprocReq_MotorReq_motorCmd_setVelocityRegCoefs_MSGTYPE RegCoefs
 #define CoprocReq_MotorReq_motorCmd_setPositionRegCoefs_MSGTYPE RegCoefs
+#define CoprocReq_MotorReq_motorCmd_setConfig_MSGTYPE MotorConfig
 
 #define CoprocReq_BuzzerReq_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, BOOL,     on,                1)
@@ -362,7 +387,8 @@ X(a, STATIC,   ONEOF,    MESSAGE,  (payload,buttonsStat,payload.buttonsStat),   
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,stupidServoStat,payload.stupidServoStat),   6) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,ultrasoundStat,payload.ultrasoundStat),   7) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,powerAdcStat,payload.powerAdcStat),   8) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (payload,versionStat,payload.versionStat),   9)
+X(a, STATIC,   ONEOF,    MESSAGE,  (payload,versionStat,payload.versionStat),   9) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (payload,motorStat,payload.motorStat),  10)
 #define CoprocStat_CALLBACK NULL
 #define CoprocStat_DEFAULT NULL
 #define CoprocStat_payload_ledsStat_MSGTYPE None
@@ -371,6 +397,7 @@ X(a, STATIC,   ONEOF,    MESSAGE,  (payload,versionStat,payload.versionStat),   
 #define CoprocStat_payload_ultrasoundStat_MSGTYPE CoprocStat_UltrasoundStat
 #define CoprocStat_payload_powerAdcStat_MSGTYPE CoprocStat_PowerAdcStat
 #define CoprocStat_payload_versionStat_MSGTYPE CoprocStat_VersionStat
+#define CoprocStat_payload_motorStat_MSGTYPE CoprocStat_MotorStat
 
 #define CoprocStat_ButtonsStat_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, UENUM,    buttonsPressed,    1)
@@ -408,6 +435,7 @@ X(a, STATIC,   SINGULAR, BOOL,     dirty,             3)
 
 extern const pb_msgdesc_t None_msg;
 extern const pb_msgdesc_t RegCoefs_msg;
+extern const pb_msgdesc_t MotorConfig_msg;
 extern const pb_msgdesc_t CoprocReq_msg;
 extern const pb_msgdesc_t CoprocReq_SetLeds_msg;
 extern const pb_msgdesc_t CoprocReq_GetButtons_msg;
@@ -426,6 +454,7 @@ extern const pb_msgdesc_t CoprocStat_VersionStat_msg;
 /* Defines for backwards compatibility with code written before nanopb-0.4.0 */
 #define None_fields &None_msg
 #define RegCoefs_fields &RegCoefs_msg
+#define MotorConfig_fields &MotorConfig_msg
 #define CoprocReq_fields &CoprocReq_msg
 #define CoprocReq_SetLeds_fields &CoprocReq_SetLeds_msg
 #define CoprocReq_GetButtons_fields &CoprocReq_GetButtons_msg
@@ -444,6 +473,7 @@ extern const pb_msgdesc_t CoprocStat_VersionStat_msg;
 /* Maximum encoded size of messages (where known) */
 #define None_size                                0
 #define RegCoefs_size                            18
+#define MotorConfig_size                         18
 #define CoprocReq_size                           29
 #define CoprocReq_SetLeds_size                   2
 #define CoprocReq_GetButtons_size                0
@@ -452,7 +482,7 @@ extern const pb_msgdesc_t CoprocStat_VersionStat_msg;
 #define CoprocReq_MotorReq_size                  27
 #define CoprocReq_BuzzerReq_size                 2
 #define CoprocReq_CalibratePower_size            24
-#define CoprocStat_size                          25
+#define CoprocStat_size                          28
 #define CoprocStat_ButtonsStat_size              2
 #define CoprocStat_UltrasoundStat_size           12
 #define CoprocStat_MotorStat_size                26

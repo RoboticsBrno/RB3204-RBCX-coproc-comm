@@ -10,12 +10,19 @@ enum MotorMode {
   BRAKE = 1;
   VELOCITY = 2;
   POSITION = 3;
+  POSITION_IDLE = 4;
 }
 
 message RegCoefs {
   uint32 p = 1;
   uint32 i = 2;
   uint32 d = 3;
+}
+
+message MotorConfig {
+  uint32 velEpsilon = 1;
+  uint32 posEpsilon = 2;
+  uint32 maxAccel = 3;
 }
 
 message CoprocReq {
@@ -74,6 +81,7 @@ message CoprocReq {
       sint32 addPosition = 11;
       RegCoefs setVelocityRegCoefs = 16;
       RegCoefs setPositionRegCoefs = 17;
+      MotorConfig setConfig = 18;
     }
   }
 
@@ -97,6 +105,7 @@ message CoprocStat {
     UltrasoundStat ultrasoundStat = 7;
     PowerAdcStat powerAdcStat = 8;
     VersionStat versionStat = 9;
+    MotorStat motorStat = 10;
   }
 
   message ButtonsStat {

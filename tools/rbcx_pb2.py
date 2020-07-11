@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=b'\n\nrbcx.proto\x1a\x0cnanopb.proto\"\x06\n\x04None\"+\n\x08RegCoefs\x12\t\n\x01p\x18\x01 \x01(\r\x12\t\n\x01i\x18\x02 \x01(\r\x12\t\n\x01\x64\x18\x03 \x01(\r\"\xeb\x08\n\tCoprocReq\x12\x1a\n\tkeepalive\x18\x01 \x01(\x0b\x32\x05.NoneH\x00\x12%\n\x07setLeds\x18\x04 \x01(\x0b\x32\x12.CoprocReq.SetLedsH\x00\x12+\n\ngetButtons\x18\x05 \x01(\x0b\x32\x15.CoprocReq.GetButtonsH\x00\x12\x33\n\x0esetStupidServo\x18\x06 \x01(\x0b\x32\x19.CoprocReq.SetStupidServoH\x00\x12\x31\n\rultrasoundReq\x18\x07 \x01(\x0b\x32\x18.CoprocReq.UltrasoundReqH\x00\x12\'\n\x08motorReq\x18\x08 \x01(\x0b\x32\x13.CoprocReq.MotorReqH\x00\x12)\n\tbuzzerReq\x18\t \x01(\x0b\x32\x14.CoprocReq.BuzzerReqH\x00\x12\x33\n\x0e\x63\x61libratePower\x18\n \x01(\x0b\x32\x19.CoprocReq.CalibratePowerH\x00\x12\x1e\n\rshutdownPower\x18\x0b \x01(\x0b\x32\x05.NoneH\x00\x12\x1b\n\nversionReq\x18\x0c \x01(\x0b\x32\x05.NoneH\x00\x1a.\n\x07SetLeds\x12#\n\x06ledsOn\x18\x01 \x01(\x0e\x32\x13.CoprocReq.LedsEnum\x1a\x0c\n\nGetButtons\x1a\x61\n\x0eSetStupidServo\x12\x12\n\nservoIndex\x18\x01 \x01(\r\x12\x18\n\x07\x64isable\x18\x04 \x01(\x0b\x32\x05.NoneH\x00\x12\x15\n\x0bsetPosition\x18\x05 \x01(\x02H\x00\x42\n\n\x08servoCmd\x1aH\n\rUltrasoundReq\x12\x10\n\x08utsIndex\x18\x01 \x01(\r\x12\x1b\n\nsinglePing\x18\x04 \x01(\x0b\x32\x05.NoneH\x00\x42\x08\n\x06utsCmd\x1a\x9e\x02\n\x08MotorReq\x12\x12\n\nmotorIndex\x18\x01 \x01(\r\x12\x19\n\x08getState\x18\x04 \x01(\x0b\x32\x05.NoneH\x00\x12\x12\n\x08setPower\x18\x05 \x01(\x11H\x00\x12\x12\n\x08setBrake\x18\x06 \x01(\x11H\x00\x12\x15\n\x0bsetVelocity\x18\x07 \x01(\x11H\x00\x12\x16\n\x0chomePosition\x18\x08 \x01(\x11H\x00\x12\x15\n\x0bsetPosition\x18\n \x01(\x11H\x00\x12\x15\n\x0b\x61\x64\x64Position\x18\x0b \x01(\x11H\x00\x12(\n\x13setVelocityRegCoefs\x18\x10 \x01(\x0b\x32\t.RegCoefsH\x00\x12(\n\x13setPositionRegCoefs\x18\x11 \x01(\x0b\x32\t.RegCoefsH\x00\x42\n\n\x08motorCmd\x1a\x17\n\tBuzzerReq\x12\n\n\x02on\x18\x01 \x01(\x08\x1aZ\n\x0e\x43\x61libratePower\x12\r\n\x05vccMv\x18\x01 \x01(\r\x12\x11\n\tbattMidMv\x18\x02 \x01(\r\x12\x10\n\x08vRef33Mv\x18\x03 \x01(\r\x12\x14\n\x0ctemperatureC\x18\x04 \x01(\r\"4\n\x08LedsEnum\x12\x08\n\x04NONE\x10\x00\x12\x06\n\x02L1\x10\x01\x12\x06\n\x02L2\x10\x02\x12\x06\n\x02L3\x10\x04\x12\x06\n\x02L4\x10\x08\x42\t\n\x07payload\"\xea\x05\n\nCoprocStat\x12\x19\n\x08ledsStat\x18\x04 \x01(\x0b\x32\x05.NoneH\x00\x12.\n\x0b\x62uttonsStat\x18\x05 \x01(\x0b\x32\x17.CoprocStat.ButtonsStatH\x00\x12 \n\x0fstupidServoStat\x18\x06 \x01(\x0b\x32\x05.NoneH\x00\x12\x34\n\x0eultrasoundStat\x18\x07 \x01(\x0b\x32\x1a.CoprocStat.UltrasoundStatH\x00\x12\x30\n\x0cpowerAdcStat\x18\x08 \x01(\x0b\x32\x18.CoprocStat.PowerAdcStatH\x00\x12.\n\x0bversionStat\x18\t \x01(\x0b\x32\x17.CoprocStat.VersionStatH\x00\x1a>\n\x0b\x42uttonsStat\x12/\n\x0e\x62uttonsPressed\x18\x01 \x01(\x0e\x32\x17.CoprocStat.ButtonsEnum\x1a>\n\x0eUltrasoundStat\x12\x10\n\x08utsIndex\x18\x01 \x01(\r\x12\x1a\n\x12roundtripMicrosecs\x18\x02 \x01(\r\x1al\n\tMotorStat\x12\x12\n\nmotorIndex\x18\x01 \x01(\r\x12\x18\n\x04mode\x18\x02 \x01(\x0e\x32\n.MotorMode\x12\r\n\x05power\x18\x03 \x01(\x11\x12\x10\n\x08velocity\x18\x04 \x01(\x11\x12\x10\n\x08position\x18\x05 \x01(\x11\x1a\x46\n\x0cPowerAdcStat\x12\r\n\x05vccMv\x18\x01 \x01(\r\x12\x11\n\tbattMidMv\x18\x02 \x01(\r\x12\x14\n\x0ctemperatureC\x18\x03 \x01(\x05\x1aJ\n\x0bVersionStat\x12\x1c\n\x08revision\x18\x01 \x01(\x0c\x42\n\x92?\x02\x08\x08\x92?\x02x\x01\x12\x0e\n\x06number\x18\x02 \x01(\r\x12\r\n\x05\x64irty\x18\x03 \x01(\x08\"J\n\x0b\x42uttonsEnum\x12\x08\n\x04NONE\x10\x00\x12\x08\n\x04\x42OFF\x10\x01\x12\x06\n\x02\x42\x31\x10\x02\x12\x06\n\x02\x42\x32\x10\x04\x12\x06\n\x02\x42\x33\x10\x08\x12\x06\n\x02\x42\x34\x10\x10\x12\x07\n\x03\x42ON\x10 B\t\n\x07payload*=\n\tMotorMode\x12\t\n\x05POWER\x10\x00\x12\t\n\x05\x42RAKE\x10\x01\x12\x0c\n\x08VELOCITY\x10\x02\x12\x0c\n\x08POSITION\x10\x03\x62\x06proto3'
+  serialized_pb=b'\n\nrbcx.proto\x1a\x0cnanopb.proto\"\x06\n\x04None\"+\n\x08RegCoefs\x12\t\n\x01p\x18\x01 \x01(\r\x12\t\n\x01i\x18\x02 \x01(\r\x12\t\n\x01\x64\x18\x03 \x01(\r\"G\n\x0bMotorConfig\x12\x12\n\nvelEpsilon\x18\x01 \x01(\r\x12\x12\n\nposEpsilon\x18\x02 \x01(\r\x12\x10\n\x08maxAccel\x18\x03 \x01(\r\"\x8e\t\n\tCoprocReq\x12\x1a\n\tkeepalive\x18\x01 \x01(\x0b\x32\x05.NoneH\x00\x12%\n\x07setLeds\x18\x04 \x01(\x0b\x32\x12.CoprocReq.SetLedsH\x00\x12+\n\ngetButtons\x18\x05 \x01(\x0b\x32\x15.CoprocReq.GetButtonsH\x00\x12\x33\n\x0esetStupidServo\x18\x06 \x01(\x0b\x32\x19.CoprocReq.SetStupidServoH\x00\x12\x31\n\rultrasoundReq\x18\x07 \x01(\x0b\x32\x18.CoprocReq.UltrasoundReqH\x00\x12\'\n\x08motorReq\x18\x08 \x01(\x0b\x32\x13.CoprocReq.MotorReqH\x00\x12)\n\tbuzzerReq\x18\t \x01(\x0b\x32\x14.CoprocReq.BuzzerReqH\x00\x12\x33\n\x0e\x63\x61libratePower\x18\n \x01(\x0b\x32\x19.CoprocReq.CalibratePowerH\x00\x12\x1e\n\rshutdownPower\x18\x0b \x01(\x0b\x32\x05.NoneH\x00\x12\x1b\n\nversionReq\x18\x0c \x01(\x0b\x32\x05.NoneH\x00\x1a.\n\x07SetLeds\x12#\n\x06ledsOn\x18\x01 \x01(\x0e\x32\x13.CoprocReq.LedsEnum\x1a\x0c\n\nGetButtons\x1a\x61\n\x0eSetStupidServo\x12\x12\n\nservoIndex\x18\x01 \x01(\r\x12\x18\n\x07\x64isable\x18\x04 \x01(\x0b\x32\x05.NoneH\x00\x12\x15\n\x0bsetPosition\x18\x05 \x01(\x02H\x00\x42\n\n\x08servoCmd\x1aH\n\rUltrasoundReq\x12\x10\n\x08utsIndex\x18\x01 \x01(\r\x12\x1b\n\nsinglePing\x18\x04 \x01(\x0b\x32\x05.NoneH\x00\x42\x08\n\x06utsCmd\x1a\xc1\x02\n\x08MotorReq\x12\x12\n\nmotorIndex\x18\x01 \x01(\r\x12\x19\n\x08getState\x18\x04 \x01(\x0b\x32\x05.NoneH\x00\x12\x12\n\x08setPower\x18\x05 \x01(\x11H\x00\x12\x12\n\x08setBrake\x18\x06 \x01(\x11H\x00\x12\x15\n\x0bsetVelocity\x18\x07 \x01(\x11H\x00\x12\x16\n\x0chomePosition\x18\x08 \x01(\x11H\x00\x12\x15\n\x0bsetPosition\x18\n \x01(\x11H\x00\x12\x15\n\x0b\x61\x64\x64Position\x18\x0b \x01(\x11H\x00\x12(\n\x13setVelocityRegCoefs\x18\x10 \x01(\x0b\x32\t.RegCoefsH\x00\x12(\n\x13setPositionRegCoefs\x18\x11 \x01(\x0b\x32\t.RegCoefsH\x00\x12!\n\tsetConfig\x18\x12 \x01(\x0b\x32\x0c.MotorConfigH\x00\x42\n\n\x08motorCmd\x1a\x17\n\tBuzzerReq\x12\n\n\x02on\x18\x01 \x01(\x08\x1aZ\n\x0e\x43\x61libratePower\x12\r\n\x05vccMv\x18\x01 \x01(\r\x12\x11\n\tbattMidMv\x18\x02 \x01(\r\x12\x10\n\x08vRef33Mv\x18\x03 \x01(\r\x12\x14\n\x0ctemperatureC\x18\x04 \x01(\r\"4\n\x08LedsEnum\x12\x08\n\x04NONE\x10\x00\x12\x06\n\x02L1\x10\x01\x12\x06\n\x02L2\x10\x02\x12\x06\n\x02L3\x10\x04\x12\x06\n\x02L4\x10\x08\x42\t\n\x07payload\"\x96\x06\n\nCoprocStat\x12\x19\n\x08ledsStat\x18\x04 \x01(\x0b\x32\x05.NoneH\x00\x12.\n\x0b\x62uttonsStat\x18\x05 \x01(\x0b\x32\x17.CoprocStat.ButtonsStatH\x00\x12 \n\x0fstupidServoStat\x18\x06 \x01(\x0b\x32\x05.NoneH\x00\x12\x34\n\x0eultrasoundStat\x18\x07 \x01(\x0b\x32\x1a.CoprocStat.UltrasoundStatH\x00\x12\x30\n\x0cpowerAdcStat\x18\x08 \x01(\x0b\x32\x18.CoprocStat.PowerAdcStatH\x00\x12.\n\x0bversionStat\x18\t \x01(\x0b\x32\x17.CoprocStat.VersionStatH\x00\x12*\n\tmotorStat\x18\n \x01(\x0b\x32\x15.CoprocStat.MotorStatH\x00\x1a>\n\x0b\x42uttonsStat\x12/\n\x0e\x62uttonsPressed\x18\x01 \x01(\x0e\x32\x17.CoprocStat.ButtonsEnum\x1a>\n\x0eUltrasoundStat\x12\x10\n\x08utsIndex\x18\x01 \x01(\r\x12\x1a\n\x12roundtripMicrosecs\x18\x02 \x01(\r\x1al\n\tMotorStat\x12\x12\n\nmotorIndex\x18\x01 \x01(\r\x12\x18\n\x04mode\x18\x02 \x01(\x0e\x32\n.MotorMode\x12\r\n\x05power\x18\x03 \x01(\x11\x12\x10\n\x08velocity\x18\x04 \x01(\x11\x12\x10\n\x08position\x18\x05 \x01(\x11\x1a\x46\n\x0cPowerAdcStat\x12\r\n\x05vccMv\x18\x01 \x01(\r\x12\x11\n\tbattMidMv\x18\x02 \x01(\r\x12\x14\n\x0ctemperatureC\x18\x03 \x01(\x05\x1aJ\n\x0bVersionStat\x12\x1c\n\x08revision\x18\x01 \x01(\x0c\x42\n\x92?\x02\x08\x08\x92?\x02x\x01\x12\x0e\n\x06number\x18\x02 \x01(\r\x12\r\n\x05\x64irty\x18\x03 \x01(\x08\"J\n\x0b\x42uttonsEnum\x12\x08\n\x04NONE\x10\x00\x12\x08\n\x04\x42OFF\x10\x01\x12\x06\n\x02\x42\x31\x10\x02\x12\x06\n\x02\x42\x32\x10\x04\x12\x06\n\x02\x42\x33\x10\x08\x12\x06\n\x02\x42\x34\x10\x10\x12\x07\n\x03\x42ON\x10 B\t\n\x07payload*P\n\tMotorMode\x12\t\n\x05POWER\x10\x00\x12\t\n\x05\x42RAKE\x10\x01\x12\x0c\n\x08VELOCITY\x10\x02\x12\x0c\n\x08POSITION\x10\x03\x12\x11\n\rPOSITION_IDLE\x10\x04\x62\x06proto3'
   ,
   dependencies=[nanopb__pb2.DESCRIPTOR,])
 
@@ -46,11 +46,15 @@ _MOTORMODE = _descriptor.EnumDescriptor(
       name='POSITION', index=3, number=3,
       serialized_options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='POSITION_IDLE', index=4, number=4,
+      serialized_options=None,
+      type=None),
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1964,
-  serialized_end=2025,
+  serialized_start=2116,
+  serialized_end=2196,
 )
 _sym_db.RegisterEnumDescriptor(_MOTORMODE)
 
@@ -59,6 +63,7 @@ POWER = 0
 BRAKE = 1
 VELOCITY = 2
 POSITION = 3
+POSITION_IDLE = 4
 
 
 _COPROCREQ_LEDSENUM = _descriptor.EnumDescriptor(
@@ -90,8 +95,8 @@ _COPROCREQ_LEDSENUM = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1150,
-  serialized_end=1202,
+  serialized_start=1258,
+  serialized_end=1310,
 )
 _sym_db.RegisterEnumDescriptor(_COPROCREQ_LEDSENUM)
 
@@ -132,8 +137,8 @@ _COPROCSTAT_BUTTONSENUM = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1877,
-  serialized_end=1951,
+  serialized_start=2029,
+  serialized_end=2103,
 )
 _sym_db.RegisterEnumDescriptor(_COPROCSTAT_BUTTONSENUM)
 
@@ -207,6 +212,51 @@ _REGCOEFS = _descriptor.Descriptor(
 )
 
 
+_MOTORCONFIG = _descriptor.Descriptor(
+  name='MotorConfig',
+  full_name='MotorConfig',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='velEpsilon', full_name='MotorConfig.velEpsilon', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='posEpsilon', full_name='MotorConfig.posEpsilon', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='maxAccel', full_name='MotorConfig.maxAccel', index=2,
+      number=3, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=81,
+  serialized_end=152,
+)
+
+
 _COPROCREQ_SETLEDS = _descriptor.Descriptor(
   name='SetLeds',
   full_name='CoprocReq.SetLeds',
@@ -233,8 +283,8 @@ _COPROCREQ_SETLEDS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=509,
-  serialized_end=555,
+  serialized_start=582,
+  serialized_end=628,
 )
 
 _COPROCREQ_GETBUTTONS = _descriptor.Descriptor(
@@ -256,8 +306,8 @@ _COPROCREQ_GETBUTTONS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=557,
-  serialized_end=569,
+  serialized_start=630,
+  serialized_end=642,
 )
 
 _COPROCREQ_SETSTUPIDSERVO = _descriptor.Descriptor(
@@ -303,8 +353,8 @@ _COPROCREQ_SETSTUPIDSERVO = _descriptor.Descriptor(
       name='servoCmd', full_name='CoprocReq.SetStupidServo.servoCmd',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=571,
-  serialized_end=668,
+  serialized_start=644,
+  serialized_end=741,
 )
 
 _COPROCREQ_ULTRASOUNDREQ = _descriptor.Descriptor(
@@ -343,8 +393,8 @@ _COPROCREQ_ULTRASOUNDREQ = _descriptor.Descriptor(
       name='utsCmd', full_name='CoprocReq.UltrasoundReq.utsCmd',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=670,
-  serialized_end=742,
+  serialized_start=743,
+  serialized_end=815,
 )
 
 _COPROCREQ_MOTORREQ = _descriptor.Descriptor(
@@ -424,6 +474,13 @@ _COPROCREQ_MOTORREQ = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='setConfig', full_name='CoprocReq.MotorReq.setConfig', index=10,
+      number=18, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -439,8 +496,8 @@ _COPROCREQ_MOTORREQ = _descriptor.Descriptor(
       name='motorCmd', full_name='CoprocReq.MotorReq.motorCmd',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=745,
-  serialized_end=1031,
+  serialized_start=818,
+  serialized_end=1139,
 )
 
 _COPROCREQ_BUZZERREQ = _descriptor.Descriptor(
@@ -469,8 +526,8 @@ _COPROCREQ_BUZZERREQ = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1033,
-  serialized_end=1056,
+  serialized_start=1141,
+  serialized_end=1164,
 )
 
 _COPROCREQ_CALIBRATEPOWER = _descriptor.Descriptor(
@@ -520,8 +577,8 @@ _COPROCREQ_CALIBRATEPOWER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1058,
-  serialized_end=1148,
+  serialized_start=1166,
+  serialized_end=1256,
 )
 
 _COPROCREQ = _descriptor.Descriptor(
@@ -617,8 +674,8 @@ _COPROCREQ = _descriptor.Descriptor(
       name='payload', full_name='CoprocReq.payload',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=82,
-  serialized_end=1213,
+  serialized_start=155,
+  serialized_end=1321,
 )
 
 
@@ -648,8 +705,8 @@ _COPROCSTAT_BUTTONSSTAT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1491,
-  serialized_end=1553,
+  serialized_start=1643,
+  serialized_end=1705,
 )
 
 _COPROCSTAT_ULTRASOUNDSTAT = _descriptor.Descriptor(
@@ -685,8 +742,8 @@ _COPROCSTAT_ULTRASOUNDSTAT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1555,
-  serialized_end=1617,
+  serialized_start=1707,
+  serialized_end=1769,
 )
 
 _COPROCSTAT_MOTORSTAT = _descriptor.Descriptor(
@@ -743,8 +800,8 @@ _COPROCSTAT_MOTORSTAT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1619,
-  serialized_end=1727,
+  serialized_start=1771,
+  serialized_end=1879,
 )
 
 _COPROCSTAT_POWERADCSTAT = _descriptor.Descriptor(
@@ -787,8 +844,8 @@ _COPROCSTAT_POWERADCSTAT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1729,
-  serialized_end=1799,
+  serialized_start=1881,
+  serialized_end=1951,
 )
 
 _COPROCSTAT_VERSIONSTAT = _descriptor.Descriptor(
@@ -831,8 +888,8 @@ _COPROCSTAT_VERSIONSTAT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1801,
-  serialized_end=1875,
+  serialized_start=1953,
+  serialized_end=2027,
 )
 
 _COPROCSTAT = _descriptor.Descriptor(
@@ -884,6 +941,13 @@ _COPROCSTAT = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='motorStat', full_name='CoprocStat.motorStat', index=6,
+      number=10, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -900,8 +964,8 @@ _COPROCSTAT = _descriptor.Descriptor(
       name='payload', full_name='CoprocStat.payload',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=1216,
-  serialized_end=1962,
+  serialized_start=1324,
+  serialized_end=2114,
 )
 
 _COPROCREQ_SETLEDS.fields_by_name['ledsOn'].enum_type = _COPROCREQ_LEDSENUM
@@ -923,6 +987,7 @@ _COPROCREQ_ULTRASOUNDREQ.fields_by_name['singlePing'].containing_oneof = _COPROC
 _COPROCREQ_MOTORREQ.fields_by_name['getState'].message_type = _NONE
 _COPROCREQ_MOTORREQ.fields_by_name['setVelocityRegCoefs'].message_type = _REGCOEFS
 _COPROCREQ_MOTORREQ.fields_by_name['setPositionRegCoefs'].message_type = _REGCOEFS
+_COPROCREQ_MOTORREQ.fields_by_name['setConfig'].message_type = _MOTORCONFIG
 _COPROCREQ_MOTORREQ.containing_type = _COPROCREQ
 _COPROCREQ_MOTORREQ.oneofs_by_name['motorCmd'].fields.append(
   _COPROCREQ_MOTORREQ.fields_by_name['getState'])
@@ -951,6 +1016,9 @@ _COPROCREQ_MOTORREQ.fields_by_name['setVelocityRegCoefs'].containing_oneof = _CO
 _COPROCREQ_MOTORREQ.oneofs_by_name['motorCmd'].fields.append(
   _COPROCREQ_MOTORREQ.fields_by_name['setPositionRegCoefs'])
 _COPROCREQ_MOTORREQ.fields_by_name['setPositionRegCoefs'].containing_oneof = _COPROCREQ_MOTORREQ.oneofs_by_name['motorCmd']
+_COPROCREQ_MOTORREQ.oneofs_by_name['motorCmd'].fields.append(
+  _COPROCREQ_MOTORREQ.fields_by_name['setConfig'])
+_COPROCREQ_MOTORREQ.fields_by_name['setConfig'].containing_oneof = _COPROCREQ_MOTORREQ.oneofs_by_name['motorCmd']
 _COPROCREQ_BUZZERREQ.containing_type = _COPROCREQ
 _COPROCREQ_CALIBRATEPOWER.containing_type = _COPROCREQ
 _COPROCREQ.fields_by_name['keepalive'].message_type = _NONE
@@ -1007,6 +1075,7 @@ _COPROCSTAT.fields_by_name['stupidServoStat'].message_type = _NONE
 _COPROCSTAT.fields_by_name['ultrasoundStat'].message_type = _COPROCSTAT_ULTRASOUNDSTAT
 _COPROCSTAT.fields_by_name['powerAdcStat'].message_type = _COPROCSTAT_POWERADCSTAT
 _COPROCSTAT.fields_by_name['versionStat'].message_type = _COPROCSTAT_VERSIONSTAT
+_COPROCSTAT.fields_by_name['motorStat'].message_type = _COPROCSTAT_MOTORSTAT
 _COPROCSTAT_BUTTONSENUM.containing_type = _COPROCSTAT
 _COPROCSTAT.oneofs_by_name['payload'].fields.append(
   _COPROCSTAT.fields_by_name['ledsStat'])
@@ -1026,8 +1095,12 @@ _COPROCSTAT.fields_by_name['powerAdcStat'].containing_oneof = _COPROCSTAT.oneofs
 _COPROCSTAT.oneofs_by_name['payload'].fields.append(
   _COPROCSTAT.fields_by_name['versionStat'])
 _COPROCSTAT.fields_by_name['versionStat'].containing_oneof = _COPROCSTAT.oneofs_by_name['payload']
+_COPROCSTAT.oneofs_by_name['payload'].fields.append(
+  _COPROCSTAT.fields_by_name['motorStat'])
+_COPROCSTAT.fields_by_name['motorStat'].containing_oneof = _COPROCSTAT.oneofs_by_name['payload']
 DESCRIPTOR.message_types_by_name['None'] = _NONE
 DESCRIPTOR.message_types_by_name['RegCoefs'] = _REGCOEFS
+DESCRIPTOR.message_types_by_name['MotorConfig'] = _MOTORCONFIG
 DESCRIPTOR.message_types_by_name['CoprocReq'] = _COPROCREQ
 DESCRIPTOR.message_types_by_name['CoprocStat'] = _COPROCSTAT
 DESCRIPTOR.enum_types_by_name['MotorMode'] = _MOTORMODE
@@ -1046,6 +1119,13 @@ RegCoefs = _reflection.GeneratedProtocolMessageType('RegCoefs', (_message.Messag
   # @@protoc_insertion_point(class_scope:RegCoefs)
   })
 _sym_db.RegisterMessage(RegCoefs)
+
+MotorConfig = _reflection.GeneratedProtocolMessageType('MotorConfig', (_message.Message,), {
+  'DESCRIPTOR' : _MOTORCONFIG,
+  '__module__' : 'rbcx_pb2'
+  # @@protoc_insertion_point(class_scope:MotorConfig)
+  })
+_sym_db.RegisterMessage(MotorConfig)
 
 CoprocReq = _reflection.GeneratedProtocolMessageType('CoprocReq', (_message.Message,), {
 
