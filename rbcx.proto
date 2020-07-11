@@ -77,11 +77,16 @@ message CoprocReq {
       sint32 setBrake = 6;
       sint32 setVelocity = 7;
       sint32 homePosition = 8;
-      sint32 setPosition = 10;
-      sint32 addPosition = 11;
+      SetPosition setPosition = 10;
+      SetPosition addPosition = 11;
       RegCoefs setVelocityRegCoefs = 16;
       RegCoefs setPositionRegCoefs = 17;
       MotorConfig setConfig = 18;
+    }
+
+    message SetPosition {
+      sint32 targetPosition = 1;
+      sint32 runningVelocity = 2;
     }
   }
 

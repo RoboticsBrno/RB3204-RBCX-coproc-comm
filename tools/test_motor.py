@@ -24,7 +24,10 @@ if __name__ == "__main__":
         p = int(input("P:"))
         i = int(input("I:"))
         d = int(input("D:"))
+        a = int(input("AccMax:"))
         msg = pb.CoprocReq(motorReq=pb.CoprocReq.MotorReq(motorIndex=motorIndex, setPositionRegCoefs=pb.RegCoefs(p=p, i=i, d=d)))
+        frame_send(port, msg)
+        msg = pb.CoprocReq(motorReq=pb.CoprocReq.MotorReq(motorIndex=motorIndex, setConfig=pb.MotorConfig(maxAccel=1000)))
         frame_send(port, msg)
         while True:
             position = int(input())
