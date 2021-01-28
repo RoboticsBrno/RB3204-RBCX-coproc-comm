@@ -23,6 +23,7 @@ message MotorConfig {
   uint32 velEpsilon = 1;
   uint32 posEpsilon = 2;
   uint32 maxAccel = 3;
+  uint32 maxSpeed = 4;
 }
 
 message CoprocReq {
@@ -37,6 +38,7 @@ message CoprocReq {
     CalibratePower calibratePower = 10;
     None shutdownPower = 11;
     None versionReq = 12;
+    SetSmartServo setSmartServo = 13;
   }
 
   message SetLeds {
@@ -99,6 +101,11 @@ message CoprocReq {
     uint32 battMidMv = 2;
     uint32 vRef33Mv = 3;
     uint32 temperatureC = 4;
+  }
+
+  message SetSmartServo {
+    uint32 servoIndex = 1;
+    float position = 2;
   }
 }
 
