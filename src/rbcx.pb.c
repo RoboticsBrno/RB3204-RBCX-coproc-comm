@@ -42,6 +42,9 @@ PB_BIND(CoprocReq_BuzzerReq, CoprocReq_BuzzerReq, AUTO)
 PB_BIND(CoprocReq_CalibratePower, CoprocReq_CalibratePower, AUTO)
 
 
+PB_BIND(CoprocReq_RtcReq, CoprocReq_RtcReq, AUTO)
+
+
 PB_BIND(CoprocStat, CoprocStat, AUTO)
 
 
@@ -58,6 +61,9 @@ PB_BIND(CoprocStat_PowerAdcStat, CoprocStat_PowerAdcStat, AUTO)
 
 
 PB_BIND(CoprocStat_VersionStat, CoprocStat_VersionStat, AUTO)
+
+
+PB_BIND(CoprocStat_RtcStat, CoprocStat_RtcStat, AUTO)
 
 
 

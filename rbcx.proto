@@ -37,6 +37,7 @@ message CoprocReq {
     CalibratePower calibratePower = 10;
     None shutdownPower = 11;
     None versionReq = 12;
+    RtcReq rtcReq = 13;
   }
 
   message SetLeds {
@@ -100,6 +101,14 @@ message CoprocReq {
     uint32 vRef33Mv = 3;
     uint32 temperatureC = 4;
   }
+
+  message RtcReq {
+    oneof rtcCmd {
+      None get = 1;
+      uint32 setTime = 2;
+      uint32 setAlarm = 3;
+    }
+  }
 }
 
 message CoprocStat {
@@ -111,6 +120,7 @@ message CoprocStat {
     PowerAdcStat powerAdcStat = 8;
     VersionStat versionStat = 9;
     MotorStat motorStat = 10;
+    RtcStat rtcStat = 11;
   }
 
   message ButtonsStat {
@@ -150,5 +160,10 @@ message CoprocStat {
     bytes revision = 1 [(nanopb).max_size = 8, (nanopb).fixed_length = true];
     uint32 number = 2;
     bool dirty = 3;
+  }
+
+  message RtcStat {
+    uint32 time = 1;
+    uint32 alarm = 2;
   }
 }
