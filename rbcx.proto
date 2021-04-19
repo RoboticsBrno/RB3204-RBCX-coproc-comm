@@ -165,5 +165,6 @@ message CoprocStat {
   message RtcStat {
     uint32 time = 1;
     uint32 alarm = 2;
+    bool notReady = 3;
   }
 }

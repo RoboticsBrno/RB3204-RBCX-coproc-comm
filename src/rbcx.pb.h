@@ -112,6 +112,7 @@ typedef struct _CoprocStat_PowerAdcStat {
 typedef struct _CoprocStat_RtcStat {
     uint32_t time;
     uint32_t alarm;
+    bool notReady;
 } CoprocStat_RtcStat;
 
 typedef struct _CoprocStat_UltrasoundStat {
@@ -224,7 +225,7 @@ extern "C" {
 #define CoprocStat_MotorStat_init_default        {0, _MotorMode_MIN, 0, 0, 0}
 #define CoprocStat_PowerAdcStat_init_default     {0, 0, 0}
 #define CoprocStat_VersionStat_init_default      {{0}, 0, 0}
-#define CoprocStat_RtcStat_init_default          {0, 0}
+#define CoprocStat_RtcStat_init_default          {0, 0, 0}
 #define None_init_zero                           {0}
 #define RegCoefs_init_zero                       {0, 0, 0}
 #define MotorConfig_init_zero                    {0, 0, 0}
@@ -244,7 +245,7 @@ extern "C" {
 #define CoprocStat_MotorStat_init_zero           {0, _MotorMode_MIN, 0, 0, 0}
 #define CoprocStat_PowerAdcStat_init_zero        {0, 0, 0}
 #define CoprocStat_VersionStat_init_zero         {{0}, 0, 0}
-#define CoprocStat_RtcStat_init_zero             {0, 0}
+#define CoprocStat_RtcStat_init_zero             {0, 0, 0}
 
 /* Field tags (for use in manual encoding/decoding) */
 #define CoprocReq_BuzzerReq_on_tag               1
@@ -274,6 +275,7 @@ extern "C" {
 #define CoprocStat_PowerAdcStat_temperatureC_tag 3
 #define CoprocStat_RtcStat_time_tag              1
 #define CoprocStat_RtcStat_alarm_tag             2
+#define CoprocStat_RtcStat_notReady_tag          3
 #define CoprocStat_UltrasoundStat_utsIndex_tag   1
 #define CoprocStat_UltrasoundStat_roundtripMicrosecs_tag 2
 #define CoprocStat_VersionStat_revision_tag      1
@@ -491,7 +493,8 @@ X(a, STATIC,   SINGULAR, BOOL,     dirty,             3)
 
 #define CoprocStat_RtcStat_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, UINT32,   time,              1) \
-X(a, STATIC,   SINGULAR, UINT32,   alarm,             2)
+X(a, STATIC,   SINGULAR, UINT32,   alarm,             2) \
+X(a, STATIC,   SINGULAR, BOOL,     notReady,          3)
 #define CoprocStat_RtcStat_CALLBACK NULL
 #define CoprocStat_RtcStat_DEFAULT NULL
 
@@ -558,7 +561,7 @@ extern const pb_msgdesc_t CoprocStat_RtcStat_msg;
 #define CoprocStat_MotorStat_size                26
 #define CoprocStat_PowerAdcStat_size             23
 #define CoprocStat_VersionStat_size              18
-#define CoprocStat_RtcStat_size                  12
+#define CoprocStat_RtcStat_size                  14
 
 #ifdef __cplusplus
 } /* extern "C" */
