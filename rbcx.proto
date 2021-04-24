@@ -128,7 +128,7 @@ message CoprocStat {
   }
 
   enum ButtonsEnum {
-    NONE = 0;
+    BNONE = 0;
     BOFF = 1;
     B1 = 2;
     B2 = 4;
@@ -165,6 +165,12 @@ message CoprocStat {
   message RtcStat {
     uint32 time = 1;
     uint32 alarm = 2;
-    bool notReady = 3;
+    RtcFlags flags = 3;
+  }
+
+  enum RtcFlags {
+    RTC_NONE = 0;
+    RTC_NOT_READY = 1;
+    RTC_ALARM = 2;
   }
 }

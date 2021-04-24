@@ -70,3 +70,4 @@ PB_BIND(CoprocStat_RtcStat, CoprocStat_RtcStat, AUTO)
 
 
 
+

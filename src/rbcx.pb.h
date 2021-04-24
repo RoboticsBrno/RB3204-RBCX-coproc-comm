@@ -27,7 +27,7 @@ typedef enum _CoprocReq_LedsEnum {
 } CoprocReq_LedsEnum;
 
 typedef enum _CoprocStat_ButtonsEnum {
-    CoprocStat_ButtonsEnum_NONE = 0,
+    CoprocStat_ButtonsEnum_BNONE = 0,
     CoprocStat_ButtonsEnum_BOFF = 1,
     CoprocStat_ButtonsEnum_B1 = 2,
     CoprocStat_ButtonsEnum_B2 = 4,
@@ -35,6 +35,12 @@ typedef enum _CoprocStat_ButtonsEnum {
     CoprocStat_ButtonsEnum_B4 = 16,
     CoprocStat_ButtonsEnum_BON = 32
 } CoprocStat_ButtonsEnum;
+
+typedef enum _CoprocStat_RtcFlags {
+    CoprocStat_RtcFlags_RTC_NONE = 0,
+    CoprocStat_RtcFlags_RTC_NOT_READY = 1,
+    CoprocStat_RtcFlags_RTC_ALARM = 2
+} CoprocStat_RtcFlags;
 
 /* Struct definitions */
 typedef struct _CoprocReq_GetButtons {
@@ -112,7 +118,7 @@ typedef struct _CoprocStat_PowerAdcStat {
 typedef struct _CoprocStat_RtcStat {
     uint32_t time;
     uint32_t alarm;
-    bool notReady;
+    CoprocStat_RtcFlags flags;
 } CoprocStat_RtcStat;
 
 typedef struct _CoprocStat_UltrasoundStat {
@@ -196,9 +202,13 @@ typedef struct _CoprocReq {
 #define _CoprocReq_LedsEnum_MAX CoprocReq_LedsEnum_L4
 #define _CoprocReq_LedsEnum_ARRAYSIZE ((CoprocReq_LedsEnum)(CoprocReq_LedsEnum_L4+1))
 
-#define _CoprocStat_ButtonsEnum_MIN CoprocStat_ButtonsEnum_NONE
+#define _CoprocStat_ButtonsEnum_MIN CoprocStat_ButtonsEnum_BNONE
 #define _CoprocStat_ButtonsEnum_MAX CoprocStat_ButtonsEnum_BON
 #define _CoprocStat_ButtonsEnum_ARRAYSIZE ((CoprocStat_ButtonsEnum)(CoprocStat_ButtonsEnum_BON+1))
+
+#define _CoprocStat_RtcFlags_MIN CoprocStat_RtcFlags_RTC_NONE
+#define _CoprocStat_RtcFlags_MAX CoprocStat_RtcFlags_RTC_ALARM
+#define _CoprocStat_RtcFlags_ARRAYSIZE ((CoprocStat_RtcFlags)(CoprocStat_RtcFlags_RTC_ALARM+1))
 
 
 #ifdef __cplusplus
@@ -225,7 +235,7 @@ extern "C" {
 #define CoprocStat_MotorStat_init_default        {0, _MotorMode_MIN, 0, 0, 0}
 #define CoprocStat_PowerAdcStat_init_default     {0, 0, 0}
 #define CoprocStat_VersionStat_init_default      {{0}, 0, 0}
-#define CoprocStat_RtcStat_init_default          {0, 0, 0}
+#define CoprocStat_RtcStat_init_default          {0, 0, _CoprocStat_RtcFlags_MIN}
 #define None_init_zero                           {0}
 #define RegCoefs_init_zero                       {0, 0, 0}
 #define MotorConfig_init_zero                    {0, 0, 0}
@@ -245,7 +255,7 @@ extern "C" {
 #define CoprocStat_MotorStat_init_zero           {0, _MotorMode_MIN, 0, 0, 0}
 #define CoprocStat_PowerAdcStat_init_zero        {0, 0, 0}
 #define CoprocStat_VersionStat_init_zero         {{0}, 0, 0}
-#define CoprocStat_RtcStat_init_zero             {0, 0, 0}
+#define CoprocStat_RtcStat_init_zero             {0, 0, _CoprocStat_RtcFlags_MIN}
 
 /* Field tags (for use in manual encoding/decoding) */
 #define CoprocReq_BuzzerReq_on_tag               1
@@ -275,7 +285,7 @@ extern "C" {
 #define CoprocStat_PowerAdcStat_temperatureC_tag 3
 #define CoprocStat_RtcStat_time_tag              1
 #define CoprocStat_RtcStat_alarm_tag             2
-#define CoprocStat_RtcStat_notReady_tag          3
+#define CoprocStat_RtcStat_flags_tag             3
 #define CoprocStat_UltrasoundStat_utsIndex_tag   1
 #define CoprocStat_UltrasoundStat_roundtripMicrosecs_tag 2
 #define CoprocStat_VersionStat_revision_tag      1
@@ -494,7 +504,7 @@ X(a, STATIC,   SINGULAR, BOOL,     dirty,             3)
 #define CoprocStat_RtcStat_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, UINT32,   time,              1) \
 X(a, STATIC,   SINGULAR, UINT32,   alarm,             2) \
-X(a, STATIC,   SINGULAR, BOOL,     notReady,          3)
+X(a, STATIC,   SINGULAR, UENUM,    flags,             3)
 #define CoprocStat_RtcStat_CALLBACK NULL
 #define CoprocStat_RtcStat_DEFAULT NULL
 
