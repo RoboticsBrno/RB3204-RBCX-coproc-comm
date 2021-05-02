@@ -38,6 +38,7 @@ message CoprocReq {
     None shutdownPower = 11;
     None versionReq = 12;
     RtcReq rtcReq = 13;
+    OledReq oledReq = 14;
   }
 
   message SetLeds {
@@ -108,6 +109,33 @@ message CoprocReq {
       uint32 setTime = 2;
       uint32 setAlarm = 3;
     }
+  }
+
+  message OledReq {
+    oneof oledCmd {
+      OledInit init = 1;
+      None update = 2;
+      OledColor fill = 3;
+      OledDrawPixel drawPixel = 4;
+    }
+  }
+
+  enum OledColor {
+    OLED_BLACK = 0;
+    OLED_WHITE = 1;
+  }
+
+  message OledInit {
+    uint32 height = 1;
+    uint32 width = 2;
+    bool rotate = 3;
+    bool inverseColor = 4;
+  }
+
+  message OledDrawPixel {
+    uint32 x = 1;
+    uint32 y = 2;
+    OledColor color = 3;
   }
 }
 
