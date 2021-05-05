@@ -31,6 +31,13 @@ typedef enum _CoprocReq_OledColor {
     CoprocReq_OledColor_OLED_WHITE = 1
 } CoprocReq_OledColor;
 
+typedef enum _CoprocReq_OledFont {
+    CoprocReq_OledFont_OLED_FONT_6X8 = 0,
+    CoprocReq_OledFont_OLED_FONT_7X10 = 1,
+    CoprocReq_OledFont_OLED_FONT_11X18 = 2,
+    CoprocReq_OledFont_OLED_FONT_16X26 = 3
+} CoprocReq_OledFont;
+
 typedef enum _CoprocStat_ButtonsEnum {
     CoprocStat_ButtonsEnum_BNONE = 0,
     CoprocStat_ButtonsEnum_BOFF = 1,
@@ -72,6 +79,44 @@ typedef struct _CoprocReq_MotorReq_SetPosition {
     int32_t runningVelocity;
 } CoprocReq_MotorReq_SetPosition;
 
+typedef struct _CoprocReq_OledDrawArc {
+    uint32_t x;
+    uint32_t y;
+    uint32_t radius;
+    uint32_t start_angle;
+    uint32_t sweep;
+    CoprocReq_OledColor color;
+} CoprocReq_OledDrawArc;
+
+typedef struct _CoprocReq_OledDrawCircle {
+    uint32_t x;
+    uint32_t y;
+    uint32_t radius;
+    CoprocReq_OledColor color;
+} CoprocReq_OledDrawCircle;
+
+typedef struct _CoprocReq_OledDrawLine {
+    uint32_t x1;
+    uint32_t y1;
+    uint32_t x2;
+    uint32_t y2;
+    CoprocReq_OledColor color;
+} CoprocReq_OledDrawLine;
+
+typedef struct _CoprocReq_OledDrawPixel {
+    uint32_t x;
+    uint32_t y;
+    CoprocReq_OledColor color;
+} CoprocReq_OledDrawPixel;
+
+typedef struct _CoprocReq_OledDrawRectangle {
+    uint32_t x1;
+    uint32_t y1;
+    uint32_t x2;
+    uint32_t y2;
+    CoprocReq_OledColor color;
+} CoprocReq_OledDrawRectangle;
+
 typedef struct _CoprocReq_OledInit {
     uint32_t height;
     uint32_t width;
@@ -79,11 +124,22 @@ typedef struct _CoprocReq_OledInit {
     bool inverseColor;
 } CoprocReq_OledInit;
 
-typedef struct _CoprocReq_OledPixel {
+typedef struct _CoprocReq_OledSetCursor {
     uint32_t x;
     uint32_t y;
+} CoprocReq_OledSetCursor;
+
+typedef struct _CoprocReq_OledWriteChar {
+    uint32_t text;
+    CoprocReq_OledFont font;
     CoprocReq_OledColor color;
-} CoprocReq_OledPixel;
+} CoprocReq_OledWriteChar;
+
+typedef struct _CoprocReq_OledWriteString {
+    char text[101];
+    CoprocReq_OledFont font;
+    CoprocReq_OledColor color;
+} CoprocReq_OledWriteString;
 
 typedef struct _CoprocReq_RtcReq {
     pb_size_t which_rtcCmd;
@@ -183,9 +239,15 @@ typedef struct _CoprocReq_OledReq {
     pb_size_t which_oledCmd;
     union {
         CoprocReq_OledInit init;
-        None update;
         CoprocReq_OledColor fill;
-        CoprocReq_OledPixel drawPixel;
+        None update;
+        CoprocReq_OledDrawPixel drawPixel;
+        CoprocReq_OledWriteString writeString;
+        CoprocReq_OledSetCursor setCursor;
+        CoprocReq_OledDrawLine drawLine;
+        CoprocReq_OledDrawArc drawArc;
+        CoprocReq_OledDrawCircle drawCircle;
+        CoprocReq_OledDrawRectangle drawRectangle;
     } oledCmd;
 } CoprocReq_OledReq;
 
@@ -235,6 +297,10 @@ typedef struct _CoprocReq {
 #define _CoprocReq_OledColor_MAX CoprocReq_OledColor_OLED_WHITE
 #define _CoprocReq_OledColor_ARRAYSIZE ((CoprocReq_OledColor)(CoprocReq_OledColor_OLED_WHITE+1))
 
+#define _CoprocReq_OledFont_MIN CoprocReq_OledFont_OLED_FONT_6X8
+#define _CoprocReq_OledFont_MAX CoprocReq_OledFont_OLED_FONT_16X26
+#define _CoprocReq_OledFont_ARRAYSIZE ((CoprocReq_OledFont)(CoprocReq_OledFont_OLED_FONT_16X26+1))
+
 #define _CoprocStat_ButtonsEnum_MIN CoprocStat_ButtonsEnum_BNONE
 #define _CoprocStat_ButtonsEnum_MAX CoprocStat_ButtonsEnum_BON
 #define _CoprocStat_ButtonsEnum_ARRAYSIZE ((CoprocStat_ButtonsEnum)(CoprocStat_ButtonsEnum_BON+1))
@@ -264,7 +330,14 @@ extern "C" {
 #define CoprocReq_RtcReq_init_default            {0, {None_init_default}}
 #define CoprocReq_OledReq_init_default           {0, {CoprocReq_OledInit_init_default}}
 #define CoprocReq_OledInit_init_default          {0, 0, 0, 0}
-#define CoprocReq_OledPixel_init_default         {0, 0, _CoprocReq_OledColor_MIN}
+#define CoprocReq_OledDrawPixel_init_default     {0, 0, _CoprocReq_OledColor_MIN}
+#define CoprocReq_OledWriteChar_init_default     {0, _CoprocReq_OledFont_MIN, _CoprocReq_OledColor_MIN}
+#define CoprocReq_OledWriteString_init_default   {"", _CoprocReq_OledFont_MIN, _CoprocReq_OledColor_MIN}
+#define CoprocReq_OledSetCursor_init_default     {0, 0}
+#define CoprocReq_OledDrawLine_init_default      {0, 0, 0, 0, _CoprocReq_OledColor_MIN}
+#define CoprocReq_OledDrawArc_init_default       {0, 0, 0, 0, 0, _CoprocReq_OledColor_MIN}
+#define CoprocReq_OledDrawCircle_init_default    {0, 0, 0, _CoprocReq_OledColor_MIN}
+#define CoprocReq_OledDrawRectangle_init_default {0, 0, 0, 0, _CoprocReq_OledColor_MIN}
 #define CoprocStat_init_default                  {0, {None_init_default}}
 #define CoprocStat_ButtonsStat_init_default      {_CoprocStat_ButtonsEnum_MIN}
 #define CoprocStat_UltrasoundStat_init_default   {0, 0}
@@ -287,7 +360,14 @@ extern "C" {
 #define CoprocReq_RtcReq_init_zero               {0, {None_init_zero}}
 #define CoprocReq_OledReq_init_zero              {0, {CoprocReq_OledInit_init_zero}}
 #define CoprocReq_OledInit_init_zero             {0, 0, 0, 0}
-#define CoprocReq_OledPixel_init_zero            {0, 0, _CoprocReq_OledColor_MIN}
+#define CoprocReq_OledDrawPixel_init_zero        {0, 0, _CoprocReq_OledColor_MIN}
+#define CoprocReq_OledWriteChar_init_zero        {0, _CoprocReq_OledFont_MIN, _CoprocReq_OledColor_MIN}
+#define CoprocReq_OledWriteString_init_zero      {"", _CoprocReq_OledFont_MIN, _CoprocReq_OledColor_MIN}
+#define CoprocReq_OledSetCursor_init_zero        {0, 0}
+#define CoprocReq_OledDrawLine_init_zero         {0, 0, 0, 0, _CoprocReq_OledColor_MIN}
+#define CoprocReq_OledDrawArc_init_zero          {0, 0, 0, 0, 0, _CoprocReq_OledColor_MIN}
+#define CoprocReq_OledDrawCircle_init_zero       {0, 0, 0, _CoprocReq_OledColor_MIN}
+#define CoprocReq_OledDrawRectangle_init_zero    {0, 0, 0, 0, _CoprocReq_OledColor_MIN}
 #define CoprocStat_init_zero                     {0, {None_init_zero}}
 #define CoprocStat_ButtonsStat_init_zero         {_CoprocStat_ButtonsEnum_MIN}
 #define CoprocStat_UltrasoundStat_init_zero      {0, 0}
@@ -304,13 +384,41 @@ extern "C" {
 #define CoprocReq_CalibratePower_temperatureC_tag 4
 #define CoprocReq_MotorReq_SetPosition_targetPosition_tag 1
 #define CoprocReq_MotorReq_SetPosition_runningVelocity_tag 2
+#define CoprocReq_OledDrawArc_x_tag              1
+#define CoprocReq_OledDrawArc_y_tag              2
+#define CoprocReq_OledDrawArc_radius_tag         3
+#define CoprocReq_OledDrawArc_start_angle_tag    4
+#define CoprocReq_OledDrawArc_sweep_tag          5
+#define CoprocReq_OledDrawArc_color_tag          6
+#define CoprocReq_OledDrawCircle_x_tag           1
+#define CoprocReq_OledDrawCircle_y_tag           2
+#define CoprocReq_OledDrawCircle_radius_tag      3
+#define CoprocReq_OledDrawCircle_color_tag       4
+#define CoprocReq_OledDrawLine_x1_tag            1
+#define CoprocReq_OledDrawLine_y1_tag            2
+#define CoprocReq_OledDrawLine_x2_tag            3
+#define CoprocReq_OledDrawLine_y2_tag            4
+#define CoprocReq_OledDrawLine_color_tag         5
+#define CoprocReq_OledDrawPixel_x_tag            1
+#define CoprocReq_OledDrawPixel_y_tag            2
+#define CoprocReq_OledDrawPixel_color_tag        3
+#define CoprocReq_OledDrawRectangle_x1_tag       1
+#define CoprocReq_OledDrawRectangle_y1_tag       2
+#define CoprocReq_OledDrawRectangle_x2_tag       3
+#define CoprocReq_OledDrawRectangle_y2_tag       4
+#define CoprocReq_OledDrawRectangle_color_tag    5
 #define CoprocReq_OledInit_height_tag            1
 #define CoprocReq_OledInit_width_tag             2
 #define CoprocReq_OledInit_rotate_tag            3
 #define CoprocReq_OledInit_inverseColor_tag      4
-#define CoprocReq_OledPixel_x_tag                1
-#define CoprocReq_OledPixel_y_tag                2
-#define CoprocReq_OledPixel_color_tag            3
+#define CoprocReq_OledSetCursor_x_tag            1
+#define CoprocReq_OledSetCursor_y_tag            2
+#define CoprocReq_OledWriteChar_text_tag         1
+#define CoprocReq_OledWriteChar_font_tag         2
+#define CoprocReq_OledWriteChar_color_tag        3
+#define CoprocReq_OledWriteString_text_tag       1
+#define CoprocReq_OledWriteString_font_tag       2
+#define CoprocReq_OledWriteString_color_tag      3
 #define CoprocReq_RtcReq_get_tag                 1
 #define CoprocReq_RtcReq_setTime_tag             2
 #define CoprocReq_RtcReq_setAlarm_tag            3
@@ -355,9 +463,15 @@ extern "C" {
 #define CoprocReq_MotorReq_setPositionRegCoefs_tag 17
 #define CoprocReq_MotorReq_setConfig_tag         18
 #define CoprocReq_OledReq_init_tag               1
-#define CoprocReq_OledReq_update_tag             2
-#define CoprocReq_OledReq_fill_tag               3
+#define CoprocReq_OledReq_fill_tag               2
+#define CoprocReq_OledReq_update_tag             3
 #define CoprocReq_OledReq_drawPixel_tag          4
+#define CoprocReq_OledReq_writeString_tag        5
+#define CoprocReq_OledReq_setCursor_tag          6
+#define CoprocReq_OledReq_drawLine_tag           7
+#define CoprocReq_OledReq_drawArc_tag            8
+#define CoprocReq_OledReq_drawCircle_tag         9
+#define CoprocReq_OledReq_drawRectangle_tag      10
 #define CoprocStat_ledsStat_tag                  4
 #define CoprocStat_buttonsStat_tag               5
 #define CoprocStat_stupidServoStat_tag           6
@@ -502,14 +616,26 @@ X(a, STATIC,   ONEOF,    UINT32,   (rtcCmd,setAlarm,rtcCmd.setAlarm),   3)
 
 #define CoprocReq_OledReq_FIELDLIST(X, a) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (oledCmd,init,oledCmd.init),   1) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (oledCmd,update,oledCmd.update),   2) \
-X(a, STATIC,   ONEOF,    UENUM,    (oledCmd,fill,oledCmd.fill),   3) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (oledCmd,drawPixel,oledCmd.drawPixel),   4)
+X(a, STATIC,   ONEOF,    UENUM,    (oledCmd,fill,oledCmd.fill),   2) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (oledCmd,update,oledCmd.update),   3) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (oledCmd,drawPixel,oledCmd.drawPixel),   4) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (oledCmd,writeString,oledCmd.writeString),   5) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (oledCmd,setCursor,oledCmd.setCursor),   6) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (oledCmd,drawLine,oledCmd.drawLine),   7) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (oledCmd,drawArc,oledCmd.drawArc),   8) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (oledCmd,drawCircle,oledCmd.drawCircle),   9) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (oledCmd,drawRectangle,oledCmd.drawRectangle),  10)
 #define CoprocReq_OledReq_CALLBACK NULL
 #define CoprocReq_OledReq_DEFAULT NULL
 #define CoprocReq_OledReq_oledCmd_init_MSGTYPE CoprocReq_OledInit
 #define CoprocReq_OledReq_oledCmd_update_MSGTYPE None
-#define CoprocReq_OledReq_oledCmd_drawPixel_MSGTYPE CoprocReq_OledPixel
+#define CoprocReq_OledReq_oledCmd_drawPixel_MSGTYPE CoprocReq_OledDrawPixel
+#define CoprocReq_OledReq_oledCmd_writeString_MSGTYPE CoprocReq_OledWriteString
+#define CoprocReq_OledReq_oledCmd_setCursor_MSGTYPE CoprocReq_OledSetCursor
+#define CoprocReq_OledReq_oledCmd_drawLine_MSGTYPE CoprocReq_OledDrawLine
+#define CoprocReq_OledReq_oledCmd_drawArc_MSGTYPE CoprocReq_OledDrawArc
+#define CoprocReq_OledReq_oledCmd_drawCircle_MSGTYPE CoprocReq_OledDrawCircle
+#define CoprocReq_OledReq_oledCmd_drawRectangle_MSGTYPE CoprocReq_OledDrawRectangle
 
 #define CoprocReq_OledInit_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, UINT32,   height,            1) \
@@ -519,12 +645,68 @@ X(a, STATIC,   SINGULAR, BOOL,     inverseColor,      4)
 #define CoprocReq_OledInit_CALLBACK NULL
 #define CoprocReq_OledInit_DEFAULT NULL
 
-#define CoprocReq_OledPixel_FIELDLIST(X, a) \
+#define CoprocReq_OledDrawPixel_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, UINT32,   x,                 1) \
 X(a, STATIC,   SINGULAR, UINT32,   y,                 2) \
 X(a, STATIC,   SINGULAR, UENUM,    color,             3)
-#define CoprocReq_OledPixel_CALLBACK NULL
-#define CoprocReq_OledPixel_DEFAULT NULL
+#define CoprocReq_OledDrawPixel_CALLBACK NULL
+#define CoprocReq_OledDrawPixel_DEFAULT NULL
+
+#define CoprocReq_OledWriteChar_FIELDLIST(X, a) \
+X(a, STATIC,   SINGULAR, UINT32,   text,              1) \
+X(a, STATIC,   SINGULAR, UENUM,    font,              2) \
+X(a, STATIC,   SINGULAR, UENUM,    color,             3)
+#define CoprocReq_OledWriteChar_CALLBACK NULL
+#define CoprocReq_OledWriteChar_DEFAULT NULL
+
+#define CoprocReq_OledWriteString_FIELDLIST(X, a) \
+X(a, STATIC,   SINGULAR, STRING,   text,              1) \
+X(a, STATIC,   SINGULAR, UENUM,    font,              2) \
+X(a, STATIC,   SINGULAR, UENUM,    color,             3)
+#define CoprocReq_OledWriteString_CALLBACK NULL
+#define CoprocReq_OledWriteString_DEFAULT NULL
+
+#define CoprocReq_OledSetCursor_FIELDLIST(X, a) \
+X(a, STATIC,   SINGULAR, UINT32,   x,                 1) \
+X(a, STATIC,   SINGULAR, UINT32,   y,                 2)
+#define CoprocReq_OledSetCursor_CALLBACK NULL
+#define CoprocReq_OledSetCursor_DEFAULT NULL
+
+#define CoprocReq_OledDrawLine_FIELDLIST(X, a) \
+X(a, STATIC,   SINGULAR, UINT32,   x1,                1) \
+X(a, STATIC,   SINGULAR, UINT32,   y1,                2) \
+X(a, STATIC,   SINGULAR, UINT32,   x2,                3) \
+X(a, STATIC,   SINGULAR, UINT32,   y2,                4) \
+X(a, STATIC,   SINGULAR, UENUM,    color,             5)
+#define CoprocReq_OledDrawLine_CALLBACK NULL
+#define CoprocReq_OledDrawLine_DEFAULT NULL
+
+#define CoprocReq_OledDrawArc_FIELDLIST(X, a) \
+X(a, STATIC,   SINGULAR, UINT32,   x,                 1) \
+X(a, STATIC,   SINGULAR, UINT32,   y,                 2) \
+X(a, STATIC,   SINGULAR, UINT32,   radius,            3) \
+X(a, STATIC,   SINGULAR, UINT32,   start_angle,       4) \
+X(a, STATIC,   SINGULAR, UINT32,   sweep,             5) \
+X(a, STATIC,   SINGULAR, UENUM,    color,             6)
+#define CoprocReq_OledDrawArc_CALLBACK NULL
+#define CoprocReq_OledDrawArc_DEFAULT NULL
+
+#define CoprocReq_OledDrawCircle_FIELDLIST(X, a) \
+X(a, STATIC,   SINGULAR, UINT32,   x,                 1) \
+X(a, STATIC,   SINGULAR, UINT32,   y,                 2) \
+X(a, STATIC,   SINGULAR, UINT32,   radius,            3) \
+X(a, STATIC,   SINGULAR, UENUM,    color,             4)
+#define CoprocReq_OledDrawCircle_CALLBACK NULL
+#define CoprocReq_OledDrawCircle_DEFAULT NULL
+
+#define CoprocReq_OledDrawRectangle_FIELDLIST(X, a) \
+X(a, STATIC,   SINGULAR, UINT32,   x1,                1) \
+X(a, STATIC,   SINGULAR, UINT32,   y1,                2) \
+X(a, STATIC,   SINGULAR, UINT32,   x2,                3) \
+X(a, STATIC,   SINGULAR, UINT32,   y2,                4) \
+X(a, STATIC,   SINGULAR, UENUM,    color,             5)
+#define CoprocReq_OledDrawRectangle_CALLBACK NULL
+#define CoprocReq_OledDrawRectangle_DEFAULT NULL
 
 #define CoprocStat_FIELDLIST(X, a) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,ledsStat,payload.ledsStat),   4) \
@@ -602,7 +784,14 @@ extern const pb_msgdesc_t CoprocReq_CalibratePower_msg;
 extern const pb_msgdesc_t CoprocReq_RtcReq_msg;
 extern const pb_msgdesc_t CoprocReq_OledReq_msg;
 extern const pb_msgdesc_t CoprocReq_OledInit_msg;
-extern const pb_msgdesc_t CoprocReq_OledPixel_msg;
+extern const pb_msgdesc_t CoprocReq_OledDrawPixel_msg;
+extern const pb_msgdesc_t CoprocReq_OledWriteChar_msg;
+extern const pb_msgdesc_t CoprocReq_OledWriteString_msg;
+extern const pb_msgdesc_t CoprocReq_OledSetCursor_msg;
+extern const pb_msgdesc_t CoprocReq_OledDrawLine_msg;
+extern const pb_msgdesc_t CoprocReq_OledDrawArc_msg;
+extern const pb_msgdesc_t CoprocReq_OledDrawCircle_msg;
+extern const pb_msgdesc_t CoprocReq_OledDrawRectangle_msg;
 extern const pb_msgdesc_t CoprocStat_msg;
 extern const pb_msgdesc_t CoprocStat_ButtonsStat_msg;
 extern const pb_msgdesc_t CoprocStat_UltrasoundStat_msg;
@@ -627,7 +816,14 @@ extern const pb_msgdesc_t CoprocStat_RtcStat_msg;
 #define CoprocReq_RtcReq_fields &CoprocReq_RtcReq_msg
 #define CoprocReq_OledReq_fields &CoprocReq_OledReq_msg
 #define CoprocReq_OledInit_fields &CoprocReq_OledInit_msg
-#define CoprocReq_OledPixel_fields &CoprocReq_OledPixel_msg
+#define CoprocReq_OledDrawPixel_fields &CoprocReq_OledDrawPixel_msg
+#define CoprocReq_OledWriteChar_fields &CoprocReq_OledWriteChar_msg
+#define CoprocReq_OledWriteString_fields &CoprocReq_OledWriteString_msg
+#define CoprocReq_OledSetCursor_fields &CoprocReq_OledSetCursor_msg
+#define CoprocReq_OledDrawLine_fields &CoprocReq_OledDrawLine_msg
+#define CoprocReq_OledDrawArc_fields &CoprocReq_OledDrawArc_msg
+#define CoprocReq_OledDrawCircle_fields &CoprocReq_OledDrawCircle_msg
+#define CoprocReq_OledDrawRectangle_fields &CoprocReq_OledDrawRectangle_msg
 #define CoprocStat_fields &CoprocStat_msg
 #define CoprocStat_ButtonsStat_fields &CoprocStat_ButtonsStat_msg
 #define CoprocStat_UltrasoundStat_fields &CoprocStat_UltrasoundStat_msg
@@ -640,7 +836,7 @@ extern const pb_msgdesc_t CoprocStat_RtcStat_msg;
 #define None_size                                0
 #define RegCoefs_size                            18
 #define MotorConfig_size                         18
-#define CoprocReq_size                           29
+#define CoprocReq_size                           110
 #define CoprocReq_SetLeds_size                   2
 #define CoprocReq_GetButtons_size                0
 #define CoprocReq_SetStupidServo_size            11
@@ -650,9 +846,16 @@ extern const pb_msgdesc_t CoprocStat_RtcStat_msg;
 #define CoprocReq_BuzzerReq_size                 2
 #define CoprocReq_CalibratePower_size            24
 #define CoprocReq_RtcReq_size                    6
-#define CoprocReq_OledReq_size                   18
+#define CoprocReq_OledReq_size                   108
 #define CoprocReq_OledInit_size                  16
-#define CoprocReq_OledPixel_size                 14
+#define CoprocReq_OledDrawPixel_size             14
+#define CoprocReq_OledWriteChar_size             10
+#define CoprocReq_OledWriteString_size           106
+#define CoprocReq_OledSetCursor_size             12
+#define CoprocReq_OledDrawLine_size              26
+#define CoprocReq_OledDrawArc_size               32
+#define CoprocReq_OledDrawCircle_size            20
+#define CoprocReq_OledDrawRectangle_size         26
 #define CoprocStat_size                          28
 #define CoprocStat_ButtonsStat_size              2
 #define CoprocStat_UltrasoundStat_size           12

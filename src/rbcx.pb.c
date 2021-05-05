@@ -51,7 +51,28 @@ PB_BIND(CoprocReq_OledReq, CoprocReq_OledReq, AUTO)
 PB_BIND(CoprocReq_OledInit, CoprocReq_OledInit, AUTO)
 
 
-PB_BIND(CoprocReq_OledPixel, CoprocReq_OledPixel, AUTO)
+PB_BIND(CoprocReq_OledDrawPixel, CoprocReq_OledDrawPixel, AUTO)
+
+
+PB_BIND(CoprocReq_OledWriteChar, CoprocReq_OledWriteChar, AUTO)
+
+
+PB_BIND(CoprocReq_OledWriteString, CoprocReq_OledWriteString, AUTO)
+
+
+PB_BIND(CoprocReq_OledSetCursor, CoprocReq_OledSetCursor, AUTO)
+
+
+PB_BIND(CoprocReq_OledDrawLine, CoprocReq_OledDrawLine, AUTO)
+
+
+PB_BIND(CoprocReq_OledDrawArc, CoprocReq_OledDrawArc, AUTO)
+
+
+PB_BIND(CoprocReq_OledDrawCircle, CoprocReq_OledDrawCircle, AUTO)
+
+
+PB_BIND(CoprocReq_OledDrawRectangle, CoprocReq_OledDrawRectangle, AUTO)
 
 
 PB_BIND(CoprocStat, CoprocStat, AUTO)
@@ -73,6 +94,7 @@ PB_BIND(CoprocStat_VersionStat, CoprocStat_VersionStat, AUTO)
 
 
 PB_BIND(CoprocStat_RtcStat, CoprocStat_RtcStat, AUTO)
+
 
 
 

@@ -114,15 +114,28 @@ message CoprocReq {
   message OledReq {
     oneof oledCmd {
       OledInit init = 1;
-      None update = 2;
-      OledColor fill = 3;
+      OledColor fill = 2;
+      None update = 3;
       OledDrawPixel drawPixel = 4;
+      OledWriteString writeString = 5;
+      OledSetCursor setCursor = 6;
+      OledDrawLine drawLine = 7;
+      OledDrawArc drawArc = 8;
+      OledDrawCircle drawCircle = 9;
+      OledDrawRectangle drawRectangle = 10;
     }
   }
 
   enum OledColor {
     OLED_BLACK = 0;
     OLED_WHITE = 1;
+  }
+
+  enum OledFont {
+    OLED_FONT_6X8 = 0;
+    OLED_FONT_7X10 = 1;
+    OLED_FONT_11X18 = 2;
+    OLED_FONT_16X26 = 3;
   }
 
   message OledInit {
@@ -137,6 +150,56 @@ message CoprocReq {
     uint32 y = 2;
     OledColor color = 3;
   }
+
+  message OledWriteChar {
+    uint32 text = 1 [(nanopb).max_length = 100];
+    OledFont font = 2;
+    OledColor color = 3;
+  }
+
+  message OledWriteString {
+    string text = 1 [(nanopb).max_length = 100];
+    OledFont font = 2;
+    OledColor color = 3;
+  }
+
+  message OledSetCursor {
+    uint32 x = 1;
+    uint32 y = 2;
+  }
+
+  message OledDrawLine {
+    uint32 x1 = 1;
+    uint32 y1 = 2;
+    uint32 x2 = 3;
+    uint32 y2 = 4;
+    OledColor color = 5;
+  }
+
+  message OledDrawArc {
+    uint32 x = 1;
+    uint32 y = 2;
+    uint32 radius = 3;
+    uint32 start_angle = 4;
+    uint32 sweep = 5;
+    OledColor color = 6;
+  }
+
+  message OledDrawCircle {
+    uint32 x = 1;
+    uint32 y = 2;
+    uint32 radius = 3;
+    OledColor color = 4;
+  }
+
+  message OledDrawRectangle {
+    uint32 x1 = 1;
+    uint32 y1 = 2;
+    uint32 x2 = 3;
+    uint32 y2 = 4;
+    OledColor color = 5;
+  }
+
 }
 
 message CoprocStat {
