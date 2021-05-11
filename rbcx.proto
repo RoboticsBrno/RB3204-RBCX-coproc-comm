@@ -38,7 +38,7 @@ message CoprocReq {
     None shutdownPower = 11;
     None versionReq = 12;
     RtcReq rtcReq = 13;
-    OledReq oledReq = 14;
+    I2cReq i2cReq = 14;
   }
 
   message SetLeds {
@@ -111,6 +111,13 @@ message CoprocReq {
     }
   }
 
+  message I2cReq {
+    oneof payload {
+      OledReq oledReq = 1;
+      MpuReq mpuReq = 2;
+    }
+  }
+
   message OledReq {
     oneof oledCmd {
       OledInit init = 1;
@@ -151,14 +158,8 @@ message CoprocReq {
     OledColor color = 3;
   }
 
-  message OledWriteChar {
-    uint32 text = 1 [(nanopb).max_length = 100];
-    OledFont font = 2;
-    OledColor color = 3;
-  }
-
   message OledWriteString {
-    string text = 1 [(nanopb).max_length = 100];
+    string text = 1 [(nanopb).max_length = 32];
     OledFont font = 2;
     OledColor color = 3;
   }
@@ -200,6 +201,13 @@ message CoprocReq {
     OledColor color = 5;
   }
 
+  message MpuReq {
+    oneof mpuCmd {
+      None oneSend = 1;
+      None startSend = 2;
+      None stopSend = 3;
+    }
+  }
 }
 
 message CoprocStat {
@@ -212,6 +220,8 @@ message CoprocStat {
     VersionStat versionStat = 9;
     MotorStat motorStat = 10;
     RtcStat rtcStat = 11;
+    OledStat oledStat = 12;
+    MpuStat mpuStat = 13;
   }
 
   message ButtonsStat {
@@ -263,5 +273,19 @@ message CoprocStat {
     RTC_NONE = 0;
     RTC_NOT_READY = 1;
     RTC_ALARM = 2;
+  }
+
+  message OledStat {
+  }
+
+  message MpuStat {
+    MpuVector accel = 1;
+    MpuVector gyro = 2;
+  }
+
+  message MpuVector {
+    int32 x = 1;
+    int32 y = 2;
+    int32 z = 3;
   }
 }

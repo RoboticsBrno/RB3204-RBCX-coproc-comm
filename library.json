@@ -17,7 +17,7 @@
   "dependencies": [
     {
       "name": "Nanopb",
-      "version": "https://github.com/nanopb/nanopb/archive/nanopb-0.4.3.zip"
+      "version": "https://github.com/nanopb/nanopb/archive/nanopb-0.4.5.zip"
     }
   ],
   "version": "0.0.1",
