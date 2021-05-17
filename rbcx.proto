@@ -203,9 +203,10 @@ message CoprocReq {
 
   message MpuReq {
     oneof mpuCmd {
-      None oneSend = 1;
-      None startSend = 2;
-      None stopSend = 3;
+      None init = 1;
+      None oneSend = 2;
+      None startSend = 3;
+      None stopSend = 4;
     }
   }
 }
