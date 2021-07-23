@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\nrbcx.proto\x1a\x0cnanopb.proto\"\x06\n\x04None\"+\n\x08RegCoefs\x12\t\n\x01p\x18\x01 \x01(\r\x12\t\n\x01i\x18\x02 \x01(\r\x12\t\n\x01\x64\x18\x03 \x01(\r\"G\n\x0bMotorConfig\x12\x12\n\nvelEpsilon\x18\x01 \x01(\r\x12\x12\n\nposEpsilon\x18\x02 \x01(\r\x12\x10\n\x08maxAccel\x18\x03 \x01(\r\"\xbc\x17\n\tCoprocReq\x12\x1a\n\tkeepalive\x18\x01 \x01(\x0b\x32\x05.NoneH\x00\x12%\n\x07setLeds\x18\x04 \x01(\x0b\x32\x12.CoprocReq.SetLedsH\x00\x12+\n\ngetButtons\x18\x05 \x01(\x0b\x32\x15.CoprocReq.GetButtonsH\x00\x12\x33\n\x0esetStupidServo\x18\x06 \x01(\x0b\x32\x19.CoprocReq.SetStupidServoH\x00\x12\x31\n\rultrasoundReq\x18\x07 \x01(\x0b\x32\x18.CoprocReq.UltrasoundReqH\x00\x12\'\n\x08motorReq\x18\x08 \x01(\x0b\x32\x13.CoprocReq.MotorReqH\x00\x12)\n\tbuzzerReq\x18\t \x01(\x0b\x32\x14.CoprocReq.BuzzerReqH\x00\x12\x33\n\x0e\x63\x61libratePower\x18\n \x01(\x0b\x32\x19.CoprocReq.CalibratePowerH\x00\x12\x1e\n\rshutdownPower\x18\x0b \x01(\x0b\x32\x05.NoneH\x00\x12\x1b\n\nversionReq\x18\x0c \x01(\x0b\x32\x05.NoneH\x00\x12#\n\x06rtcReq\x18\r \x01(\x0b\x32\x11.CoprocReq.RtcReqH\x00\x12#\n\x06i2cReq\x18\x0e \x01(\x0b\x32\x11.CoprocReq.I2cReqH\x00\x1a.\n\x07SetLeds\x12#\n\x06ledsOn\x18\x01 \x01(\x0e\x32\x13.CoprocReq.LedsEnum\x1a\x0c\n\nGetButtons\x1a\x61\n\x0eSetStupidServo\x12\x12\n\nservoIndex\x18\x01 \x01(\r\x12\x18\n\x07\x64isable\x18\x04 \x01(\x0b\x32\x05.NoneH\x00\x12\x15\n\x0bsetPosition\x18\x05 \x01(\x02H\x00\x42\n\n\x08servoCmd\x1aH\n\rUltrasoundReq\x12\x10\n\x08utsIndex\x18\x01 \x01(\r\x12\x1b\n\nsinglePing\x18\x04 \x01(\x0b\x32\x05.NoneH\x00\x42\x08\n\x06utsCmd\x1a\xc3\x03\n\x08MotorReq\x12\x12\n\nmotorIndex\x18\x01 \x01(\r\x12\x19\n\x08getState\x18\x04 \x01(\x0b\x32\x05.NoneH\x00\x12\x12\n\x08setPower\x18\x05 \x01(\x11H\x00\x12\x12\n\x08setBrake\x18\x06 \x01(\x11H\x00\x12\x15\n\x0bsetVelocity\x18\x07 \x01(\x11H\x00\x12\x16\n\x0chomePosition\x18\x08 \x01(\x11H\x00\x12\x36\n\x0bsetPosition\x18\n \x01(\x0b\x32\x1f.CoprocReq.MotorReq.SetPositionH\x00\x12\x36\n\x0b\x61\x64\x64Position\x18\x0b \x01(\x0b\x32\x1f.CoprocReq.MotorReq.SetPositionH\x00\x12(\n\x13setVelocityRegCoefs\x18\x10 \x01(\x0b\x32\t.RegCoefsH\x00\x12(\n\x13setPositionRegCoefs\x18\x11 \x01(\x0b\x32\t.RegCoefsH\x00\x12!\n\tsetConfig\x18\x12 \x01(\x0b\x32\x0c.MotorConfigH\x00\x1a>\n\x0bSetPosition\x12\x16\n\x0etargetPosition\x18\x01 \x01(\x11\x12\x17\n\x0frunningVelocity\x18\x02 \x01(\x11\x42\n\n\x08motorCmd\x1a\x17\n\tBuzzerReq\x12\n\n\x02on\x18\x01 \x01(\x08\x1aZ\n\x0e\x43\x61libratePower\x12\r\n\x05vccMv\x18\x01 \x01(\r\x12\x11\n\tbattMidMv\x18\x02 \x01(\r\x12\x10\n\x08vRef33Mv\x18\x03 \x01(\r\x12\x14\n\x0ctemperatureC\x18\x04 \x01(\r\x1aO\n\x06RtcReq\x12\x14\n\x03get\x18\x01 \x01(\x0b\x32\x05.NoneH\x00\x12\x11\n\x07setTime\x18\x02 \x01(\rH\x00\x12\x12\n\x08setAlarm\x18\x03 \x01(\rH\x00\x42\x08\n\x06rtcCmd\x1a_\n\x06I2cReq\x12%\n\x07oledReq\x18\x01 \x01(\x0b\x32\x12.CoprocReq.OledReqH\x00\x12#\n\x06mpuReq\x18\x02 \x01(\x0b\x32\x11.CoprocReq.MpuReqH\x00\x42\t\n\x07payload\x1a\xc9\x03\n\x07OledReq\x12#\n\x04init\x18\x01 \x01(\x0b\x32\x13.CoprocReq.OledInitH\x00\x12$\n\x04\x66ill\x18\x02 \x01(\x0e\x32\x14.CoprocReq.OledColorH\x00\x12\x17\n\x06update\x18\x03 \x01(\x0b\x32\x05.NoneH\x00\x12-\n\tdrawPixel\x18\x04 \x01(\x0b\x32\x18.CoprocReq.OledDrawPixelH\x00\x12\x31\n\x0bwriteString\x18\x05 \x01(\x0b\x32\x1a.CoprocReq.OledWriteStringH\x00\x12-\n\tsetCursor\x18\x06 \x01(\x0b\x32\x18.CoprocReq.OledSetCursorH\x00\x12+\n\x08\x64rawLine\x18\x07 \x01(\x0b\x32\x17.CoprocReq.OledDrawLineH\x00\x12)\n\x07\x64rawArc\x18\x08 \x01(\x0b\x32\x16.CoprocReq.OledDrawArcH\x00\x12/\n\ndrawCircle\x18\t \x01(\x0b\x32\x19.CoprocReq.OledDrawCircleH\x00\x12\x35\n\rdrawRectangle\x18\n \x01(\x0b\x32\x1c.CoprocReq.OledDrawRectangleH\x00\x42\t\n\x07oledCmd\x1aO\n\x08OledInit\x12\x0e\n\x06height\x18\x01 \x01(\r\x12\r\n\x05width\x18\x02 \x01(\r\x12\x0e\n\x06rotate\x18\x03 \x01(\x08\x12\x14\n\x0cinverseColor\x18\x04 \x01(\x08\x1aJ\n\rOledDrawPixel\x12\t\n\x01x\x18\x01 \x01(\r\x12\t\n\x01y\x18\x02 \x01(\r\x12#\n\x05\x63olor\x18\x03 \x01(\x0e\x32\x14.CoprocReq.OledColor\x1an\n\x0fOledWriteString\x12\x13\n\x04text\x18\x01 \x01(\tB\x05\x92?\x02p \x12!\n\x04\x66ont\x18\x02 \x01(\x0e\x32\x13.CoprocReq.OledFont\x12#\n\x05\x63olor\x18\x03 \x01(\x0e\x32\x14.CoprocReq.OledColor\x1a%\n\rOledSetCursor\x12\t\n\x01x\x18\x01 \x01(\r\x12\t\n\x01y\x18\x02 \x01(\r\x1a\x63\n\x0cOledDrawLine\x12\n\n\x02x1\x18\x01 \x01(\r\x12\n\n\x02y1\x18\x02 \x01(\r\x12\n\n\x02x2\x18\x03 \x01(\r\x12\n\n\x02y2\x18\x04 \x01(\r\x12#\n\x05\x63olor\x18\x05 \x01(\x0e\x32\x14.CoprocReq.OledColor\x1a|\n\x0bOledDrawArc\x12\t\n\x01x\x18\x01 \x01(\r\x12\t\n\x01y\x18\x02 \x01(\r\x12\x0e\n\x06radius\x18\x03 \x01(\r\x12\x13\n\x0bstart_angle\x18\x04 \x01(\r\x12\r\n\x05sweep\x18\x05 \x01(\r\x12#\n\x05\x63olor\x18\x06 \x01(\x0e\x32\x14.CoprocReq.OledColor\x1a[\n\x0eOledDrawCircle\x12\t\n\x01x\x18\x01 \x01(\r\x12\t\n\x01y\x18\x02 \x01(\r\x12\x0e\n\x06radius\x18\x03 \x01(\r\x12#\n\x05\x63olor\x18\x04 \x01(\x0e\x32\x14.CoprocReq.OledColor\x1ah\n\x11OledDrawRectangle\x12\n\n\x02x1\x18\x01 \x01(\r\x12\n\n\x02y1\x18\x02 \x01(\r\x12\n\n\x02x2\x18\x03 \x01(\r\x12\n\n\x02y2\x18\x04 \x01(\r\x12#\n\x05\x63olor\x18\x05 \x01(\x0e\x32\x14.CoprocReq.OledColor\x1az\n\x06MpuReq\x12\x15\n\x04init\x18\x01 \x01(\x0b\x32\x05.NoneH\x00\x12\x18\n\x07oneSend\x18\x02 \x01(\x0b\x32\x05.NoneH\x00\x12\x1a\n\tstartSend\x18\x03 \x01(\x0b\x32\x05.NoneH\x00\x12\x19\n\x08stopSend\x18\x04 \x01(\x0b\x32\x05.NoneH\x00\x42\x08\n\x06mpuCmd\"4\n\x08LedsEnum\x12\x08\n\x04NONE\x10\x00\x12\x06\n\x02L1\x10\x01\x12\x06\n\x02L2\x10\x02\x12\x06\n\x02L3\x10\x04\x12\x06\n\x02L4\x10\x08\"+\n\tOledColor\x12\x0e\n\nOLED_BLACK\x10\x00\x12\x0e\n\nOLED_WHITE\x10\x01\"[\n\x08OledFont\x12\x11\n\rOLED_FONT_6X8\x10\x00\x12\x12\n\x0eOLED_FONT_7X10\x10\x01\x12\x13\n\x0fOLED_FONT_11X18\x10\x02\x12\x13\n\x0fOLED_FONT_16X26\x10\x03\x42\t\n\x07payload\"\xaa\t\n\nCoprocStat\x12\x19\n\x08ledsStat\x18\x04 \x01(\x0b\x32\x05.NoneH\x00\x12.\n\x0b\x62uttonsStat\x18\x05 \x01(\x0b\x32\x17.CoprocStat.ButtonsStatH\x00\x12 \n\x0fstupidServoStat\x18\x06 \x01(\x0b\x32\x05.NoneH\x00\x12\x34\n\x0eultrasoundStat\x18\x07 \x01(\x0b\x32\x1a.CoprocStat.UltrasoundStatH\x00\x12\x30\n\x0cpowerAdcStat\x18\x08 \x01(\x0b\x32\x18.CoprocStat.PowerAdcStatH\x00\x12.\n\x0bversionStat\x18\t \x01(\x0b\x32\x17.CoprocStat.VersionStatH\x00\x12*\n\tmotorStat\x18\n \x01(\x0b\x32\x15.CoprocStat.MotorStatH\x00\x12&\n\x07rtcStat\x18\x0b \x01(\x0b\x32\x13.CoprocStat.RtcStatH\x00\x12(\n\x08oledStat\x18\x0c \x01(\x0b\x32\x14.CoprocStat.OledStatH\x00\x12&\n\x07mpuStat\x18\r \x01(\x0b\x32\x13.CoprocStat.MpuStatH\x00\x1a>\n\x0b\x42uttonsStat\x12/\n\x0e\x62uttonsPressed\x18\x01 \x01(\x0e\x32\x17.CoprocStat.ButtonsEnum\x1a>\n\x0eUltrasoundStat\x12\x10\n\x08utsIndex\x18\x01 \x01(\r\x12\x1a\n\x12roundtripMicrosecs\x18\x02 \x01(\r\x1al\n\tMotorStat\x12\x12\n\nmotorIndex\x18\x01 \x01(\r\x12\x18\n\x04mode\x18\x02 \x01(\x0e\x32\n.MotorMode\x12\r\n\x05power\x18\x03 \x01(\x11\x12\x10\n\x08velocity\x18\x04 \x01(\x11\x12\x10\n\x08position\x18\x05 \x01(\x11\x1a\x46\n\x0cPowerAdcStat\x12\r\n\x05vccMv\x18\x01 \x01(\r\x12\x11\n\tbattMidMv\x18\x02 \x01(\r\x12\x14\n\x0ctemperatureC\x18\x03 \x01(\x05\x1aJ\n\x0bVersionStat\x12\x1c\n\x08revision\x18\x01 \x01(\x0c\x42\n\x92?\x02\x08\x08\x92?\x02x\x01\x12\x0e\n\x06number\x18\x02 \x01(\r\x12\r\n\x05\x64irty\x18\x03 \x01(\x08\x1aK\n\x07RtcStat\x12\x0c\n\x04time\x18\x01 \x01(\r\x12\r\n\x05\x61larm\x18\x02 \x01(\r\x12#\n\x05\x66lags\x18\x03 \x01(\x0e\x32\x14.CoprocStat.RtcFlags\x1a\n\n\x08OledStat\x1aT\n\x07MpuStat\x12$\n\x05\x61\x63\x63\x65l\x18\x01 \x01(\x0b\x32\x15.CoprocStat.MpuVector\x12#\n\x04gyro\x18\x02 \x01(\x0b\x32\x15.CoprocStat.MpuVector\x1a,\n\tMpuVector\x12\t\n\x01x\x18\x01 \x01(\x05\x12\t\n\x01y\x18\x02 \x01(\x05\x12\t\n\x01z\x18\x03 \x01(\x05\"K\n\x0b\x42uttonsEnum\x12\t\n\x05\x42NONE\x10\x00\x12\x08\n\x04\x42OFF\x10\x01\x12\x06\n\x02\x42\x31\x10\x02\x12\x06\n\x02\x42\x32\x10\x04\x12\x06\n\x02\x42\x33\x10\x08\x12\x06\n\x02\x42\x34\x10\x10\x12\x07\n\x03\x42ON\x10 \":\n\x08RtcFlags\x12\x0c\n\x08RTC_NONE\x10\x00\x12\x11\n\rRTC_NOT_READY\x10\x01\x12\r\n\tRTC_ALARM\x10\x02\x42\t\n\x07payload*P\n\tMotorMode\x12\t\n\x05POWER\x10\x00\x12\t\n\x05\x42RAKE\x10\x01\x12\x0c\n\x08VELOCITY\x10\x02\x12\x0c\n\x08POSITION\x10\x03\x12\x11\n\rPOSITION_IDLE\x10\x04\x62\x06proto3')
+  serialized_pb=_b('\n\nrbcx.proto\x1a\x0cnanopb.proto\"\x06\n\x04None\"+\n\x08RegCoefs\x12\t\n\x01p\x18\x01 \x01(\r\x12\t\n\x01i\x18\x02 \x01(\r\x12\t\n\x01\x64\x18\x03 \x01(\r\"G\n\x0bMotorConfig\x12\x12\n\nvelEpsilon\x18\x01 \x01(\r\x12\x12\n\nposEpsilon\x18\x02 \x01(\r\x12\x10\n\x08maxAccel\x18\x03 \x01(\r\"\xe3\x17\n\tCoprocReq\x12\x1a\n\tkeepalive\x18\x01 \x01(\x0b\x32\x05.NoneH\x00\x12%\n\x07setLeds\x18\x04 \x01(\x0b\x32\x12.CoprocReq.SetLedsH\x00\x12+\n\ngetButtons\x18\x05 \x01(\x0b\x32\x15.CoprocReq.GetButtonsH\x00\x12\x33\n\x0esetStupidServo\x18\x06 \x01(\x0b\x32\x19.CoprocReq.SetStupidServoH\x00\x12\x31\n\rultrasoundReq\x18\x07 \x01(\x0b\x32\x18.CoprocReq.UltrasoundReqH\x00\x12\'\n\x08motorReq\x18\x08 \x01(\x0b\x32\x13.CoprocReq.MotorReqH\x00\x12)\n\tbuzzerReq\x18\t \x01(\x0b\x32\x14.CoprocReq.BuzzerReqH\x00\x12\x33\n\x0e\x63\x61libratePower\x18\n \x01(\x0b\x32\x19.CoprocReq.CalibratePowerH\x00\x12\x1e\n\rshutdownPower\x18\x0b \x01(\x0b\x32\x05.NoneH\x00\x12\x1b\n\nversionReq\x18\x0c \x01(\x0b\x32\x05.NoneH\x00\x12#\n\x06rtcReq\x18\r \x01(\x0b\x32\x11.CoprocReq.RtcReqH\x00\x12#\n\x06i2cReq\x18\x0e \x01(\x0b\x32\x11.CoprocReq.I2cReqH\x00\x1a.\n\x07SetLeds\x12#\n\x06ledsOn\x18\x01 \x01(\x0e\x32\x13.CoprocReq.LedsEnum\x1a\x0c\n\nGetButtons\x1a\x61\n\x0eSetStupidServo\x12\x12\n\nservoIndex\x18\x01 \x01(\r\x12\x18\n\x07\x64isable\x18\x04 \x01(\x0b\x32\x05.NoneH\x00\x12\x15\n\x0bsetPosition\x18\x05 \x01(\x02H\x00\x42\n\n\x08servoCmd\x1aH\n\rUltrasoundReq\x12\x10\n\x08utsIndex\x18\x01 \x01(\r\x12\x1b\n\nsinglePing\x18\x04 \x01(\x0b\x32\x05.NoneH\x00\x42\x08\n\x06utsCmd\x1a\xc3\x03\n\x08MotorReq\x12\x12\n\nmotorIndex\x18\x01 \x01(\r\x12\x19\n\x08getState\x18\x04 \x01(\x0b\x32\x05.NoneH\x00\x12\x12\n\x08setPower\x18\x05 \x01(\x11H\x00\x12\x12\n\x08setBrake\x18\x06 \x01(\x11H\x00\x12\x15\n\x0bsetVelocity\x18\x07 \x01(\x11H\x00\x12\x16\n\x0chomePosition\x18\x08 \x01(\x11H\x00\x12\x36\n\x0bsetPosition\x18\n \x01(\x0b\x32\x1f.CoprocReq.MotorReq.SetPositionH\x00\x12\x36\n\x0b\x61\x64\x64Position\x18\x0b \x01(\x0b\x32\x1f.CoprocReq.MotorReq.SetPositionH\x00\x12(\n\x13setVelocityRegCoefs\x18\x10 \x01(\x0b\x32\t.RegCoefsH\x00\x12(\n\x13setPositionRegCoefs\x18\x11 \x01(\x0b\x32\t.RegCoefsH\x00\x12!\n\tsetConfig\x18\x12 \x01(\x0b\x32\x0c.MotorConfigH\x00\x1a>\n\x0bSetPosition\x12\x16\n\x0etargetPosition\x18\x01 \x01(\x11\x12\x17\n\x0frunningVelocity\x18\x02 \x01(\x11\x42\n\n\x08motorCmd\x1a\x17\n\tBuzzerReq\x12\n\n\x02on\x18\x01 \x01(\x08\x1aZ\n\x0e\x43\x61libratePower\x12\r\n\x05vccMv\x18\x01 \x01(\r\x12\x11\n\tbattMidMv\x18\x02 \x01(\r\x12\x10\n\x08vRef33Mv\x18\x03 \x01(\r\x12\x14\n\x0ctemperatureC\x18\x04 \x01(\r\x1aO\n\x06RtcReq\x12\x14\n\x03get\x18\x01 \x01(\x0b\x32\x05.NoneH\x00\x12\x11\n\x07setTime\x18\x02 \x01(\rH\x00\x12\x12\n\x08setAlarm\x18\x03 \x01(\rH\x00\x42\x08\n\x06rtcCmd\x1a_\n\x06I2cReq\x12%\n\x07oledReq\x18\x01 \x01(\x0b\x32\x12.CoprocReq.OledReqH\x00\x12#\n\x06mpuReq\x18\x02 \x01(\x0b\x32\x11.CoprocReq.MpuReqH\x00\x42\t\n\x07payload\x1a\xc9\x03\n\x07OledReq\x12#\n\x04init\x18\x01 \x01(\x0b\x32\x13.CoprocReq.OledInitH\x00\x12$\n\x04\x66ill\x18\x02 \x01(\x0e\x32\x14.CoprocReq.OledColorH\x00\x12\x17\n\x06update\x18\x03 \x01(\x0b\x32\x05.NoneH\x00\x12-\n\tdrawPixel\x18\x04 \x01(\x0b\x32\x18.CoprocReq.OledDrawPixelH\x00\x12\x31\n\x0bwriteString\x18\x05 \x01(\x0b\x32\x1a.CoprocReq.OledWriteStringH\x00\x12-\n\tsetCursor\x18\x06 \x01(\x0b\x32\x18.CoprocReq.OledSetCursorH\x00\x12+\n\x08\x64rawLine\x18\x07 \x01(\x0b\x32\x17.CoprocReq.OledDrawLineH\x00\x12)\n\x07\x64rawArc\x18\x08 \x01(\x0b\x32\x16.CoprocReq.OledDrawArcH\x00\x12/\n\ndrawCircle\x18\t \x01(\x0b\x32\x19.CoprocReq.OledDrawCircleH\x00\x12\x35\n\rdrawRectangle\x18\n \x01(\x0b\x32\x1c.CoprocReq.OledDrawRectangleH\x00\x42\t\n\x07oledCmd\x1aO\n\x08OledInit\x12\x0e\n\x06height\x18\x01 \x01(\r\x12\r\n\x05width\x18\x02 \x01(\r\x12\x0e\n\x06rotate\x18\x03 \x01(\x08\x12\x14\n\x0cinverseColor\x18\x04 \x01(\x08\x1aJ\n\rOledDrawPixel\x12\t\n\x01x\x18\x01 \x01(\r\x12\t\n\x01y\x18\x02 \x01(\r\x12#\n\x05\x63olor\x18\x03 \x01(\x0e\x32\x14.CoprocReq.OledColor\x1an\n\x0fOledWriteString\x12\x13\n\x04text\x18\x01 \x01(\tB\x05\x92?\x02p \x12!\n\x04\x66ont\x18\x02 \x01(\x0e\x32\x13.CoprocReq.OledFont\x12#\n\x05\x63olor\x18\x03 \x01(\x0e\x32\x14.CoprocReq.OledColor\x1a%\n\rOledSetCursor\x12\t\n\x01x\x18\x01 \x01(\r\x12\t\n\x01y\x18\x02 \x01(\r\x1a\x63\n\x0cOledDrawLine\x12\n\n\x02x1\x18\x01 \x01(\r\x12\n\n\x02y1\x18\x02 \x01(\r\x12\n\n\x02x2\x18\x03 \x01(\r\x12\n\n\x02y2\x18\x04 \x01(\r\x12#\n\x05\x63olor\x18\x05 \x01(\x0e\x32\x14.CoprocReq.OledColor\x1a|\n\x0bOledDrawArc\x12\t\n\x01x\x18\x01 \x01(\r\x12\t\n\x01y\x18\x02 \x01(\r\x12\x0e\n\x06radius\x18\x03 \x01(\r\x12\x13\n\x0bstart_angle\x18\x04 \x01(\r\x12\r\n\x05sweep\x18\x05 \x01(\r\x12#\n\x05\x63olor\x18\x06 \x01(\x0e\x32\x14.CoprocReq.OledColor\x1a[\n\x0eOledDrawCircle\x12\t\n\x01x\x18\x01 \x01(\r\x12\t\n\x01y\x18\x02 \x01(\r\x12\x0e\n\x06radius\x18\x03 \x01(\r\x12#\n\x05\x63olor\x18\x04 \x01(\x0e\x32\x14.CoprocReq.OledColor\x1ah\n\x11OledDrawRectangle\x12\n\n\x02x1\x18\x01 \x01(\r\x12\n\n\x02y1\x18\x02 \x01(\r\x12\n\n\x02x2\x18\x03 \x01(\r\x12\n\n\x02y2\x18\x04 \x01(\r\x12#\n\x05\x63olor\x18\x05 \x01(\x0e\x32\x14.CoprocReq.OledColor\x1a\xa0\x01\n\x06MpuReq\x12\x18\n\x07oneSend\x18\x01 \x01(\x0b\x32\x05.NoneH\x00\x12\x1a\n\tstartSend\x18\x02 \x01(\x0b\x32\x05.NoneH\x00\x12\x19\n\x08stopSend\x18\x03 \x01(\x0b\x32\x05.NoneH\x00\x12\x19\n\x0fsetCompressCoef\x18\x04 \x01(\rH\x00\x12 \n\x0fgetCompressCoef\x18\x05 \x01(\x0b\x32\x05.NoneH\x00\x42\x08\n\x06mpuCmd\"4\n\x08LedsEnum\x12\x08\n\x04NONE\x10\x00\x12\x06\n\x02L1\x10\x01\x12\x06\n\x02L2\x10\x02\x12\x06\n\x02L3\x10\x04\x12\x06\n\x02L4\x10\x08\"+\n\tOledColor\x12\x0e\n\nOLED_BLACK\x10\x00\x12\x0e\n\nOLED_WHITE\x10\x01\"[\n\x08OledFont\x12\x11\n\rOLED_FONT_6X8\x10\x00\x12\x12\n\x0eOLED_FONT_7X10\x10\x01\x12\x13\n\x0fOLED_FONT_11X18\x10\x02\x12\x13\n\x0fOLED_FONT_16X26\x10\x03\x42\t\n\x07payload\"\xc0\t\n\nCoprocStat\x12\x19\n\x08ledsStat\x18\x04 \x01(\x0b\x32\x05.NoneH\x00\x12.\n\x0b\x62uttonsStat\x18\x05 \x01(\x0b\x32\x17.CoprocStat.ButtonsStatH\x00\x12 \n\x0fstupidServoStat\x18\x06 \x01(\x0b\x32\x05.NoneH\x00\x12\x34\n\x0eultrasoundStat\x18\x07 \x01(\x0b\x32\x1a.CoprocStat.UltrasoundStatH\x00\x12\x30\n\x0cpowerAdcStat\x18\x08 \x01(\x0b\x32\x18.CoprocStat.PowerAdcStatH\x00\x12.\n\x0bversionStat\x18\t \x01(\x0b\x32\x17.CoprocStat.VersionStatH\x00\x12*\n\tmotorStat\x18\n \x01(\x0b\x32\x15.CoprocStat.MotorStatH\x00\x12&\n\x07rtcStat\x18\x0b \x01(\x0b\x32\x13.CoprocStat.RtcStatH\x00\x12(\n\x08oledStat\x18\x0c \x01(\x0b\x32\x14.CoprocStat.OledStatH\x00\x12&\n\x07mpuStat\x18\r \x01(\x0b\x32\x13.CoprocStat.MpuStatH\x00\x1a>\n\x0b\x42uttonsStat\x12/\n\x0e\x62uttonsPressed\x18\x01 \x01(\x0e\x32\x17.CoprocStat.ButtonsEnum\x1a>\n\x0eUltrasoundStat\x12\x10\n\x08utsIndex\x18\x01 \x01(\r\x12\x1a\n\x12roundtripMicrosecs\x18\x02 \x01(\r\x1al\n\tMotorStat\x12\x12\n\nmotorIndex\x18\x01 \x01(\r\x12\x18\n\x04mode\x18\x02 \x01(\x0e\x32\n.MotorMode\x12\r\n\x05power\x18\x03 \x01(\x11\x12\x10\n\x08velocity\x18\x04 \x01(\x11\x12\x10\n\x08position\x18\x05 \x01(\x11\x1a\x46\n\x0cPowerAdcStat\x12\r\n\x05vccMv\x18\x01 \x01(\r\x12\x11\n\tbattMidMv\x18\x02 \x01(\r\x12\x14\n\x0ctemperatureC\x18\x03 \x01(\x05\x1aJ\n\x0bVersionStat\x12\x1c\n\x08revision\x18\x01 \x01(\x0c\x42\n\x92?\x02\x08\x08\x92?\x02x\x01\x12\x0e\n\x06number\x18\x02 \x01(\r\x12\r\n\x05\x64irty\x18\x03 \x01(\x08\x1aK\n\x07RtcStat\x12\x0c\n\x04time\x18\x01 \x01(\r\x12\r\n\x05\x61larm\x18\x02 \x01(\r\x12#\n\x05\x66lags\x18\x03 \x01(\x0e\x32\x14.CoprocStat.RtcFlags\x1a\n\n\x08OledStat\x1aj\n\x07MpuStat\x12\x14\n\x0c\x63ompressCoef\x18\x01 \x01(\r\x12$\n\x05\x61\x63\x63\x65l\x18\x02 \x01(\x0b\x32\x15.CoprocStat.MpuVector\x12#\n\x04gyro\x18\x03 \x01(\x0b\x32\x15.CoprocStat.MpuVector\x1a,\n\tMpuVector\x12\t\n\x01x\x18\x01 \x01(\x05\x12\t\n\x01y\x18\x02 \x01(\x05\x12\t\n\x01z\x18\x03 \x01(\x05\"K\n\x0b\x42uttonsEnum\x12\t\n\x05\x42NONE\x10\x00\x12\x08\n\x04\x42OFF\x10\x01\x12\x06\n\x02\x42\x31\x10\x02\x12\x06\n\x02\x42\x32\x10\x04\x12\x06\n\x02\x42\x33\x10\x08\x12\x06\n\x02\x42\x34\x10\x10\x12\x07\n\x03\x42ON\x10 \":\n\x08RtcFlags\x12\x0c\n\x08RTC_NONE\x10\x00\x12\x11\n\rRTC_NOT_READY\x10\x01\x12\r\n\tRTC_ALARM\x10\x02\x42\t\n\x07payload*P\n\tMotorMode\x12\t\n\x05POWER\x10\x00\x12\t\n\x05\x42RAKE\x10\x01\x12\x0c\n\x08VELOCITY\x10\x02\x12\x0c\n\x08POSITION\x10\x03\x12\x11\n\rPOSITION_IDLE\x10\x04\x62\x06proto3')
   ,
   dependencies=[nanopb__pb2.DESCRIPTOR,])
 
@@ -54,8 +54,8 @@ _MOTORMODE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=4358,
-  serialized_end=4438,
+  serialized_start=4419,
+  serialized_end=4499,
 )
 _sym_db.RegisterEnumDescriptor(_MOTORMODE)
 
@@ -96,8 +96,8 @@ _COPROCREQ_LEDSENUM = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=2958,
-  serialized_end=3010,
+  serialized_start=2997,
+  serialized_end=3049,
 )
 _sym_db.RegisterEnumDescriptor(_COPROCREQ_LEDSENUM)
 
@@ -118,8 +118,8 @@ _COPROCREQ_OLEDCOLOR = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=3012,
-  serialized_end=3055,
+  serialized_start=3051,
+  serialized_end=3094,
 )
 _sym_db.RegisterEnumDescriptor(_COPROCREQ_OLEDCOLOR)
 
@@ -148,8 +148,8 @@ _COPROCREQ_OLEDFONT = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=3057,
-  serialized_end=3148,
+  serialized_start=3096,
+  serialized_end=3187,
 )
 _sym_db.RegisterEnumDescriptor(_COPROCREQ_OLEDFONT)
 
@@ -190,8 +190,8 @@ _COPROCSTAT_BUTTONSENUM = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=4210,
-  serialized_end=4285,
+  serialized_start=4271,
+  serialized_end=4346,
 )
 _sym_db.RegisterEnumDescriptor(_COPROCSTAT_BUTTONSENUM)
 
@@ -216,8 +216,8 @@ _COPROCSTAT_RTCFLAGS = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=4287,
-  serialized_end=4345,
+  serialized_start=4348,
+  serialized_end=4406,
 )
 _sym_db.RegisterEnumDescriptor(_COPROCSTAT_RTCFLAGS)
 
@@ -1296,29 +1296,36 @@ _COPROCREQ_MPUREQ = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='init', full_name='CoprocReq.MpuReq.init', index=0,
+      name='oneSend', full_name='CoprocReq.MpuReq.oneSend', index=0,
       number=1, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='oneSend', full_name='CoprocReq.MpuReq.oneSend', index=1,
+      name='startSend', full_name='CoprocReq.MpuReq.startSend', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='startSend', full_name='CoprocReq.MpuReq.startSend', index=2,
+      name='stopSend', full_name='CoprocReq.MpuReq.stopSend', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='stopSend', full_name='CoprocReq.MpuReq.stopSend', index=3,
-      number=4, type=11, cpp_type=10, label=1,
+      name='setCompressCoef', full_name='CoprocReq.MpuReq.setCompressCoef', index=3,
+      number=4, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='getCompressCoef', full_name='CoprocReq.MpuReq.getCompressCoef', index=4,
+      number=5, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -1338,8 +1345,8 @@ _COPROCREQ_MPUREQ = _descriptor.Descriptor(
       name='mpuCmd', full_name='CoprocReq.MpuReq.mpuCmd',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=2834,
-  serialized_end=2956,
+  serialized_start=2835,
+  serialized_end=2995,
 )
 
 _COPROCREQ = _descriptor.Descriptor(
@@ -1452,7 +1459,7 @@ _COPROCREQ = _descriptor.Descriptor(
       index=0, containing_type=None, fields=[]),
   ],
   serialized_start=155,
-  serialized_end=3159,
+  serialized_end=3198,
 )
 
 
@@ -1482,8 +1489,8 @@ _COPROCSTAT_BUTTONSSTAT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3603,
-  serialized_end=3665,
+  serialized_start=3642,
+  serialized_end=3704,
 )
 
 _COPROCSTAT_ULTRASOUNDSTAT = _descriptor.Descriptor(
@@ -1519,8 +1526,8 @@ _COPROCSTAT_ULTRASOUNDSTAT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3667,
-  serialized_end=3729,
+  serialized_start=3706,
+  serialized_end=3768,
 )
 
 _COPROCSTAT_MOTORSTAT = _descriptor.Descriptor(
@@ -1577,8 +1584,8 @@ _COPROCSTAT_MOTORSTAT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3731,
-  serialized_end=3839,
+  serialized_start=3770,
+  serialized_end=3878,
 )
 
 _COPROCSTAT_POWERADCSTAT = _descriptor.Descriptor(
@@ -1621,8 +1628,8 @@ _COPROCSTAT_POWERADCSTAT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3841,
-  serialized_end=3911,
+  serialized_start=3880,
+  serialized_end=3950,
 )
 
 _COPROCSTAT_VERSIONSTAT = _descriptor.Descriptor(
@@ -1665,8 +1672,8 @@ _COPROCSTAT_VERSIONSTAT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3913,
-  serialized_end=3987,
+  serialized_start=3952,
+  serialized_end=4026,
 )
 
 _COPROCSTAT_RTCSTAT = _descriptor.Descriptor(
@@ -1709,8 +1716,8 @@ _COPROCSTAT_RTCSTAT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3989,
-  serialized_end=4064,
+  serialized_start=4028,
+  serialized_end=4103,
 )
 
 _COPROCSTAT_OLEDSTAT = _descriptor.Descriptor(
@@ -1732,8 +1739,8 @@ _COPROCSTAT_OLEDSTAT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4066,
-  serialized_end=4076,
+  serialized_start=4105,
+  serialized_end=4115,
 )
 
 _COPROCSTAT_MPUSTAT = _descriptor.Descriptor(
@@ -1744,15 +1751,22 @@ _COPROCSTAT_MPUSTAT = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='accel', full_name='CoprocStat.MpuStat.accel', index=0,
-      number=1, type=11, cpp_type=10, label=1,
+      name='compressCoef', full_name='CoprocStat.MpuStat.compressCoef', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='accel', full_name='CoprocStat.MpuStat.accel', index=1,
+      number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='gyro', full_name='CoprocStat.MpuStat.gyro', index=1,
-      number=2, type=11, cpp_type=10, label=1,
+      name='gyro', full_name='CoprocStat.MpuStat.gyro', index=2,
+      number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -1769,8 +1783,8 @@ _COPROCSTAT_MPUSTAT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4078,
-  serialized_end=4162,
+  serialized_start=4117,
+  serialized_end=4223,
 )
 
 _COPROCSTAT_MPUVECTOR = _descriptor.Descriptor(
@@ -1813,8 +1827,8 @@ _COPROCSTAT_MPUVECTOR = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4164,
-  serialized_end=4208,
+  serialized_start=4225,
+  serialized_end=4269,
 )
 
 _COPROCSTAT = _descriptor.Descriptor(
@@ -1911,8 +1925,8 @@ _COPROCSTAT = _descriptor.Descriptor(
       name='payload', full_name='CoprocStat.payload',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=3162,
-  serialized_end=4356,
+  serialized_start=3201,
+  serialized_end=4417,
 )
 
 _COPROCREQ_SETLEDS.fields_by_name['ledsOn'].enum_type = _COPROCREQ_LEDSENUM
@@ -2047,14 +2061,11 @@ _COPROCREQ_OLEDDRAWCIRCLE.fields_by_name['color'].enum_type = _COPROCREQ_OLEDCOL
 _COPROCREQ_OLEDDRAWCIRCLE.containing_type = _COPROCREQ
 _COPROCREQ_OLEDDRAWRECTANGLE.fields_by_name['color'].enum_type = _COPROCREQ_OLEDCOLOR
 _COPROCREQ_OLEDDRAWRECTANGLE.containing_type = _COPROCREQ
-_COPROCREQ_MPUREQ.fields_by_name['init'].message_type = _NONE
 _COPROCREQ_MPUREQ.fields_by_name['oneSend'].message_type = _NONE
 _COPROCREQ_MPUREQ.fields_by_name['startSend'].message_type = _NONE
 _COPROCREQ_MPUREQ.fields_by_name['stopSend'].message_type = _NONE
+_COPROCREQ_MPUREQ.fields_by_name['getCompressCoef'].message_type = _NONE
 _COPROCREQ_MPUREQ.containing_type = _COPROCREQ
-_COPROCREQ_MPUREQ.oneofs_by_name['mpuCmd'].fields.append(
-  _COPROCREQ_MPUREQ.fields_by_name['init'])
-_COPROCREQ_MPUREQ.fields_by_name['init'].containing_oneof = _COPROCREQ_MPUREQ.oneofs_by_name['mpuCmd']
 _COPROCREQ_MPUREQ.oneofs_by_name['mpuCmd'].fields.append(
   _COPROCREQ_MPUREQ.fields_by_name['oneSend'])
 _COPROCREQ_MPUREQ.fields_by_name['oneSend'].containing_oneof = _COPROCREQ_MPUREQ.oneofs_by_name['mpuCmd']
@@ -2064,6 +2075,12 @@ _COPROCREQ_MPUREQ.fields_by_name['startSend'].containing_oneof = _COPROCREQ_MPUR
 _COPROCREQ_MPUREQ.oneofs_by_name['mpuCmd'].fields.append(
   _COPROCREQ_MPUREQ.fields_by_name['stopSend'])
 _COPROCREQ_MPUREQ.fields_by_name['stopSend'].containing_oneof = _COPROCREQ_MPUREQ.oneofs_by_name['mpuCmd']
+_COPROCREQ_MPUREQ.oneofs_by_name['mpuCmd'].fields.append(
+  _COPROCREQ_MPUREQ.fields_by_name['setCompressCoef'])
+_COPROCREQ_MPUREQ.fields_by_name['setCompressCoef'].containing_oneof = _COPROCREQ_MPUREQ.oneofs_by_name['mpuCmd']
+_COPROCREQ_MPUREQ.oneofs_by_name['mpuCmd'].fields.append(
+  _COPROCREQ_MPUREQ.fields_by_name['getCompressCoef'])
+_COPROCREQ_MPUREQ.fields_by_name['getCompressCoef'].containing_oneof = _COPROCREQ_MPUREQ.oneofs_by_name['mpuCmd']
 _COPROCREQ.fields_by_name['keepalive'].message_type = _NONE
 _COPROCREQ.fields_by_name['setLeds'].message_type = _COPROCREQ_SETLEDS
 _COPROCREQ.fields_by_name['getButtons'].message_type = _COPROCREQ_GETBUTTONS

@@ -203,10 +203,11 @@ message CoprocReq {
 
   message MpuReq {
     oneof mpuCmd {
-      None init = 1;
-      None oneSend = 2;
-      None startSend = 3;
-      None stopSend = 4;
+      None oneSend = 1;
+      None startSend = 2;
+      None stopSend = 3;
+      uint32 setCompressCoef = 4;
+      None getCompressCoef = 5;
     }
   }
 }
@@ -280,8 +281,9 @@ message CoprocStat {
   }
 
   message MpuStat {
-    MpuVector accel = 1;
-    MpuVector gyro = 2;
+    uint32 compressCoef = 1;
+    MpuVector accel = 2;
+    MpuVector gyro = 3;
   }
 
   message MpuVector {
