@@ -99,7 +99,7 @@ PB_BIND(CoprocStat_VersionStat, CoprocStat_VersionStat, AUTO)
 PB_BIND(CoprocStat_RtcStat, CoprocStat_RtcStat, AUTO)
 
 
-PB_BIND(CoprocStat_OledStat, CoprocStat_OledStat, AUTO)
+PB_BIND(CoprocStat_FaultStat, CoprocStat_FaultStat, AUTO)
 
 
 PB_BIND(CoprocStat_MpuStat, CoprocStat_MpuStat, AUTO)

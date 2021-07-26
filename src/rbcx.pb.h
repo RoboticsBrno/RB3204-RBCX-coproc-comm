@@ -59,10 +59,6 @@ typedef struct _CoprocReq_GetButtons {
     char dummy_field;
 } CoprocReq_GetButtons;
 
-typedef struct _CoprocStat_OledStat { 
-    char dummy_field;
-} CoprocStat_OledStat;
-
 typedef struct _None { 
     char dummy_field;
 } None;
@@ -86,6 +82,7 @@ typedef struct _CoprocReq_MotorReq_SetPosition {
 typedef struct _CoprocReq_MpuReq { 
     pb_size_t which_mpuCmd;
     union {
+        None init;
         None oneSend;
         None startSend;
         None stopSend;
@@ -183,6 +180,14 @@ typedef struct _CoprocReq_UltrasoundReq {
 typedef struct _CoprocStat_ButtonsStat { 
     CoprocStat_ButtonsEnum buttonsPressed; 
 } CoprocStat_ButtonsStat;
+
+typedef struct _CoprocStat_FaultStat { 
+    pb_size_t which_fault;
+    union {
+        None oledFault;
+        None mpuFault;
+    } fault; 
+} CoprocStat_FaultStat;
 
 typedef struct _CoprocStat_MotorStat { 
     uint32_t motorIndex; 
@@ -293,7 +298,7 @@ typedef struct _CoprocStat {
         CoprocStat_VersionStat versionStat;
         CoprocStat_MotorStat motorStat;
         CoprocStat_RtcStat rtcStat;
-        CoprocStat_OledStat oledStat;
+        CoprocStat_FaultStat faultStat;
         CoprocStat_MpuStat mpuStat;
     } payload; 
 } CoprocStat;
@@ -379,7 +384,7 @@ extern "C" {
 #define CoprocStat_PowerAdcStat_init_default     {0, 0, 0}
 #define CoprocStat_VersionStat_init_default      {{0}, 0, 0}
 #define CoprocStat_RtcStat_init_default          {0, 0, _CoprocStat_RtcFlags_MIN}
-#define CoprocStat_OledStat_init_default         {0}
+#define CoprocStat_FaultStat_init_default        {0, {None_init_default}}
 #define CoprocStat_MpuStat_init_default          {0, false, CoprocStat_MpuVector_init_default, false, CoprocStat_MpuVector_init_default}
 #define CoprocStat_MpuVector_init_default        {0, 0, 0}
 #define None_init_zero                           {0}
@@ -413,7 +418,7 @@ extern "C" {
 #define CoprocStat_PowerAdcStat_init_zero        {0, 0, 0}
 #define CoprocStat_VersionStat_init_zero         {{0}, 0, 0}
 #define CoprocStat_RtcStat_init_zero             {0, 0, _CoprocStat_RtcFlags_MIN}
-#define CoprocStat_OledStat_init_zero            {0}
+#define CoprocStat_FaultStat_init_zero           {0, {None_init_zero}}
 #define CoprocStat_MpuStat_init_zero             {0, false, CoprocStat_MpuVector_init_zero, false, CoprocStat_MpuVector_init_zero}
 #define CoprocStat_MpuVector_init_zero           {0, 0, 0}
 
@@ -425,11 +430,12 @@ extern "C" {
 #define CoprocReq_CalibratePower_temperatureC_tag 4
 #define CoprocReq_MotorReq_SetPosition_targetPosition_tag 1
 #define CoprocReq_MotorReq_SetPosition_runningVelocity_tag 2
-#define CoprocReq_MpuReq_oneSend_tag             1
-#define CoprocReq_MpuReq_startSend_tag           2
-#define CoprocReq_MpuReq_stopSend_tag            3
-#define CoprocReq_MpuReq_setCompressCoef_tag     4
-#define CoprocReq_MpuReq_getCompressCoef_tag     5
+#define CoprocReq_MpuReq_init_tag                1
+#define CoprocReq_MpuReq_oneSend_tag             2
+#define CoprocReq_MpuReq_startSend_tag           3
+#define CoprocReq_MpuReq_stopSend_tag            4
+#define CoprocReq_MpuReq_setCompressCoef_tag     5
+#define CoprocReq_MpuReq_getCompressCoef_tag     6
 #define CoprocReq_OledDrawArc_x_tag              1
 #define CoprocReq_OledDrawArc_y_tag              2
 #define CoprocReq_OledDrawArc_radius_tag         3
@@ -472,6 +478,8 @@ extern "C" {
 #define CoprocReq_UltrasoundReq_utsIndex_tag     1
 #define CoprocReq_UltrasoundReq_singlePing_tag   4
 #define CoprocStat_ButtonsStat_buttonsPressed_tag 1
+#define CoprocStat_FaultStat_oledFault_tag       1
+#define CoprocStat_FaultStat_mpuFault_tag        2
 #define CoprocStat_MotorStat_motorIndex_tag      1
 #define CoprocStat_MotorStat_mode_tag            2
 #define CoprocStat_MotorStat_power_tag           3
@@ -531,7 +539,7 @@ extern "C" {
 #define CoprocStat_versionStat_tag               9
 #define CoprocStat_motorStat_tag                 10
 #define CoprocStat_rtcStat_tag                   11
-#define CoprocStat_oledStat_tag                  12
+#define CoprocStat_faultStat_tag                 12
 #define CoprocStat_mpuStat_tag                   13
 #define CoprocReq_keepalive_tag                  1
 #define CoprocReq_setLeds_tag                    4
@@ -763,13 +771,15 @@ X(a, STATIC,   SINGULAR, UENUM,    color,             5)
 #define CoprocReq_OledDrawRectangle_DEFAULT NULL
 
 #define CoprocReq_MpuReq_FIELDLIST(X, a) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (mpuCmd,oneSend,mpuCmd.oneSend),   1) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (mpuCmd,startSend,mpuCmd.startSend),   2) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (mpuCmd,stopSend,mpuCmd.stopSend),   3) \
-X(a, STATIC,   ONEOF,    UINT32,   (mpuCmd,setCompressCoef,mpuCmd.setCompressCoef),   4) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (mpuCmd,getCompressCoef,mpuCmd.getCompressCoef),   5)
+X(a, STATIC,   ONEOF,    MESSAGE,  (mpuCmd,init,mpuCmd.init),   1) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (mpuCmd,oneSend,mpuCmd.oneSend),   2) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (mpuCmd,startSend,mpuCmd.startSend),   3) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (mpuCmd,stopSend,mpuCmd.stopSend),   4) \
+X(a, STATIC,   ONEOF,    UINT32,   (mpuCmd,setCompressCoef,mpuCmd.setCompressCoef),   5) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (mpuCmd,getCompressCoef,mpuCmd.getCompressCoef),   6)
 #define CoprocReq_MpuReq_CALLBACK NULL
 #define CoprocReq_MpuReq_DEFAULT NULL
+#define CoprocReq_MpuReq_mpuCmd_init_MSGTYPE None
 #define CoprocReq_MpuReq_mpuCmd_oneSend_MSGTYPE None
 #define CoprocReq_MpuReq_mpuCmd_startSend_MSGTYPE None
 #define CoprocReq_MpuReq_mpuCmd_stopSend_MSGTYPE None
@@ -784,7 +794,7 @@ X(a, STATIC,   ONEOF,    MESSAGE,  (payload,powerAdcStat,payload.powerAdcStat), 
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,versionStat,payload.versionStat),   9) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,motorStat,payload.motorStat),  10) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,rtcStat,payload.rtcStat),  11) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (payload,oledStat,payload.oledStat),  12) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (payload,faultStat,payload.faultStat),  12) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,mpuStat,payload.mpuStat),  13)
 #define CoprocStat_CALLBACK NULL
 #define CoprocStat_DEFAULT NULL
@@ -796,7 +806,7 @@ X(a, STATIC,   ONEOF,    MESSAGE,  (payload,mpuStat,payload.mpuStat),  13)
 #define CoprocStat_payload_versionStat_MSGTYPE CoprocStat_VersionStat
 #define CoprocStat_payload_motorStat_MSGTYPE CoprocStat_MotorStat
 #define CoprocStat_payload_rtcStat_MSGTYPE CoprocStat_RtcStat
-#define CoprocStat_payload_oledStat_MSGTYPE CoprocStat_OledStat
+#define CoprocStat_payload_faultStat_MSGTYPE CoprocStat_FaultStat
 #define CoprocStat_payload_mpuStat_MSGTYPE CoprocStat_MpuStat
 
 #define CoprocStat_ButtonsStat_FIELDLIST(X, a) \
@@ -840,10 +850,13 @@ X(a, STATIC,   SINGULAR, UENUM,    flags,             3)
 #define CoprocStat_RtcStat_CALLBACK NULL
 #define CoprocStat_RtcStat_DEFAULT NULL
 
-#define CoprocStat_OledStat_FIELDLIST(X, a) \
-
-#define CoprocStat_OledStat_CALLBACK NULL
-#define CoprocStat_OledStat_DEFAULT NULL
+#define CoprocStat_FaultStat_FIELDLIST(X, a) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (fault,oledFault,fault.oledFault),   1) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (fault,mpuFault,fault.mpuFault),   2)
+#define CoprocStat_FaultStat_CALLBACK NULL
+#define CoprocStat_FaultStat_DEFAULT NULL
+#define CoprocStat_FaultStat_fault_oledFault_MSGTYPE None
+#define CoprocStat_FaultStat_fault_mpuFault_MSGTYPE None
 
 #define CoprocStat_MpuStat_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, UINT32,   compressCoef,      1) \
@@ -892,7 +905,7 @@ extern const pb_msgdesc_t CoprocStat_MotorStat_msg;
 extern const pb_msgdesc_t CoprocStat_PowerAdcStat_msg;
 extern const pb_msgdesc_t CoprocStat_VersionStat_msg;
 extern const pb_msgdesc_t CoprocStat_RtcStat_msg;
-extern const pb_msgdesc_t CoprocStat_OledStat_msg;
+extern const pb_msgdesc_t CoprocStat_FaultStat_msg;
 extern const pb_msgdesc_t CoprocStat_MpuStat_msg;
 extern const pb_msgdesc_t CoprocStat_MpuVector_msg;
 
@@ -928,7 +941,7 @@ extern const pb_msgdesc_t CoprocStat_MpuVector_msg;
 #define CoprocStat_PowerAdcStat_fields &CoprocStat_PowerAdcStat_msg
 #define CoprocStat_VersionStat_fields &CoprocStat_VersionStat_msg
 #define CoprocStat_RtcStat_fields &CoprocStat_RtcStat_msg
-#define CoprocStat_OledStat_fields &CoprocStat_OledStat_msg
+#define CoprocStat_FaultStat_fields &CoprocStat_FaultStat_msg
 #define CoprocStat_MpuStat_fields &CoprocStat_MpuStat_msg
 #define CoprocStat_MpuVector_fields &CoprocStat_MpuVector_msg
 
@@ -955,10 +968,10 @@ extern const pb_msgdesc_t CoprocStat_MpuVector_msg;
 #define CoprocReq_UltrasoundReq_size             8
 #define CoprocReq_size                           44
 #define CoprocStat_ButtonsStat_size              2
+#define CoprocStat_FaultStat_size                2
 #define CoprocStat_MotorStat_size                26
 #define CoprocStat_MpuStat_size                  76
 #define CoprocStat_MpuVector_size                33
-#define CoprocStat_OledStat_size                 0
 #define CoprocStat_PowerAdcStat_size             23
 #define CoprocStat_RtcStat_size                  14
 #define CoprocStat_UltrasoundStat_size           12

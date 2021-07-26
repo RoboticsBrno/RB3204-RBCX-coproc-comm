@@ -203,11 +203,12 @@ message CoprocReq {
 
   message MpuReq {
     oneof mpuCmd {
-      None oneSend = 1;
-      None startSend = 2;
-      None stopSend = 3;
-      uint32 setCompressCoef = 4;
-      None getCompressCoef = 5;
+      None init = 1;
+      None oneSend = 2;
+      None startSend = 3;
+      None stopSend = 4;
+      uint32 setCompressCoef = 5;
+      None getCompressCoef = 6;
     }
   }
 }
@@ -222,7 +223,7 @@ message CoprocStat {
     VersionStat versionStat = 9;
     MotorStat motorStat = 10;
     RtcStat rtcStat = 11;
-    OledStat oledStat = 12;
+    FaultStat faultStat = 12;
     MpuStat mpuStat = 13;
   }
 
@@ -277,7 +278,11 @@ message CoprocStat {
     RTC_ALARM = 2;
   }
 
-  message OledStat {
+  message FaultStat {
+    oneof fault {
+        None oledFault = 1;
+        None mpuFault = 2;
+    }
   }
 
   message MpuStat {
