@@ -14,12 +14,7 @@
       "maintainer": true
     }
   ],
-  "dependencies": [
-    {
-      "name": "Nanopb",
-      "version": "https://github.com/nanopb/nanopb/archive/nanopb-0.4.5.zip"
-    }
-  ],
+  "dependencies": [],
   "version": "0.0.1",
   "frameworks": "*",
   "platforms": "*"

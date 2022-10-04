@@ -2,7 +2,7 @@
 
 #include <array>
 
-#include <pb.h>
+#include "nanopb/pb.h"
 
 #include "coproc_codec.h"
 

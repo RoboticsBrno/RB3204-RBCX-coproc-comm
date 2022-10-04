@@ -1,10 +1,9 @@
 #pragma once
 
+#include "nanopb/pb.h"
 #include <array>
-#include <pb.h>
 #include <stddef.h>
 #include <stdint.h>
-
 
 namespace rb {
 
