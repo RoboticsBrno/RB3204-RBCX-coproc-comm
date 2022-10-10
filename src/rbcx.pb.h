@@ -18,6 +18,11 @@ typedef enum _MotorMode {
     MotorMode_POSITION_IDLE = 4 
 } MotorMode;
 
+typedef enum _MotorCoupling { 
+    MotorCoupling_INDEP = 0, 
+    MotorCoupling_COUPLE_POWER = 1 
+} MotorCoupling;
+
 typedef enum _CoprocReq_LedsEnum { 
     CoprocReq_LedsEnum_NONE = 0, 
     CoprocReq_LedsEnum_L1 = 1, 
@@ -230,6 +235,8 @@ typedef struct _MotorConfig {
     uint32_t velEpsilon;
     uint32_t posEpsilon;
     uint32_t maxAccel;
+    MotorCoupling coupling;
+    uint32_t couplePartnerMotorIndex;
 } MotorConfig;
 
 typedef struct _RegCoefs { 
@@ -327,6 +334,10 @@ typedef struct _CoprocReq {
 #define _MotorMode_MAX MotorMode_POSITION_IDLE
 #define _MotorMode_ARRAYSIZE ((MotorMode)(MotorMode_POSITION_IDLE+1))
 
+#define _MotorCoupling_MIN MotorCoupling_INDEP
+#define _MotorCoupling_MAX MotorCoupling_COUPLE_POWER
+#define _MotorCoupling_ARRAYSIZE ((MotorCoupling)(MotorCoupling_COUPLE_POWER+1))
+
 #define _CoprocReq_LedsEnum_MIN CoprocReq_LedsEnum_NONE
 #define _CoprocReq_LedsEnum_MAX CoprocReq_LedsEnum_L4
 #define _CoprocReq_LedsEnum_ARRAYSIZE ((CoprocReq_LedsEnum)(CoprocReq_LedsEnum_L4+1))
@@ -355,7 +366,7 @@ extern "C" {
 /* Initializer values for message structs */
 #define None_init_default                        {0}
 #define RegCoefs_init_default                    {0, 0, 0}
-#define MotorConfig_init_default                 {0, 0, 0}
+#define MotorConfig_init_default                 {0, 0, 0, _MotorCoupling_MIN, 0}
 #define CoprocReq_init_default                   {0, {None_init_default}}
 #define CoprocReq_SetLeds_init_default           {_CoprocReq_LedsEnum_MIN}
 #define CoprocReq_GetButtons_init_default        {0}
@@ -389,7 +400,7 @@ extern "C" {
 #define CoprocStat_MpuVector_init_default        {0, 0, 0}
 #define None_init_zero                           {0}
 #define RegCoefs_init_zero                       {0, 0, 0}
-#define MotorConfig_init_zero                    {0, 0, 0}
+#define MotorConfig_init_zero                    {0, 0, 0, _MotorCoupling_MIN, 0}
 #define CoprocReq_init_zero                      {0, {None_init_zero}}
 #define CoprocReq_SetLeds_init_zero              {_CoprocReq_LedsEnum_MIN}
 #define CoprocReq_GetButtons_init_zero           {0}
@@ -502,6 +513,8 @@ extern "C" {
 #define MotorConfig_velEpsilon_tag               1
 #define MotorConfig_posEpsilon_tag               2
 #define MotorConfig_maxAccel_tag                 3
+#define MotorConfig_coupling_tag                 4
+#define MotorConfig_couplePartnerMotorIndex_tag  5
 #define RegCoefs_p_tag                           1
 #define RegCoefs_i_tag                           2
 #define RegCoefs_d_tag                           3
@@ -570,7 +583,9 @@ X(a, STATIC,   SINGULAR, UINT32,   d,                 3)
 #define MotorConfig_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, UINT32,   velEpsilon,        1) \
 X(a, STATIC,   SINGULAR, UINT32,   posEpsilon,        2) \
-X(a, STATIC,   SINGULAR, UINT32,   maxAccel,          3)
+X(a, STATIC,   SINGULAR, UINT32,   maxAccel,          3) \
+X(a, STATIC,   SINGULAR, UENUM,    coupling,          4) \
+X(a, STATIC,   SINGULAR, UINT32,   couplePartnerMotorIndex,   5)
 #define MotorConfig_CALLBACK NULL
 #define MotorConfig_DEFAULT NULL
 
@@ -951,7 +966,7 @@ extern const pb_msgdesc_t CoprocStat_MpuVector_msg;
 #define CoprocReq_GetButtons_size                0
 #define CoprocReq_I2cReq_size                    42
 #define CoprocReq_MotorReq_SetPosition_size      12
-#define CoprocReq_MotorReq_size                  27
+#define CoprocReq_MotorReq_size                  35
 #define CoprocReq_MpuReq_size                    6
 #define CoprocReq_OledDrawArc_size               32
 #define CoprocReq_OledDrawCircle_size            20
@@ -977,7 +992,7 @@ extern const pb_msgdesc_t CoprocStat_MpuVector_msg;
 #define CoprocStat_UltrasoundStat_size           12
 #define CoprocStat_VersionStat_size              18
 #define CoprocStat_size                          78
-#define MotorConfig_size                         18
+#define MotorConfig_size                         26
 #define None_size                                0
 #define RegCoefs_size                            18
 

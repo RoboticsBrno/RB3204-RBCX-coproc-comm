@@ -19,10 +19,17 @@ message RegCoefs {
   uint32 d = 3;
 }
 
+enum MotorCoupling {
+  INDEP = 0;
+  COUPLE_POWER = 1;
+}
+
 message MotorConfig {
   uint32 velEpsilon = 1;
   uint32 posEpsilon = 2;
   uint32 maxAccel = 3;
+  MotorCoupling coupling = 4;
+  uint32 couplePartnerMotorIndex = 5;
 }
 
 message CoprocReq {
