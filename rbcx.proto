@@ -11,6 +11,7 @@ enum MotorMode {
   VELOCITY = 2;
   POSITION = 3;
   POSITION_IDLE = 4;
+  COUPLE_POWER = 5;
 }
 
 message RegCoefs {
@@ -19,17 +20,10 @@ message RegCoefs {
   uint32 d = 3;
 }
 
-enum MotorCoupling {
-  INDEP = 0;
-  COUPLE_POWER = 1;
-}
-
 message MotorConfig {
   uint32 velEpsilon = 1;
   uint32 posEpsilon = 2;
   uint32 maxAccel = 3;
-  MotorCoupling coupling = 4;
-  uint32 couplePartnerMotorIndex = 5;
 }
 
 message CoprocReq {
@@ -47,11 +41,11 @@ message CoprocReq {
     RtcReq rtcReq = 13;
     I2cReq i2cReq = 14;
   }
-
+  
   message SetLeds {
     LedsEnum ledsOn = 1;
   }
-
+  
   enum LedsEnum {
     NONE = 0;
     L1 = 1;
@@ -59,10 +53,10 @@ message CoprocReq {
     L3 = 4;
     L4 = 8;
   }
-
+  
   message GetButtons {
   }
-
+  
   message SetStupidServo {
     uint32 servoIndex = 1;
     oneof servoCmd {
@@ -70,14 +64,19 @@ message CoprocReq {
       float setPosition = 5;
     }
   }
-
+  
   message UltrasoundReq {
     uint32 utsIndex = 1;
     oneof utsCmd {
       None singlePing = 4;
     }
   }
-
+  
+  message SetMotorCoupling {
+    uint32 coupleAxis = 1;
+    int32 coupleCoefPower = 2;
+  }
+  
   message MotorReq {
     uint32 motorIndex = 1;
     oneof motorCmd {
@@ -91,8 +90,9 @@ message CoprocReq {
       RegCoefs setVelocityRegCoefs = 16;
       RegCoefs setPositionRegCoefs = 17;
       MotorConfig setConfig = 18;
+      SetMotorCoupling setCoupling = 19;
     }
-
+    
     message SetPosition {
       sint32 targetPosition = 1;
       sint32 runningVelocity = 2;
