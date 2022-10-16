@@ -163,7 +163,6 @@ typedef struct _CoprocReq_SetLeds {
 
 typedef struct _CoprocReq_SetMotorCoupling { 
     uint32_t coupleAxis;
-    int32_t coupleCoefPower;
 } CoprocReq_SetMotorCoupling;
 
 typedef struct _CoprocReq_SetStupidServo { 
@@ -368,7 +367,7 @@ extern "C" {
 #define CoprocReq_GetButtons_init_default        {0}
 #define CoprocReq_SetStupidServo_init_default    {0, 0, {None_init_default}}
 #define CoprocReq_UltrasoundReq_init_default     {0, 0, {None_init_default}}
-#define CoprocReq_SetMotorCoupling_init_default  {0, 0}
+#define CoprocReq_SetMotorCoupling_init_default  {0}
 #define CoprocReq_MotorReq_init_default          {0, 0, {None_init_default}}
 #define CoprocReq_MotorReq_SetPosition_init_default {0, 0}
 #define CoprocReq_BuzzerReq_init_default         {0}
@@ -403,7 +402,7 @@ extern "C" {
 #define CoprocReq_GetButtons_init_zero           {0}
 #define CoprocReq_SetStupidServo_init_zero       {0, 0, {None_init_zero}}
 #define CoprocReq_UltrasoundReq_init_zero        {0, 0, {None_init_zero}}
-#define CoprocReq_SetMotorCoupling_init_zero     {0, 0}
+#define CoprocReq_SetMotorCoupling_init_zero     {0}
 #define CoprocReq_MotorReq_init_zero             {0, 0, {None_init_zero}}
 #define CoprocReq_MotorReq_SetPosition_init_zero {0, 0}
 #define CoprocReq_BuzzerReq_init_zero            {0}
@@ -482,7 +481,6 @@ extern "C" {
 #define CoprocReq_RtcReq_setAlarm_tag            3
 #define CoprocReq_SetLeds_ledsOn_tag             1
 #define CoprocReq_SetMotorCoupling_coupleAxis_tag 1
-#define CoprocReq_SetMotorCoupling_coupleCoefPower_tag 2
 #define CoprocReq_SetStupidServo_servoIndex_tag  1
 #define CoprocReq_SetStupidServo_disable_tag     4
 #define CoprocReq_SetStupidServo_setPosition_tag 5
@@ -640,8 +638,7 @@ X(a, STATIC,   ONEOF,    MESSAGE,  (utsCmd,singlePing,utsCmd.singlePing),   4)
 #define CoprocReq_UltrasoundReq_utsCmd_singlePing_MSGTYPE None
 
 #define CoprocReq_SetMotorCoupling_FIELDLIST(X, a) \
-X(a, STATIC,   SINGULAR, UINT32,   coupleAxis,        1) \
-X(a, STATIC,   SINGULAR, INT32,    coupleCoefPower,   2)
+X(a, STATIC,   SINGULAR, UINT32,   coupleAxis,        1)
 #define CoprocReq_SetMotorCoupling_CALLBACK NULL
 #define CoprocReq_SetMotorCoupling_DEFAULT NULL
 
@@ -986,7 +983,7 @@ extern const pb_msgdesc_t CoprocStat_MpuVector_msg;
 #define CoprocReq_OledWriteString_size           38
 #define CoprocReq_RtcReq_size                    6
 #define CoprocReq_SetLeds_size                   2
-#define CoprocReq_SetMotorCoupling_size          17
+#define CoprocReq_SetMotorCoupling_size          6
 #define CoprocReq_SetStupidServo_size            11
 #define CoprocReq_UltrasoundReq_size             8
 #define CoprocReq_size                           44
