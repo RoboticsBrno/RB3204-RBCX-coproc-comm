@@ -42,6 +42,7 @@ message CoprocReq {
     I2cReq i2cReq = 14;
     EspWatchdogSettings espWatchdogSettings = 15;
     CoprocStartupMessage coprocStartupMessage = 16;
+    SmartServoReq smartServoReq = 17;
   }
   
   message SetLeds {
@@ -232,6 +233,12 @@ message CoprocReq {
     bool getRtc = 3;
     EspWatchdogSettings espWatchdogSettings = 4;
   }
+
+  message SmartServoReq {
+    uint32 id = 1;
+    bool expect_response = 2;
+    bytes data = 3 [(nanopb).max_size = 8]; 
+  }
 }
 
 message CoprocStat {
@@ -246,6 +253,7 @@ message CoprocStat {
     RtcStat rtcStat = 11;
     FaultStat faultStat = 12;
     MpuStat mpuStat = 13;
+    SmartServoStat smartServoStat = 14;
   }
 
   message ButtonsStat {
@@ -316,5 +324,10 @@ message CoprocStat {
     int32 x = 1;
     int32 y = 2;
     int32 z = 3;
+  }
+
+  message SmartServoStat {
+    uint32 id = 1;
+    bytes data = 2 [(nanopb).max_size = 8];
   }
 }

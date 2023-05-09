@@ -87,6 +87,9 @@ PB_BIND(CoprocReq_EspWatchdogSettings, CoprocReq_EspWatchdogSettings, AUTO)
 PB_BIND(CoprocReq_CoprocStartupMessage, CoprocReq_CoprocStartupMessage, AUTO)
 
 
+PB_BIND(CoprocReq_SmartServoReq, CoprocReq_SmartServoReq, AUTO)
+
+
 PB_BIND(CoprocStat, CoprocStat, AUTO)
 
 
@@ -115,6 +118,9 @@ PB_BIND(CoprocStat_MpuStat, CoprocStat_MpuStat, AUTO)
 
 
 PB_BIND(CoprocStat_MpuVector, CoprocStat_MpuVector, AUTO)
+
+
+PB_BIND(CoprocStat_SmartServoStat, CoprocStat_SmartServoStat, AUTO)
 
 
 

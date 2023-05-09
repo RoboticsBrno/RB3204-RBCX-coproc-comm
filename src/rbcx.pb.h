@@ -248,6 +248,13 @@ typedef struct _CoprocReq_CoprocStartupMessage {
     CoprocReq_EspWatchdogSettings espWatchdogSettings;
 } CoprocReq_CoprocStartupMessage;
 
+typedef PB_BYTES_ARRAY_T(8) CoprocReq_SmartServoReq_data_t;
+typedef struct _CoprocReq_SmartServoReq {
+    uint32_t id;
+    bool expect_response;
+    CoprocReq_SmartServoReq_data_t data;
+} CoprocReq_SmartServoReq;
+
 typedef struct _CoprocReq {
     pb_size_t which_payload;
     union {
@@ -265,6 +272,7 @@ typedef struct _CoprocReq {
         CoprocReq_I2cReq i2cReq;
         CoprocReq_EspWatchdogSettings espWatchdogSettings;
         CoprocReq_CoprocStartupMessage coprocStartupMessage;
+        CoprocReq_SmartServoReq smartServoReq;
     } payload;
 } CoprocReq;
 
@@ -325,6 +333,12 @@ typedef struct _CoprocStat_MpuStat {
     CoprocStat_MpuVector gyro;
 } CoprocStat_MpuStat;
 
+typedef PB_BYTES_ARRAY_T(8) CoprocStat_SmartServoStat_data_t;
+typedef struct _CoprocStat_SmartServoStat {
+    uint32_t id;
+    CoprocStat_SmartServoStat_data_t data;
+} CoprocStat_SmartServoStat;
+
 typedef struct _CoprocStat {
     pb_size_t which_payload;
     union {
@@ -338,6 +352,7 @@ typedef struct _CoprocStat {
         CoprocStat_RtcStat rtcStat;
         CoprocStat_FaultStat faultStat;
         CoprocStat_MpuStat mpuStat;
+        CoprocStat_SmartServoStat smartServoStat;
     } payload;
 } CoprocStat;
 
@@ -408,6 +423,7 @@ extern "C" {
 
 
 
+
 #define CoprocStat_ButtonsStat_buttonsPressed_ENUMTYPE CoprocStat_ButtonsEnum
 
 
@@ -416,6 +432,7 @@ extern "C" {
 
 
 #define CoprocStat_RtcStat_flags_ENUMTYPE CoprocStat_RtcFlags
+
 
 
 
@@ -449,6 +466,7 @@ extern "C" {
 #define CoprocReq_MpuReq_init_default            {0, {None_init_default}}
 #define CoprocReq_EspWatchdogSettings_init_default {0}
 #define CoprocReq_CoprocStartupMessage_init_default {0, 0, 0, false, CoprocReq_EspWatchdogSettings_init_default}
+#define CoprocReq_SmartServoReq_init_default     {0, 0, {0, {0}}}
 #define CoprocStat_init_default                  {0, {None_init_default}}
 #define CoprocStat_ButtonsStat_init_default      {_CoprocStat_ButtonsEnum_MIN}
 #define CoprocStat_UltrasoundStat_init_default   {0, 0}
@@ -459,6 +477,7 @@ extern "C" {
 #define CoprocStat_FaultStat_init_default        {0, {None_init_default}}
 #define CoprocStat_MpuStat_init_default          {0, false, CoprocStat_MpuVector_init_default, false, CoprocStat_MpuVector_init_default}
 #define CoprocStat_MpuVector_init_default        {0, 0, 0}
+#define CoprocStat_SmartServoStat_init_default   {0, {0, {0}}}
 #define None_init_zero                           {0}
 #define RegCoefs_init_zero                       {0, 0, 0}
 #define MotorConfig_init_zero                    {0, 0, 0}
@@ -486,6 +505,7 @@ extern "C" {
 #define CoprocReq_MpuReq_init_zero               {0, {None_init_zero}}
 #define CoprocReq_EspWatchdogSettings_init_zero  {0}
 #define CoprocReq_CoprocStartupMessage_init_zero {0, 0, 0, false, CoprocReq_EspWatchdogSettings_init_zero}
+#define CoprocReq_SmartServoReq_init_zero        {0, 0, {0, {0}}}
 #define CoprocStat_init_zero                     {0, {None_init_zero}}
 #define CoprocStat_ButtonsStat_init_zero         {_CoprocStat_ButtonsEnum_MIN}
 #define CoprocStat_UltrasoundStat_init_zero      {0, 0}
@@ -496,6 +516,7 @@ extern "C" {
 #define CoprocStat_FaultStat_init_zero           {0, {None_init_zero}}
 #define CoprocStat_MpuStat_init_zero             {0, false, CoprocStat_MpuVector_init_zero, false, CoprocStat_MpuVector_init_zero}
 #define CoprocStat_MpuVector_init_zero           {0, 0, 0}
+#define CoprocStat_SmartServoStat_init_zero      {0, {0, {0}}}
 
 /* Field tags (for use in manual encoding/decoding) */
 #define RegCoefs_p_tag                           1
@@ -588,6 +609,9 @@ extern "C" {
 #define CoprocReq_CoprocStartupMessage_getVersion_tag 2
 #define CoprocReq_CoprocStartupMessage_getRtc_tag 3
 #define CoprocReq_CoprocStartupMessage_espWatchdogSettings_tag 4
+#define CoprocReq_SmartServoReq_id_tag           1
+#define CoprocReq_SmartServoReq_expect_response_tag 2
+#define CoprocReq_SmartServoReq_data_tag         3
 #define CoprocReq_keepalive_tag                  1
 #define CoprocReq_setLeds_tag                    4
 #define CoprocReq_getButtons_tag                 5
@@ -602,6 +626,7 @@ extern "C" {
 #define CoprocReq_i2cReq_tag                     14
 #define CoprocReq_espWatchdogSettings_tag        15
 #define CoprocReq_coprocStartupMessage_tag       16
+#define CoprocReq_smartServoReq_tag              17
 #define CoprocStat_ButtonsStat_buttonsPressed_tag 1
 #define CoprocStat_UltrasoundStat_utsIndex_tag   1
 #define CoprocStat_UltrasoundStat_roundtripMicrosecs_tag 2
@@ -627,6 +652,8 @@ extern "C" {
 #define CoprocStat_MpuStat_compressCoef_tag      1
 #define CoprocStat_MpuStat_accel_tag             2
 #define CoprocStat_MpuStat_gyro_tag              3
+#define CoprocStat_SmartServoStat_id_tag         1
+#define CoprocStat_SmartServoStat_data_tag       2
 #define CoprocStat_ledsStat_tag                  4
 #define CoprocStat_buttonsStat_tag               5
 #define CoprocStat_stupidServoStat_tag           6
@@ -637,6 +664,7 @@ extern "C" {
 #define CoprocStat_rtcStat_tag                   11
 #define CoprocStat_faultStat_tag                 12
 #define CoprocStat_mpuStat_tag                   13
+#define CoprocStat_smartServoStat_tag            14
 
 /* Struct field encoding specification for nanopb */
 #define None_FIELDLIST(X, a) \
@@ -672,7 +700,8 @@ X(a, STATIC,   ONEOF,    MESSAGE,  (payload,versionReq,payload.versionReq),  12)
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,rtcReq,payload.rtcReq),  13) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,i2cReq,payload.i2cReq),  14) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,espWatchdogSettings,payload.espWatchdogSettings),  15) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (payload,coprocStartupMessage,payload.coprocStartupMessage),  16)
+X(a, STATIC,   ONEOF,    MESSAGE,  (payload,coprocStartupMessage,payload.coprocStartupMessage),  16) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (payload,smartServoReq,payload.smartServoReq),  17)
 #define CoprocReq_CALLBACK NULL
 #define CoprocReq_DEFAULT NULL
 #define CoprocReq_payload_keepalive_MSGTYPE None
@@ -689,6 +718,7 @@ X(a, STATIC,   ONEOF,    MESSAGE,  (payload,coprocStartupMessage,payload.coprocS
 #define CoprocReq_payload_i2cReq_MSGTYPE CoprocReq_I2cReq
 #define CoprocReq_payload_espWatchdogSettings_MSGTYPE CoprocReq_EspWatchdogSettings
 #define CoprocReq_payload_coprocStartupMessage_MSGTYPE CoprocReq_CoprocStartupMessage
+#define CoprocReq_payload_smartServoReq_MSGTYPE CoprocReq_SmartServoReq
 
 #define CoprocReq_SetLeds_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, UENUM,    ledsOn,            1)
@@ -894,6 +924,13 @@ X(a, STATIC,   OPTIONAL, MESSAGE,  espWatchdogSettings,   4)
 #define CoprocReq_CoprocStartupMessage_DEFAULT NULL
 #define CoprocReq_CoprocStartupMessage_espWatchdogSettings_MSGTYPE CoprocReq_EspWatchdogSettings
 
+#define CoprocReq_SmartServoReq_FIELDLIST(X, a) \
+X(a, STATIC,   SINGULAR, UINT32,   id,                1) \
+X(a, STATIC,   SINGULAR, BOOL,     expect_response,   2) \
+X(a, STATIC,   SINGULAR, BYTES,    data,              3)
+#define CoprocReq_SmartServoReq_CALLBACK NULL
+#define CoprocReq_SmartServoReq_DEFAULT NULL
+
 #define CoprocStat_FIELDLIST(X, a) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,ledsStat,payload.ledsStat),   4) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,buttonsStat,payload.buttonsStat),   5) \
@@ -904,7 +941,8 @@ X(a, STATIC,   ONEOF,    MESSAGE,  (payload,versionStat,payload.versionStat),   
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,motorStat,payload.motorStat),  10) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,rtcStat,payload.rtcStat),  11) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,faultStat,payload.faultStat),  12) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (payload,mpuStat,payload.mpuStat),  13)
+X(a, STATIC,   ONEOF,    MESSAGE,  (payload,mpuStat,payload.mpuStat),  13) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (payload,smartServoStat,payload.smartServoStat),  14)
 #define CoprocStat_CALLBACK NULL
 #define CoprocStat_DEFAULT NULL
 #define CoprocStat_payload_ledsStat_MSGTYPE None
@@ -917,6 +955,7 @@ X(a, STATIC,   ONEOF,    MESSAGE,  (payload,mpuStat,payload.mpuStat),  13)
 #define CoprocStat_payload_rtcStat_MSGTYPE CoprocStat_RtcStat
 #define CoprocStat_payload_faultStat_MSGTYPE CoprocStat_FaultStat
 #define CoprocStat_payload_mpuStat_MSGTYPE CoprocStat_MpuStat
+#define CoprocStat_payload_smartServoStat_MSGTYPE CoprocStat_SmartServoStat
 
 #define CoprocStat_ButtonsStat_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, UENUM,    buttonsPressed,    1)
@@ -983,6 +1022,12 @@ X(a, STATIC,   SINGULAR, INT32,    z,                 3)
 #define CoprocStat_MpuVector_CALLBACK NULL
 #define CoprocStat_MpuVector_DEFAULT NULL
 
+#define CoprocStat_SmartServoStat_FIELDLIST(X, a) \
+X(a, STATIC,   SINGULAR, UINT32,   id,                1) \
+X(a, STATIC,   SINGULAR, BYTES,    data,              2)
+#define CoprocStat_SmartServoStat_CALLBACK NULL
+#define CoprocStat_SmartServoStat_DEFAULT NULL
+
 extern const pb_msgdesc_t None_msg;
 extern const pb_msgdesc_t RegCoefs_msg;
 extern const pb_msgdesc_t MotorConfig_msg;
@@ -1010,6 +1055,7 @@ extern const pb_msgdesc_t CoprocReq_OledDrawRectangle_msg;
 extern const pb_msgdesc_t CoprocReq_MpuReq_msg;
 extern const pb_msgdesc_t CoprocReq_EspWatchdogSettings_msg;
 extern const pb_msgdesc_t CoprocReq_CoprocStartupMessage_msg;
+extern const pb_msgdesc_t CoprocReq_SmartServoReq_msg;
 extern const pb_msgdesc_t CoprocStat_msg;
 extern const pb_msgdesc_t CoprocStat_ButtonsStat_msg;
 extern const pb_msgdesc_t CoprocStat_UltrasoundStat_msg;
@@ -1020,6 +1066,7 @@ extern const pb_msgdesc_t CoprocStat_RtcStat_msg;
 extern const pb_msgdesc_t CoprocStat_FaultStat_msg;
 extern const pb_msgdesc_t CoprocStat_MpuStat_msg;
 extern const pb_msgdesc_t CoprocStat_MpuVector_msg;
+extern const pb_msgdesc_t CoprocStat_SmartServoStat_msg;
 
 /* Defines for backwards compatibility with code written before nanopb-0.4.0 */
 #define None_fields &None_msg
@@ -1049,6 +1096,7 @@ extern const pb_msgdesc_t CoprocStat_MpuVector_msg;
 #define CoprocReq_MpuReq_fields &CoprocReq_MpuReq_msg
 #define CoprocReq_EspWatchdogSettings_fields &CoprocReq_EspWatchdogSettings_msg
 #define CoprocReq_CoprocStartupMessage_fields &CoprocReq_CoprocStartupMessage_msg
+#define CoprocReq_SmartServoReq_fields &CoprocReq_SmartServoReq_msg
 #define CoprocStat_fields &CoprocStat_msg
 #define CoprocStat_ButtonsStat_fields &CoprocStat_ButtonsStat_msg
 #define CoprocStat_UltrasoundStat_fields &CoprocStat_UltrasoundStat_msg
@@ -1059,6 +1107,7 @@ extern const pb_msgdesc_t CoprocStat_MpuVector_msg;
 #define CoprocStat_FaultStat_fields &CoprocStat_FaultStat_msg
 #define CoprocStat_MpuStat_fields &CoprocStat_MpuStat_msg
 #define CoprocStat_MpuVector_fields &CoprocStat_MpuVector_msg
+#define CoprocStat_SmartServoStat_fields &CoprocStat_SmartServoStat_msg
 
 /* Maximum encoded size of messages (where known) */
 #define CoprocReq_BuzzerReq_size                 2
@@ -1083,6 +1132,7 @@ extern const pb_msgdesc_t CoprocStat_MpuVector_msg;
 #define CoprocReq_SetLeds_size                   2
 #define CoprocReq_SetMotorCoupling_size          6
 #define CoprocReq_SetStupidServo_size            11
+#define CoprocReq_SmartServoReq_size             18
 #define CoprocReq_UltrasoundReq_size             8
 #define CoprocReq_size                           44
 #define CoprocStat_ButtonsStat_size              2
@@ -1092,6 +1142,7 @@ extern const pb_msgdesc_t CoprocStat_MpuVector_msg;
 #define CoprocStat_MpuVector_size                33
 #define CoprocStat_PowerAdcStat_size             23
 #define CoprocStat_RtcStat_size                  14
+#define CoprocStat_SmartServoStat_size           16
 #define CoprocStat_UltrasoundStat_size           12
 #define CoprocStat_VersionStat_size              18
 #define CoprocStat_size                          78
