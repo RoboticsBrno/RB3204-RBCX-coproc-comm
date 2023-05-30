@@ -235,9 +235,8 @@ message CoprocReq {
   }
 
   message SmartServoReq {
-    uint32 id = 1;
-    bool expect_response = 2;
-    bytes data = 3 [(nanopb).max_size = 8]; 
+    bool expect_response = 1;
+    bytes data = 2 [(nanopb).max_size = 24]; 
   }
 }
 
@@ -327,7 +326,6 @@ message CoprocStat {
   }
 
   message SmartServoStat {
-    uint32 id = 1;
-    bytes data = 2 [(nanopb).max_size = 8];
+    bytes data = 1 [(nanopb).max_size = 24];
   }
 }
