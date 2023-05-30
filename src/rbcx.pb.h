@@ -248,9 +248,8 @@ typedef struct _CoprocReq_CoprocStartupMessage {
     CoprocReq_EspWatchdogSettings espWatchdogSettings;
 } CoprocReq_CoprocStartupMessage;
 
-typedef PB_BYTES_ARRAY_T(8) CoprocReq_SmartServoReq_data_t;
+typedef PB_BYTES_ARRAY_T(24) CoprocReq_SmartServoReq_data_t;
 typedef struct _CoprocReq_SmartServoReq {
-    uint32_t id;
     bool expect_response;
     CoprocReq_SmartServoReq_data_t data;
 } CoprocReq_SmartServoReq;
@@ -333,9 +332,8 @@ typedef struct _CoprocStat_MpuStat {
     CoprocStat_MpuVector gyro;
 } CoprocStat_MpuStat;
 
-typedef PB_BYTES_ARRAY_T(8) CoprocStat_SmartServoStat_data_t;
+typedef PB_BYTES_ARRAY_T(24) CoprocStat_SmartServoStat_data_t;
 typedef struct _CoprocStat_SmartServoStat {
-    uint32_t id;
     CoprocStat_SmartServoStat_data_t data;
 } CoprocStat_SmartServoStat;
 
@@ -466,7 +464,7 @@ extern "C" {
 #define CoprocReq_MpuReq_init_default            {0, {None_init_default}}
 #define CoprocReq_EspWatchdogSettings_init_default {0}
 #define CoprocReq_CoprocStartupMessage_init_default {0, 0, 0, false, CoprocReq_EspWatchdogSettings_init_default}
-#define CoprocReq_SmartServoReq_init_default     {0, 0, {0, {0}}}
+#define CoprocReq_SmartServoReq_init_default     {0, {0, {0}}}
 #define CoprocStat_init_default                  {0, {None_init_default}}
 #define CoprocStat_ButtonsStat_init_default      {_CoprocStat_ButtonsEnum_MIN}
 #define CoprocStat_UltrasoundStat_init_default   {0, 0}
@@ -477,7 +475,7 @@ extern "C" {
 #define CoprocStat_FaultStat_init_default        {0, {None_init_default}}
 #define CoprocStat_MpuStat_init_default          {0, false, CoprocStat_MpuVector_init_default, false, CoprocStat_MpuVector_init_default}
 #define CoprocStat_MpuVector_init_default        {0, 0, 0}
-#define CoprocStat_SmartServoStat_init_default   {0, {0, {0}}}
+#define CoprocStat_SmartServoStat_init_default   {{0, {0}}}
 #define None_init_zero                           {0}
 #define RegCoefs_init_zero                       {0, 0, 0}
 #define MotorConfig_init_zero                    {0, 0, 0}
@@ -505,7 +503,7 @@ extern "C" {
 #define CoprocReq_MpuReq_init_zero               {0, {None_init_zero}}
 #define CoprocReq_EspWatchdogSettings_init_zero  {0}
 #define CoprocReq_CoprocStartupMessage_init_zero {0, 0, 0, false, CoprocReq_EspWatchdogSettings_init_zero}
-#define CoprocReq_SmartServoReq_init_zero        {0, 0, {0, {0}}}
+#define CoprocReq_SmartServoReq_init_zero        {0, {0, {0}}}
 #define CoprocStat_init_zero                     {0, {None_init_zero}}
 #define CoprocStat_ButtonsStat_init_zero         {_CoprocStat_ButtonsEnum_MIN}
 #define CoprocStat_UltrasoundStat_init_zero      {0, 0}
@@ -516,7 +514,7 @@ extern "C" {
 #define CoprocStat_FaultStat_init_zero           {0, {None_init_zero}}
 #define CoprocStat_MpuStat_init_zero             {0, false, CoprocStat_MpuVector_init_zero, false, CoprocStat_MpuVector_init_zero}
 #define CoprocStat_MpuVector_init_zero           {0, 0, 0}
-#define CoprocStat_SmartServoStat_init_zero      {0, {0, {0}}}
+#define CoprocStat_SmartServoStat_init_zero      {{0, {0}}}
 
 /* Field tags (for use in manual encoding/decoding) */
 #define RegCoefs_p_tag                           1
@@ -609,9 +607,8 @@ extern "C" {
 #define CoprocReq_CoprocStartupMessage_getVersion_tag 2
 #define CoprocReq_CoprocStartupMessage_getRtc_tag 3
 #define CoprocReq_CoprocStartupMessage_espWatchdogSettings_tag 4
-#define CoprocReq_SmartServoReq_id_tag           1
-#define CoprocReq_SmartServoReq_expect_response_tag 2
-#define CoprocReq_SmartServoReq_data_tag         3
+#define CoprocReq_SmartServoReq_expect_response_tag 1
+#define CoprocReq_SmartServoReq_data_tag         2
 #define CoprocReq_keepalive_tag                  1
 #define CoprocReq_setLeds_tag                    4
 #define CoprocReq_getButtons_tag                 5
@@ -652,8 +649,7 @@ extern "C" {
 #define CoprocStat_MpuStat_compressCoef_tag      1
 #define CoprocStat_MpuStat_accel_tag             2
 #define CoprocStat_MpuStat_gyro_tag              3
-#define CoprocStat_SmartServoStat_id_tag         1
-#define CoprocStat_SmartServoStat_data_tag       2
+#define CoprocStat_SmartServoStat_data_tag       1
 #define CoprocStat_ledsStat_tag                  4
 #define CoprocStat_buttonsStat_tag               5
 #define CoprocStat_stupidServoStat_tag           6
@@ -925,9 +921,8 @@ X(a, STATIC,   OPTIONAL, MESSAGE,  espWatchdogSettings,   4)
 #define CoprocReq_CoprocStartupMessage_espWatchdogSettings_MSGTYPE CoprocReq_EspWatchdogSettings
 
 #define CoprocReq_SmartServoReq_FIELDLIST(X, a) \
-X(a, STATIC,   SINGULAR, UINT32,   id,                1) \
-X(a, STATIC,   SINGULAR, BOOL,     expect_response,   2) \
-X(a, STATIC,   SINGULAR, BYTES,    data,              3)
+X(a, STATIC,   SINGULAR, BOOL,     expect_response,   1) \
+X(a, STATIC,   SINGULAR, BYTES,    data,              2)
 #define CoprocReq_SmartServoReq_CALLBACK NULL
 #define CoprocReq_SmartServoReq_DEFAULT NULL
 
@@ -1023,8 +1018,7 @@ X(a, STATIC,   SINGULAR, INT32,    z,                 3)
 #define CoprocStat_MpuVector_DEFAULT NULL
 
 #define CoprocStat_SmartServoStat_FIELDLIST(X, a) \
-X(a, STATIC,   SINGULAR, UINT32,   id,                1) \
-X(a, STATIC,   SINGULAR, BYTES,    data,              2)
+X(a, STATIC,   SINGULAR, BYTES,    data,              1)
 #define CoprocStat_SmartServoStat_CALLBACK NULL
 #define CoprocStat_SmartServoStat_DEFAULT NULL
 
@@ -1132,7 +1126,7 @@ extern const pb_msgdesc_t CoprocStat_SmartServoStat_msg;
 #define CoprocReq_SetLeds_size                   2
 #define CoprocReq_SetMotorCoupling_size          6
 #define CoprocReq_SetStupidServo_size            11
-#define CoprocReq_SmartServoReq_size             18
+#define CoprocReq_SmartServoReq_size             28
 #define CoprocReq_UltrasoundReq_size             8
 #define CoprocReq_size                           44
 #define CoprocStat_ButtonsStat_size              2
@@ -1142,7 +1136,7 @@ extern const pb_msgdesc_t CoprocStat_SmartServoStat_msg;
 #define CoprocStat_MpuVector_size                33
 #define CoprocStat_PowerAdcStat_size             23
 #define CoprocStat_RtcStat_size                  14
-#define CoprocStat_SmartServoStat_size           16
+#define CoprocStat_SmartServoStat_size           26
 #define CoprocStat_UltrasoundStat_size           12
 #define CoprocStat_VersionStat_size              18
 #define CoprocStat_size                          78
