@@ -326,7 +326,7 @@ typedef struct _CoprocStat_MpuVector {
 } CoprocStat_MpuVector;
 
 typedef struct _CoprocStat_MpuQuaternion {
-    int32_t q;
+    int32_t w;
     int32_t x;
     int32_t y;
     int32_t z;
@@ -662,7 +662,7 @@ extern "C" {
 #define CoprocStat_MpuVector_x_tag               1
 #define CoprocStat_MpuVector_y_tag               2
 #define CoprocStat_MpuVector_z_tag               3
-#define CoprocStat_MpuQuaternion_q_tag           1
+#define CoprocStat_MpuQuaternion_w_tag           1
 #define CoprocStat_MpuQuaternion_x_tag           2
 #define CoprocStat_MpuQuaternion_y_tag           3
 #define CoprocStat_MpuQuaternion_z_tag           4
@@ -1046,7 +1046,7 @@ X(a, STATIC,   SINGULAR, INT32,    z,                 3)
 #define CoprocStat_MpuVector_DEFAULT NULL
 
 #define CoprocStat_MpuQuaternion_FIELDLIST(X, a) \
-X(a, STATIC,   SINGULAR, INT32,    q,                 1) \
+X(a, STATIC,   SINGULAR, INT32,    w,                 1) \
 X(a, STATIC,   SINGULAR, INT32,    x,                 2) \
 X(a, STATIC,   SINGULAR, INT32,    y,                 3) \
 X(a, STATIC,   SINGULAR, INT32,    z,                 4)
