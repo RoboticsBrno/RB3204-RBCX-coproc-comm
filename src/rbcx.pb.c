@@ -120,6 +120,9 @@ PB_BIND(CoprocStat_MpuStat, CoprocStat_MpuStat, AUTO)
 PB_BIND(CoprocStat_MpuVector, CoprocStat_MpuVector, AUTO)
 
 
+PB_BIND(CoprocStat_MpuQuaternion, CoprocStat_MpuQuaternion, AUTO)
+
+
 PB_BIND(CoprocStat_SmartServoStat, CoprocStat_SmartServoStat, AUTO)
 
 

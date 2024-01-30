@@ -225,6 +225,7 @@ typedef struct _CoprocReq_MpuReq {
         None stopSend;
         uint32_t setCompressCoef;
         None getCompressCoef;
+        None calibrateOffsets;
     } mpuCmd;
 } CoprocReq_MpuReq;
 
@@ -324,12 +325,23 @@ typedef struct _CoprocStat_MpuVector {
     int32_t z;
 } CoprocStat_MpuVector;
 
+typedef struct _CoprocStat_MpuQuaternion {
+    int32_t q;
+    int32_t x;
+    int32_t y;
+    int32_t z;
+} CoprocStat_MpuQuaternion;
+
 typedef struct _CoprocStat_MpuStat {
     uint32_t compressCoef;
     bool has_accel;
     CoprocStat_MpuVector accel;
     bool has_gyro;
     CoprocStat_MpuVector gyro;
+    bool has_quat;
+    CoprocStat_MpuQuaternion quat;
+    bool has_yawPitchRoll;
+    CoprocStat_MpuVector yawPitchRoll;
 } CoprocStat_MpuStat;
 
 typedef PB_BYTES_ARRAY_T(24) CoprocStat_SmartServoStat_data_t;
@@ -436,6 +448,7 @@ extern "C" {
 
 
 
+
 /* Initializer values for message structs */
 #define None_init_default                        {0}
 #define RegCoefs_init_default                    {0, 0, 0}
@@ -473,8 +486,9 @@ extern "C" {
 #define CoprocStat_VersionStat_init_default      {{0}, 0, 0}
 #define CoprocStat_RtcStat_init_default          {0, 0, _CoprocStat_RtcFlags_MIN}
 #define CoprocStat_FaultStat_init_default        {0, {None_init_default}}
-#define CoprocStat_MpuStat_init_default          {0, false, CoprocStat_MpuVector_init_default, false, CoprocStat_MpuVector_init_default}
+#define CoprocStat_MpuStat_init_default          {0, false, CoprocStat_MpuVector_init_default, false, CoprocStat_MpuVector_init_default, false, CoprocStat_MpuQuaternion_init_default, false, CoprocStat_MpuVector_init_default}
 #define CoprocStat_MpuVector_init_default        {0, 0, 0}
+#define CoprocStat_MpuQuaternion_init_default    {0, 0, 0, 0}
 #define CoprocStat_SmartServoStat_init_default   {{0, {0}}}
 #define None_init_zero                           {0}
 #define RegCoefs_init_zero                       {0, 0, 0}
@@ -512,8 +526,9 @@ extern "C" {
 #define CoprocStat_VersionStat_init_zero         {{0}, 0, 0}
 #define CoprocStat_RtcStat_init_zero             {0, 0, _CoprocStat_RtcFlags_MIN}
 #define CoprocStat_FaultStat_init_zero           {0, {None_init_zero}}
-#define CoprocStat_MpuStat_init_zero             {0, false, CoprocStat_MpuVector_init_zero, false, CoprocStat_MpuVector_init_zero}
+#define CoprocStat_MpuStat_init_zero             {0, false, CoprocStat_MpuVector_init_zero, false, CoprocStat_MpuVector_init_zero, false, CoprocStat_MpuQuaternion_init_zero, false, CoprocStat_MpuVector_init_zero}
 #define CoprocStat_MpuVector_init_zero           {0, 0, 0}
+#define CoprocStat_MpuQuaternion_init_zero       {0, 0, 0, 0}
 #define CoprocStat_SmartServoStat_init_zero      {{0, {0}}}
 
 /* Field tags (for use in manual encoding/decoding) */
@@ -600,6 +615,7 @@ extern "C" {
 #define CoprocReq_MpuReq_stopSend_tag            4
 #define CoprocReq_MpuReq_setCompressCoef_tag     5
 #define CoprocReq_MpuReq_getCompressCoef_tag     6
+#define CoprocReq_MpuReq_calibrateOffsets_tag    7
 #define CoprocReq_I2cReq_oledReq_tag             1
 #define CoprocReq_I2cReq_mpuReq_tag              2
 #define CoprocReq_EspWatchdogSettings_disable_tag 1
@@ -646,9 +662,15 @@ extern "C" {
 #define CoprocStat_MpuVector_x_tag               1
 #define CoprocStat_MpuVector_y_tag               2
 #define CoprocStat_MpuVector_z_tag               3
+#define CoprocStat_MpuQuaternion_q_tag           1
+#define CoprocStat_MpuQuaternion_x_tag           2
+#define CoprocStat_MpuQuaternion_y_tag           3
+#define CoprocStat_MpuQuaternion_z_tag           4
 #define CoprocStat_MpuStat_compressCoef_tag      1
 #define CoprocStat_MpuStat_accel_tag             2
 #define CoprocStat_MpuStat_gyro_tag              3
+#define CoprocStat_MpuStat_quat_tag              4
+#define CoprocStat_MpuStat_yawPitchRoll_tag      5
 #define CoprocStat_SmartServoStat_data_tag       1
 #define CoprocStat_ledsStat_tag                  4
 #define CoprocStat_buttonsStat_tag               5
@@ -897,7 +919,8 @@ X(a, STATIC,   ONEOF,    MESSAGE,  (mpuCmd,oneSend,mpuCmd.oneSend),   2) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (mpuCmd,startSend,mpuCmd.startSend),   3) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (mpuCmd,stopSend,mpuCmd.stopSend),   4) \
 X(a, STATIC,   ONEOF,    UINT32,   (mpuCmd,setCompressCoef,mpuCmd.setCompressCoef),   5) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (mpuCmd,getCompressCoef,mpuCmd.getCompressCoef),   6)
+X(a, STATIC,   ONEOF,    MESSAGE,  (mpuCmd,getCompressCoef,mpuCmd.getCompressCoef),   6) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (mpuCmd,calibrateOffsets,mpuCmd.calibrateOffsets),   7)
 #define CoprocReq_MpuReq_CALLBACK NULL
 #define CoprocReq_MpuReq_DEFAULT NULL
 #define CoprocReq_MpuReq_mpuCmd_init_MSGTYPE None
@@ -905,6 +928,7 @@ X(a, STATIC,   ONEOF,    MESSAGE,  (mpuCmd,getCompressCoef,mpuCmd.getCompressCoe
 #define CoprocReq_MpuReq_mpuCmd_startSend_MSGTYPE None
 #define CoprocReq_MpuReq_mpuCmd_stopSend_MSGTYPE None
 #define CoprocReq_MpuReq_mpuCmd_getCompressCoef_MSGTYPE None
+#define CoprocReq_MpuReq_mpuCmd_calibrateOffsets_MSGTYPE None
 
 #define CoprocReq_EspWatchdogSettings_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, BOOL,     disable,           1)
@@ -1004,11 +1028,15 @@ X(a, STATIC,   ONEOF,    MESSAGE,  (fault,mpuFault,fault.mpuFault),   2)
 #define CoprocStat_MpuStat_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, UINT32,   compressCoef,      1) \
 X(a, STATIC,   OPTIONAL, MESSAGE,  accel,             2) \
-X(a, STATIC,   OPTIONAL, MESSAGE,  gyro,              3)
+X(a, STATIC,   OPTIONAL, MESSAGE,  gyro,              3) \
+X(a, STATIC,   OPTIONAL, MESSAGE,  quat,              4) \
+X(a, STATIC,   OPTIONAL, MESSAGE,  yawPitchRoll,      5)
 #define CoprocStat_MpuStat_CALLBACK NULL
 #define CoprocStat_MpuStat_DEFAULT NULL
 #define CoprocStat_MpuStat_accel_MSGTYPE CoprocStat_MpuVector
 #define CoprocStat_MpuStat_gyro_MSGTYPE CoprocStat_MpuVector
+#define CoprocStat_MpuStat_quat_MSGTYPE CoprocStat_MpuQuaternion
+#define CoprocStat_MpuStat_yawPitchRoll_MSGTYPE CoprocStat_MpuVector
 
 #define CoprocStat_MpuVector_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, INT32,    x,                 1) \
@@ -1016,6 +1044,14 @@ X(a, STATIC,   SINGULAR, INT32,    y,                 2) \
 X(a, STATIC,   SINGULAR, INT32,    z,                 3)
 #define CoprocStat_MpuVector_CALLBACK NULL
 #define CoprocStat_MpuVector_DEFAULT NULL
+
+#define CoprocStat_MpuQuaternion_FIELDLIST(X, a) \
+X(a, STATIC,   SINGULAR, INT32,    q,                 1) \
+X(a, STATIC,   SINGULAR, INT32,    x,                 2) \
+X(a, STATIC,   SINGULAR, INT32,    y,                 3) \
+X(a, STATIC,   SINGULAR, INT32,    z,                 4)
+#define CoprocStat_MpuQuaternion_CALLBACK NULL
+#define CoprocStat_MpuQuaternion_DEFAULT NULL
 
 #define CoprocStat_SmartServoStat_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, BYTES,    data,              1)
@@ -1060,6 +1096,7 @@ extern const pb_msgdesc_t CoprocStat_RtcStat_msg;
 extern const pb_msgdesc_t CoprocStat_FaultStat_msg;
 extern const pb_msgdesc_t CoprocStat_MpuStat_msg;
 extern const pb_msgdesc_t CoprocStat_MpuVector_msg;
+extern const pb_msgdesc_t CoprocStat_MpuQuaternion_msg;
 extern const pb_msgdesc_t CoprocStat_SmartServoStat_msg;
 
 /* Defines for backwards compatibility with code written before nanopb-0.4.0 */
@@ -1101,6 +1138,7 @@ extern const pb_msgdesc_t CoprocStat_SmartServoStat_msg;
 #define CoprocStat_FaultStat_fields &CoprocStat_FaultStat_msg
 #define CoprocStat_MpuStat_fields &CoprocStat_MpuStat_msg
 #define CoprocStat_MpuVector_fields &CoprocStat_MpuVector_msg
+#define CoprocStat_MpuQuaternion_fields &CoprocStat_MpuQuaternion_msg
 #define CoprocStat_SmartServoStat_fields &CoprocStat_SmartServoStat_msg
 
 /* Maximum encoded size of messages (where known) */
@@ -1132,14 +1170,15 @@ extern const pb_msgdesc_t CoprocStat_SmartServoStat_msg;
 #define CoprocStat_ButtonsStat_size              2
 #define CoprocStat_FaultStat_size                2
 #define CoprocStat_MotorStat_size                26
-#define CoprocStat_MpuStat_size                  76
+#define CoprocStat_MpuQuaternion_size            44
+#define CoprocStat_MpuStat_size                  157
 #define CoprocStat_MpuVector_size                33
 #define CoprocStat_PowerAdcStat_size             23
 #define CoprocStat_RtcStat_size                  14
 #define CoprocStat_SmartServoStat_size           26
 #define CoprocStat_UltrasoundStat_size           12
 #define CoprocStat_VersionStat_size              18
-#define CoprocStat_size                          78
+#define CoprocStat_size                          160
 #define MotorConfig_size                         18
 #define None_size                                0
 #define RegCoefs_size                            18

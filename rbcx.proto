@@ -218,6 +218,7 @@ message CoprocReq {
       None stopSend = 4;
       uint32 setCompressCoef = 5;
       None getCompressCoef = 6;
+      None calibrateOffsets = 7;
     }
   }
 
@@ -317,12 +318,21 @@ message CoprocStat {
     uint32 compressCoef = 1;
     MpuVector accel = 2;
     MpuVector gyro = 3;
+    MpuQuaternion quat = 4;
+    MpuVector yawPitchRoll = 5;
   }
 
   message MpuVector {
     int32 x = 1;
     int32 y = 2;
     int32 z = 3;
+  }
+
+  message MpuQuaternion {
+    int32 q = 1;
+    int32 x = 2;
+    int32 y = 3;
+    int32 z = 4;
   }
 
   message SmartServoStat {
