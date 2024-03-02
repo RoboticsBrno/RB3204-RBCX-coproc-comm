@@ -26,6 +26,10 @@ message MotorConfig {
   uint32 maxAccel = 3;
 }
 
+message MpuCalibrationData {
+  bytes data = 1 [(nanopb).max_size = 12, (nanopb).fixed_length = true];
+}
+
 message CoprocReq {
   oneof payload {
     None keepalive = 1;
@@ -219,6 +223,7 @@ message CoprocReq {
       uint32 setCompressCoef = 5;
       None getCompressCoef = 6;
       None calibrateOffsets = 7;
+      MpuCalibrationData restoreCalibrationData = 8;
     }
   }
 
@@ -254,6 +259,7 @@ message CoprocStat {
     FaultStat faultStat = 12;
     MpuStat mpuStat = 13;
     SmartServoStat smartServoStat = 14;
+    MpuCalibrationData mpuCalibrationDone = 15;
   }
 
   message ButtonsStat {

@@ -15,6 +15,9 @@ PB_BIND(RegCoefs, RegCoefs, AUTO)
 PB_BIND(MotorConfig, MotorConfig, AUTO)
 
 
+PB_BIND(MpuCalibrationData, MpuCalibrationData, AUTO)
+
+
 PB_BIND(CoprocReq, CoprocReq, AUTO)
 
 

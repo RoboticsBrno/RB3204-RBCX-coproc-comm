@@ -72,6 +72,10 @@ typedef struct _MotorConfig {
     uint32_t maxAccel;
 } MotorConfig;
 
+typedef struct _MpuCalibrationData {
+    pb_byte_t data[12];
+} MpuCalibrationData;
+
 typedef struct _CoprocReq_SetLeds {
     CoprocReq_LedsEnum ledsOn;
 } CoprocReq_SetLeds;
@@ -226,6 +230,7 @@ typedef struct _CoprocReq_MpuReq {
         uint32_t setCompressCoef;
         None getCompressCoef;
         None calibrateOffsets;
+        MpuCalibrationData restoreCalibrationData;
     } mpuCmd;
 } CoprocReq_MpuReq;
 
@@ -363,6 +368,7 @@ typedef struct _CoprocStat {
         CoprocStat_FaultStat faultStat;
         CoprocStat_MpuStat mpuStat;
         CoprocStat_SmartServoStat smartServoStat;
+        MpuCalibrationData mpuCalibrationDone;
     } payload;
 } CoprocStat;
 
@@ -395,6 +401,7 @@ extern "C" {
 #define _CoprocStat_RtcFlags_MIN CoprocStat_RtcFlags_RTC_NONE
 #define _CoprocStat_RtcFlags_MAX CoprocStat_RtcFlags_RTC_ALARM
 #define _CoprocStat_RtcFlags_ARRAYSIZE ((CoprocStat_RtcFlags)(CoprocStat_RtcFlags_RTC_ALARM+1))
+
 
 
 
@@ -453,6 +460,7 @@ extern "C" {
 #define None_init_default                        {0}
 #define RegCoefs_init_default                    {0, 0, 0}
 #define MotorConfig_init_default                 {0, 0, 0}
+#define MpuCalibrationData_init_default          {{0}}
 #define CoprocReq_init_default                   {0, {None_init_default}}
 #define CoprocReq_SetLeds_init_default           {_CoprocReq_LedsEnum_MIN}
 #define CoprocReq_GetButtons_init_default        {0}
@@ -493,6 +501,7 @@ extern "C" {
 #define None_init_zero                           {0}
 #define RegCoefs_init_zero                       {0, 0, 0}
 #define MotorConfig_init_zero                    {0, 0, 0}
+#define MpuCalibrationData_init_zero             {{0}}
 #define CoprocReq_init_zero                      {0, {None_init_zero}}
 #define CoprocReq_SetLeds_init_zero              {_CoprocReq_LedsEnum_MIN}
 #define CoprocReq_GetButtons_init_zero           {0}
@@ -538,6 +547,7 @@ extern "C" {
 #define MotorConfig_velEpsilon_tag               1
 #define MotorConfig_posEpsilon_tag               2
 #define MotorConfig_maxAccel_tag                 3
+#define MpuCalibrationData_data_tag              1
 #define CoprocReq_SetLeds_ledsOn_tag             1
 #define CoprocReq_SetStupidServo_servoIndex_tag  1
 #define CoprocReq_SetStupidServo_disable_tag     4
@@ -616,6 +626,7 @@ extern "C" {
 #define CoprocReq_MpuReq_setCompressCoef_tag     5
 #define CoprocReq_MpuReq_getCompressCoef_tag     6
 #define CoprocReq_MpuReq_calibrateOffsets_tag    7
+#define CoprocReq_MpuReq_restoreCalibrationData_tag 8
 #define CoprocReq_I2cReq_oledReq_tag             1
 #define CoprocReq_I2cReq_mpuReq_tag              2
 #define CoprocReq_EspWatchdogSettings_disable_tag 1
@@ -683,6 +694,7 @@ extern "C" {
 #define CoprocStat_faultStat_tag                 12
 #define CoprocStat_mpuStat_tag                   13
 #define CoprocStat_smartServoStat_tag            14
+#define CoprocStat_mpuCalibrationDone_tag        15
 
 /* Struct field encoding specification for nanopb */
 #define None_FIELDLIST(X, a) \
@@ -703,6 +715,11 @@ X(a, STATIC,   SINGULAR, UINT32,   posEpsilon,        2) \
 X(a, STATIC,   SINGULAR, UINT32,   maxAccel,          3)
 #define MotorConfig_CALLBACK NULL
 #define MotorConfig_DEFAULT NULL
+
+#define MpuCalibrationData_FIELDLIST(X, a) \
+X(a, STATIC,   SINGULAR, FIXED_LENGTH_BYTES, data,              1)
+#define MpuCalibrationData_CALLBACK NULL
+#define MpuCalibrationData_DEFAULT NULL
 
 #define CoprocReq_FIELDLIST(X, a) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,keepalive,payload.keepalive),   1) \
@@ -920,7 +937,8 @@ X(a, STATIC,   ONEOF,    MESSAGE,  (mpuCmd,startSend,mpuCmd.startSend),   3) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (mpuCmd,stopSend,mpuCmd.stopSend),   4) \
 X(a, STATIC,   ONEOF,    UINT32,   (mpuCmd,setCompressCoef,mpuCmd.setCompressCoef),   5) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (mpuCmd,getCompressCoef,mpuCmd.getCompressCoef),   6) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (mpuCmd,calibrateOffsets,mpuCmd.calibrateOffsets),   7)
+X(a, STATIC,   ONEOF,    MESSAGE,  (mpuCmd,calibrateOffsets,mpuCmd.calibrateOffsets),   7) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (mpuCmd,restoreCalibrationData,mpuCmd.restoreCalibrationData),   8)
 #define CoprocReq_MpuReq_CALLBACK NULL
 #define CoprocReq_MpuReq_DEFAULT NULL
 #define CoprocReq_MpuReq_mpuCmd_init_MSGTYPE None
@@ -929,6 +947,7 @@ X(a, STATIC,   ONEOF,    MESSAGE,  (mpuCmd,calibrateOffsets,mpuCmd.calibrateOffs
 #define CoprocReq_MpuReq_mpuCmd_stopSend_MSGTYPE None
 #define CoprocReq_MpuReq_mpuCmd_getCompressCoef_MSGTYPE None
 #define CoprocReq_MpuReq_mpuCmd_calibrateOffsets_MSGTYPE None
+#define CoprocReq_MpuReq_mpuCmd_restoreCalibrationData_MSGTYPE MpuCalibrationData
 
 #define CoprocReq_EspWatchdogSettings_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, BOOL,     disable,           1)
@@ -961,7 +980,8 @@ X(a, STATIC,   ONEOF,    MESSAGE,  (payload,motorStat,payload.motorStat),  10) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,rtcStat,payload.rtcStat),  11) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,faultStat,payload.faultStat),  12) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (payload,mpuStat,payload.mpuStat),  13) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (payload,smartServoStat,payload.smartServoStat),  14)
+X(a, STATIC,   ONEOF,    MESSAGE,  (payload,smartServoStat,payload.smartServoStat),  14) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (payload,mpuCalibrationDone,payload.mpuCalibrationDone),  15)
 #define CoprocStat_CALLBACK NULL
 #define CoprocStat_DEFAULT NULL
 #define CoprocStat_payload_ledsStat_MSGTYPE None
@@ -975,6 +995,7 @@ X(a, STATIC,   ONEOF,    MESSAGE,  (payload,smartServoStat,payload.smartServoSta
 #define CoprocStat_payload_faultStat_MSGTYPE CoprocStat_FaultStat
 #define CoprocStat_payload_mpuStat_MSGTYPE CoprocStat_MpuStat
 #define CoprocStat_payload_smartServoStat_MSGTYPE CoprocStat_SmartServoStat
+#define CoprocStat_payload_mpuCalibrationDone_MSGTYPE MpuCalibrationData
 
 #define CoprocStat_ButtonsStat_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, UENUM,    buttonsPressed,    1)
@@ -1061,6 +1082,7 @@ X(a, STATIC,   SINGULAR, BYTES,    data,              1)
 extern const pb_msgdesc_t None_msg;
 extern const pb_msgdesc_t RegCoefs_msg;
 extern const pb_msgdesc_t MotorConfig_msg;
+extern const pb_msgdesc_t MpuCalibrationData_msg;
 extern const pb_msgdesc_t CoprocReq_msg;
 extern const pb_msgdesc_t CoprocReq_SetLeds_msg;
 extern const pb_msgdesc_t CoprocReq_GetButtons_msg;
@@ -1103,6 +1125,7 @@ extern const pb_msgdesc_t CoprocStat_SmartServoStat_msg;
 #define None_fields &None_msg
 #define RegCoefs_fields &RegCoefs_msg
 #define MotorConfig_fields &MotorConfig_msg
+#define MpuCalibrationData_fields &MpuCalibrationData_msg
 #define CoprocReq_fields &CoprocReq_msg
 #define CoprocReq_SetLeds_fields &CoprocReq_SetLeds_msg
 #define CoprocReq_GetButtons_fields &CoprocReq_GetButtons_msg
@@ -1150,7 +1173,7 @@ extern const pb_msgdesc_t CoprocStat_SmartServoStat_msg;
 #define CoprocReq_I2cReq_size                    42
 #define CoprocReq_MotorReq_SetPosition_size      12
 #define CoprocReq_MotorReq_size                  27
-#define CoprocReq_MpuReq_size                    6
+#define CoprocReq_MpuReq_size                    16
 #define CoprocReq_OledDrawArc_size               32
 #define CoprocReq_OledDrawCircle_size            20
 #define CoprocReq_OledDrawLine_size              26
@@ -1180,6 +1203,7 @@ extern const pb_msgdesc_t CoprocStat_SmartServoStat_msg;
 #define CoprocStat_VersionStat_size              18
 #define CoprocStat_size                          160
 #define MotorConfig_size                         18
+#define MpuCalibrationData_size                  14
 #define None_size                                0
 #define RegCoefs_size                            18
 
