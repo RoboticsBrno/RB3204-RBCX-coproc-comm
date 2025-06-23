@@ -1,0 +1,13 @@
+idf_component_register(
+    SRCS
+        "src/coproc_codec.cpp"
+        "src/rbcx.pb.c"
+        "src/cobs/cobs.c"
+    INCLUDE_DIRS
+        "src"
+        "src/cobs"
+    REQUIRES
+        driver
+        esp_common
+        nanopb
+)
